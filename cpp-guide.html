@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ Guide - By RataLife</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Mobile Warning -->
+    <div id="mobile-warning" class="mobile-warning">
+        <div class="warning-content">
+            <i class="fas fa-exclamation-triangle warning-icon"></i>
+            <h3>Recomendación</h3>
+            <p>Para una mejor experiencia, te recomendamos acceder desde un ordenador.</p>
+            <button id="continue-mobile" class="btn-primary">Continuar en móvil</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <i class="fas fa-code logo-icon"></i>
+                <span class="brand-name">C++ Guide</span>
+            </div>
+            
+            <div class="navbar-links">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="active"><i class="fab fa-cuttlefish"></i> C++ <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cpp-guide.html" class="active">Guía Principal</a></li>
+                            <li><a href="imgui-guide.html">Dear ImGui</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contacto</a></li>
+                </ul>
+            </div>
+            
+            <div class="navbar-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero hero-cpp">
+        <div class="hero-content">
+            <h1 class="hero-title animate-typing">Guía Completa de C++</h1>
+            <p class="hero-subtitle">Aprende C++ desde cero hasta nivel avanzado con ejemplos prácticos</p>
+            <div class="hero-buttons">
+                <a href="#basics" class="btn-primary btn-pulse">Comenzar</a>
+                <a href="#contact" class="btn-secondary">¿Dudas?</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <i class="fas fa-chevron-down scroll-icon bounce"></i>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container guide-container">
+        <!-- Table of Contents -->
+        <aside class="guide-toc">
+            <div class="toc-header">
+                <h3>Contenido</h3>
+                <i class="fas fa-bookmark toc-icon"></i>
+            </div>
+            <ul class="toc-list">
+                <li><a href="#basics" class="toc-link">1. Fundamentos</a></li>
+                <li><a href="#variables" class="toc-link">2. Variables y Tipos</a></li>
+                <li><a href="#control" class="toc-link">3. Estructuras de Control</a></li>
+                <li><a href="#functions" class="toc-link">4. Funciones</a></li>
+                <li><a href="#oop" class="toc-link">5. Programación Orientada a Objetos</a></li>
+                <li><a href="#templates" class="toc-link">6. Plantillas</a></li>
+                <li><a href="#stl" class="toc-link">7. STL</a></li>
+                <li><a href="#advanced" class="toc-link">8. Temas Avanzados</a></li>
+            </ul>
+            
+            <div class="toc-footer">
+                <button id="print-guide" class="btn-secondary">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+            </div>
+        </aside>
+
+        <!-- Guide Content -->
+        <article class="guide-content">
+            <!-- Basics Section -->
+            <section id="basics" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">1. Fundamentos de C++</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">¿Qué es C++?</h3>
+                    <p>C++ es un lenguaje de programación de propósito general creado por Bjarne Stroustrup en 1985 como una extensión del lenguaje C. Es un lenguaje compilado, de tipado estático y multiparadigma que soporta programación estructurada, orientada a objetos y genérica.</p>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h4>Características clave</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>Eficiencia:</strong> C++ permite un control detallado sobre los recursos del sistema.</li>
+                            <li><strong>Portabilidad:</strong> El código puede compilarse en múltiples plataformas.</li>
+                            <li><strong>Orientado a objetos:</strong> Soporta clases, herencia, polimorfismo, etc.</li>
+                            <li><strong>STL:</strong> La Biblioteca Estándar proporciona estructuras de datos y algoritmos potentes.</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Tu primer programa en C++</h3>
+                    <p>El clásico "Hola Mundo" en C++:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">hola_mundo.cpp</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    // Imprime "Hola Mundo!" en la consola
+    std::cout << "Hola Mundo!" << std::endl;
+    return 0;
+}</code></pre>
+                    </div>
+                    
+                    <div class="explanation-box">
+                        <h4>Explicación:</h4>
+                        <ol>
+                            <li><code>#include &lt;iostream&gt;</code>: Incluye la biblioteca estándar para operaciones de entrada/salida.</li>
+                            <li><code>int main()</code>: Punto de entrada del programa. Debe devolver un entero.</li>
+                            <li><code>std::cout</code>: Objeto para imprimir en la consola.</li>
+                            <li><code>&lt;&lt;</code>: Operador de inserción para enviar datos a la salida.</li>
+                            <li><code>std::endl</code>: Inserta un salto de línea y vacía el buffer.</li>
+                            <li><code>return 0;</code>: Indica que el programa terminó correctamente.</li>
+                        </ol>
+                    </div>
+                    
+                    <h3 class="content-title">Compilación y ejecución</h3>
+                    <p>Para compilar y ejecutar un programa en C++:</p>
+                    
+                    <div class="steps-box">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Escribe el código</h4>
+                                <p>Crea un archivo con extensión <code>.cpp</code> y escribe tu código.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Compila el programa</h4>
+                                <p>Usa un compilador como g++ (GCC) o clang++ (LLVM):</p>
+                                <div class="code-block inline">
+                                    <pre><code class="language-bash">g++ hola_mundo.cpp -o hola_mundo</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Ejecuta el programa</h4>
+                                <div class="code-block inline">
+                                    <pre><code class="language-bash">./hola_mundo</code></pre>
+                                </div>
+                                <p>Deberías ver la salida: <code>Hola Mundo!</code></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Variables Section -->
+            <section id="variables" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">2. Variables y Tipos de Datos</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <!-- Content about variables -->
+                    <h3 class="content-title">Tipos Fundamentales</h3>
+                    <p>C++ ofrece varios tipos de datos fundamentales:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Tamaño (bytes)</th>
+                                    <th>Descripción</th>
+                                    <th>Ejemplo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>int</code></td>
+                                    <td>4</td>
+                                    <td>Entero con signo</td>
+                                    <td><code>42</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>float</code></td>
+                                    <td>4</td>
+                                    <td>Punto flotante de precisión simple</td>
+                                    <td><code>3.14f</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>double</code></td>
+                                    <td>8</td>
+                                    <td>Punto flotante de precisión doble</td>
+                                    <td><code>3.141592</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>char</code></td>
+                                    <td>1</td>
+                                    <td>Carácter</td>
+                                    <td><code>'A'</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>bool</code></td>
+                                    <td>1</td>
+                                    <td>Booleano</td>
+                                    <td><code>true</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>void</code></td>
+                                    <td>-</td>
+                                    <td>Sin tipo</td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="note-box">
+                        <div class="note-header">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <h4>Nota sobre tamaños</h4>
+                        </div>
+                        <p>Los tamaños pueden variar según la arquitectura y el compilador. Puedes usar <code>sizeof()</code> para verificar el tamaño en tu sistema:</p>
+                        <div class="code-block small">
+                            <pre><code class="language-cpp">std::cout << "Tamaño de int: " << sizeof(int) << " bytes" << std::endl;</code></pre>
+                        </div>
+                    </div>
+                    
+                    <h3 class="content-title">Declaración de Variables</h3>
+                    <p>Las variables se declaran con un tipo y un nombre:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">int edad = 25;
+double precio = 99.95;
+char inicial = 'R';
+bool es_valido = true;</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Constantes</h3>
+                    <p>Usa <code>const</code> para valores que no deben cambiar:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">const double PI = 3.1415926535;
+const int DIAS_SEMANA = 7;</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Auto (C++11)</h3>
+                    <p>Desde C++11, puedes usar <code>auto</code> para deducción de tipos:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">auto nombre = "RataLife";  // deduce const char*
+auto version = 1.2;       // deduce double
+auto iteraciones = 10;    // deduce int</code></pre>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <div class="warning-header">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h4>Precaución con auto</h4>
+                        </div>
+                        <p>Usa <code>auto</code> con cuidado. Puede hacer el código menos legible si se usa en exceso o con expresiones complejas.</p>
+                    </div>
+                </div>
+            </section>
+            
+                        <!-- Control Structures Section -->
+            <section id="control" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">3. Estructuras de Control</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Condicionales</h3>
+                    <p>C++ ofrece varias estructuras para controlar el flujo del programa:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">condicionales.cpp</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">// if-else
+int edad = 18;
+if (edad >= 18) {
+    std::cout << "Mayor de edad" << std::endl;
+} else {
+    std::cout << "Menor de edad" << std::endl;
+}
+
+// switch-case
+char opcion = 'B';
+switch (opcion) {
+    case 'A':
+        std::cout << "Opción A" << std::endl;
+        break;
+    case 'B':
+        std::cout << "Opción B" << std::endl;
+        break;
+    default:
+        std::cout << "Opción desconocida" << std::endl;
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Bucles</h3>
+                    <p>C++ proporciona tres tipos principales de bucles:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// for loop
+for (int i = 0; i < 5; i++) {
+    std::cout << "Iteración " << i << std::endl;
+}
+
+// while loop
+int contador = 0;
+while (contador < 5) {
+    std::cout << "Contador: " << contador << std::endl;
+    contador++;
+}
+
+// do-while loop
+int num = 0;
+do {
+    std::cout << "Número: " << num << std::endl;
+    num++;
+} while (num < 5);</code></pre>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h4>Control de bucles</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><code>break</code>: Termina el bucle inmediatamente</li>
+                            <li><code>continue</code>: Salta a la siguiente iteración</li>
+                            <li><code>return</code>: Sale de la función actual</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Operador Ternario</h3>
+                    <p>Una forma concisa de escribir condicionales simples:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">int a = 10, b = 20;
+int mayor = (a > b) ? a : b;
+std::cout << "El mayor es: " << mayor << std::endl;</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Functions Section -->
+            <section id="functions" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">4. Funciones</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Definición de Funciones</h3>
+                    <p>Las funciones permiten organizar el código en bloques reutilizables:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">funciones.cpp</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">// Declaración (prototipo)
+int suma(int a, int b);
+
+// Definición
+int suma(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    int resultado = suma(5, 3);
+    std::cout << "5 + 3 = " << resultado << std::endl;
+    return 0;
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Parámetros por Valor y Referencia</h3>
+                    <p>C++ permite pasar parámetros por valor o por referencia:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// Por valor (copia)
+void incrementar_valor(int x) {
+    x++;
+}
+
+// Por referencia (original)
+void incrementar_referencia(int &x) {
+    x++;
+}
+
+int main() {
+    int num = 5;
+    incrementar_valor(num);    // num sigue siendo 5
+    incrementar_referencia(num); // num ahora es 6
+    return 0;
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Funciones Recursivas</h3>
+                    <p>Una función que se llama a sí misma:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">int factorial(int n) {
+    if (n <= 1) return 1;
+    return n * factorial(n - 1);
+}
+
+int main() {
+    std::cout << "5! = " << factorial(5) << std::endl; // 120
+    return 0;
+}</code></pre>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <div class="warning-header">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h4>Cuidado con la recursión</h4>
+                        </div>
+                        <p>La recursión puede causar desbordamiento de pila (stack overflow) si no tiene una condición de salida adecuada o si se hace demasiado profunda.</p>
+                    </div>
+                    
+                    <h3 class="content-title">Sobrecarga de Funciones</h3>
+                    <p>C++ permite múltiples funciones con el mismo nombre pero diferentes parámetros:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">void mostrar(int x) {
+    std::cout << "Entero: " << x << std::endl;
+}
+
+void mostrar(double x) {
+    std::cout << "Double: " << x << std::endl;
+}
+
+void mostrar(const char* x) {
+    std::cout << "Cadena: " << x << std::endl;
+}
+
+int main() {
+    mostrar(5);        // Entero: 5
+    mostrar(3.14);     // Double: 3.14
+    mostrar("Hola");   // Cadena: Hola
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- OOP Section -->
+            <section id="oop" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">5. Programación Orientada a Objetos</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Clases y Objetos</h3>
+                    <p>Las clases son la base de la POO en C++:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">clases.cpp</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">class Persona {
+private:
+    std::string nombre;
+    int edad;
+    
+public:
+    // Constructor
+    Persona(std::string n, int e) : nombre(n), edad(e) {}
+    
+    // Métodos
+    void saludar() {
+        std::cout << "Hola, soy " << nombre << " y tengo " << edad << " años." << std::endl;
+    }
+    
+    // Getters y Setters
+    void setEdad(int e) { edad = e; }
+    int getEdad() const { return edad; }
+};
+
+int main() {
+    Persona juan("Juan", 25);
+    juan.saludar();
+    juan.setEdad(26);
+    std::cout << "Nueva edad: " << juan.getEdad() << std::endl;
+    return 0;
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Herencia</h3>
+                    <p>Una clase puede heredar propiedades y métodos de otra:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">class Empleado : public Persona {
+private:
+    std::string puesto;
+    double salario;
+    
+public:
+    Empleado(std::string n, int e, std::string p, double s) 
+        : Persona(n, e), puesto(p), salario(s) {}
+    
+    void mostrarInfo() {
+        saludar();
+        std::cout << "Puesto: " << puesto << ", Salario: $" << salario << std::endl;
+    }
+};
+
+int main() {
+    Empleado maria("Maria", 30, "Desarrolladora", 50000);
+    maria.mostrarInfo();
+    return 0;
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Polimorfismo</h3>
+                    <p>Las funciones pueden comportarse diferente según el objeto que las llama:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">class Animal {
+public:
+    virtual void hacerSonido() {
+        std::cout << "Sonido genérico" << std::endl;
+    }
+};
+
+class Perro : public Animal {
+public:
+    void hacerSonido() override {
+        std::cout << "Guau guau!" << std::endl;
+    }
+};
+
+class Gato : public Animal {
+public:
+    void hacerSonido() override {
+        std::cout << "Miau!" << std::endl;
+    }
+};
+
+int main() {
+    Animal* animales[] = {new Perro(), new Gato()};
+    
+    for (Animal* animal : animales) {
+        animal->hacerSonido();
+        delete animal;
+    }
+    
+    return 0;
+}</code></pre>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h4>Conceptos clave de POO</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>Encapsulamiento:</strong> Ocultar detalles internos (private/public)</li>
+                            <li><strong>Abstracción:</strong> Mostrar solo lo esencial</li>
+                            <li><strong>Herencia:</strong> Reutilizar código de clases padre</li>
+                            <li><strong>Polimorfismo:</strong> Mismo método, diferentes comportamientos</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Templates Section -->
+            <section id="templates" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">6. Plantillas</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Funciones Genéricas</h3>
+                    <p>Las plantillas permiten crear funciones que trabajan con múltiples tipos:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">plantillas_funciones.cpp</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">template <typename T>
+T maximo(T a, T b) {
+    return (a > b) ? a : b;
+}
+
+int main() {
+    std::cout << maximo(3, 7) << std::endl;       // 7
+    std::cout << maximo(3.14, 2.71) << std::endl; // 3.14
+    std::cout << maximo('a', 'z') << std::endl;   // z
+    return 0;
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Clases Genéricas</h3>
+                    <p>También podemos crear clases genéricas:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">template <typename T>
+class Contenedor {
+private:
+    T elemento;
+    
+public:
+    Contenedor(T elem) : elemento(elem) {}
+    
+    T getElemento() { return elemento; }
+};
+
+int main() {
+    Contenedor<int> c1(42);
+    Contenedor<std::string> c2("Hola");
+    
+    std::cout << c1.getElemento() << std::endl; // 42
+    std::cout << c2.getElemento() << std::endl; // Hola
+    return 0;
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">STL y Plantillas</h3>
+                    <p>La STL (Standard Template Library) hace un uso intensivo de plantillas:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> numeros = {5, 2, 8, 1, 9};
+    
+    // Ordenar el vector
+    std::sort(numeros.begin(), numeros.end());
+    
+    // Mostrar elementos
+    for (int num : numeros) {
+        std::cout << num << " ";
+    }
+    // Salida: 1 2 5 8 9
+    
+    return 0;
+}</code></pre>
+                    </div>
+                    
+                    <div class="note-box">
+                        <div class="note-header">
+                            <i class="fas fa-lightbulb"></i>
+                            <h4>Consejo sobre plantillas</h4>
+                        </div>
+                        <p>Las definiciones de plantillas generalmente se colocan en archivos de encabezado (.hpp) porque el compilador necesita ver la implementación completa para instanciarlas.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- STL Section -->
+            <section id="stl" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">7. STL - Biblioteca Estándar</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Contenedores</h3>
+                    <p>La STL proporciona varios contenedores para almacenar datos:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Contenedor</th>
+                                    <th>Descripción</th>
+                                    <th>Ejemplo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>vector</code></td>
+                                    <td>Array dinámico</td>
+                                    <td><code>std::vector&lt;int&gt; v = {1, 2, 3};</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>list</code></td>
+                                    <td>Lista doblemente enlazada</td>
+                                    <td><code>std::list&lt;std::string&gt; nombres;</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>map</code></td>
+                                    <td>Diccionario ordenado</td>
+                                    <td><code>std::map&lt;std::string, int&gt; edades;</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>set</code></td>
+                                    <td>Colección de elementos únicos</td>
+                                    <td><code>std::set&lt;int&gt; numeros;</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>queue</code></td>
+                                    <td>Cola FIFO</td>
+                                    <td><code>std::queue&lt;int&gt; cola;</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3 class="content-title">Iteradores</h3>
+                    <p>Los iteradores permiten recorrer contenedores:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">#include <vector>
+#include <iostream>
+
+int main() {
+    std::vector<int> numeros = {1, 2, 3, 4, 5};
+    
+    // Iterador tradicional
+    for (std::vector<int>::iterator it = numeros.begin(); it != numeros.end(); ++it) {
+        std::cout << *it << " ";
+    }
+    
+    // Range-based for loop (C++11)
+    for (int num : numeros) {
+        std::cout << num << " ";
+    }
+    
+    return 0;
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Algoritmos</h3>
+                    <p>La STL incluye muchos algoritmos útiles:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">#include <algorithm>
+#include <vector>
+
+int main() {
+    std::vector<int> v = {5, 2, 8, 1, 9};
+    
+    // Ordenar
+    std::sort(v.begin(), v.end());
+    
+    // Buscar
+    if (std::binary_search(v.begin(), v.end(), 8)) {
+        std::cout << "8 encontrado" << std::endl;
+    }
+    
+    // Contar
+    int cincos = std::count(v.begin(), v.end(), 5);
+    
+    // Transformar
+    std::transform(v.begin(), v.end(), v.begin(), [](int x) { return x * 2; });
+    
+    return 0;
+}</code></pre>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h4>STL moderna (C++11/14/17/20)</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>Smart pointers:</strong> <code>unique_ptr</code>, <code>shared_ptr</code></li>
+                            <li><strong>Lambdas:</strong> Funciones anónimas</li>
+                            <li><strong>Tuplas:</strong> <code>std::tuple</code></li>
+                            <li><strong>Nuevos contenedores:</strong> <code>unordered_map</code>, <code>array</code></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Advanced Topics Section -->
+            <section id="advanced" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">8. Temas Avanzados</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Punteros y Memoria</h3>
+                    <p>C++ permite manejo directo de memoria:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">punteros.cpp</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">int main() {
+    int* ptr = new int(42); // Asignar memoria dinámica
+    std::cout << *ptr << std::endl; // Acceder al valor
+    delete ptr; // Liberar memoria
+    
+    // Arrays dinámicos
+    int* arr = new int[5]{1, 2, 3, 4, 5};
+    delete[] arr;
+    
+    // Smart pointers (C++11)
+    std::unique_ptr<int> smartPtr = std::make_unique<int>(10);
+    std::cout << *smartPtr << std::endl;
+    // No necesita delete - se libera automáticamente
+    
+    return 0;
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Excepciones</h3>
+                    <p>Manejo de errores con excepciones:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">#include <stdexcept>
+
+double dividir(double a, double b) {
+    if (b == 0) {
+        throw std::runtime_error("División por cero");
+    }
+    return a / b;
+}
+
+int main() {
+    try {
+        double resultado = dividir(10, 0);
+        std::cout << resultado << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+    return 0;
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Lambdas (C++11)</h3>
+                    <p>Funciones anónimas útiles para algoritmos:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">#include <vector>
+#include <algorithm>
+
+int main() {
+    std::vector<int> numeros = {5, 2, 8, 1, 9};
+    
+    // Ordenar descendente con lambda
+    std::sort(numeros.begin(), numeros.end(), [](int a, int b) {
+        return a > b;
+    });
+    
+    // Capturar variables locales
+    int limite = 5;
+    auto mayores = std::count_if(numeros.begin(), numeros.end(), [limite](int x) {
+        return x > limite;
+    });
+    
+    std::cout << "Números mayores que " << limite << ": " << mayores << std::endl;
+    return 0;
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Novedades de C++ Moderno</h3>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="feature-title">C++11/14</h4>
+                            <ul class="feature-list">
+                                <li>Auto y decltype</li>
+                                <li>Range-based for</li>
+                                <li>Lambdas</li>
+                                <li>Smart pointers</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="feature-title">C++17</h4>
+                            <ul class="feature-list">
+                                <li>Structured bindings</li>
+                                <li>std::optional</li>
+                                <li>std::filesystem</li>
+                                <li>if constexpr</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="feature-title">C++20</h4>
+                            <ul class="feature-list">
+                                <li>Conceptos</li>
+                                <li>Ranges</li>
+                                <li>Corrutinas</li>
+                                <li>Modules</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="note-box">
+                        <div class="note-header">
+                            <i class="fas fa-book"></i>
+                            <h4>Recursos para aprender más</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><a href="https://en.cppreference.com/" target="_blank">cppreference.com</a> - Documentación completa</li>
+                            <li><a href="https://isocpp.org/" target="_blank">isocpp.org</a> - Sitio oficial de C++</li>
+                            <li><a href="https://www.learncpp.com/" target="_blank">learncpp.com</a> - Tutoriales gratuitos</li>
+                            <li><a href="https://github.com/fffaraz/awesome-cpp" target="_blank">awesome-cpp</a> - Recursos seleccionados</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Help Section -->
+            <section id="contact" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">¿Necesitas Ayuda?</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <div class="help-box">
+                        <div class="help-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="help-content">
+                            <h3>¿Tienes dudas sobre C++?</h3>
+                            <p>Si hay algún concepto que no entiendes o necesitas ayuda con tu código, envíanos tus preguntas y te ayudaremos.</p>
+                            <button id="open-help-form" class="btn-primary btn-pulse">Solicitar Ayuda</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <!-- Help Form Modal -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Formulario de Ayuda</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="cpp-help-form" action="https://formsubmit.co/your@email.com" method="POST">
+                    <input type="hidden" name="_subject" value="Ayuda con C++">
+                    <input type="hidden" name="_captcha" value="false">
+                    
+                    <div class="form-group">
+                        <label for="help-name">Nombre</label>
+                        <input type="text" id="help-name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-email">Correo Electrónico</label>
+                        <input type="email" id="help-email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-section">Sección relacionada</label>
+                        <select id="help-section" name="section" required>
+                            <option value="" disabled selected>Selecciona una sección</option>
+                            <option value="Fundamentos">1. Fundamentos</option>
+                            <option value="Variables">2. Variables y Tipos</option>
+                            <option value="Control">3. Estructuras de Control</option>
+                            <option value="Funciones">4. Funciones</option>
+                            <option value="POO">5. Programación Orientada a Objetos</option>
+                            <option value="Plantillas">6. Plantillas</option>
+                            <option value="STL">7. STL</option>
+                            <option value="Avanzado">8. Temas Avanzados</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-question">Tu pregunta o problema</label>
+                        <textarea id="help-question" name="question" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-code">Código relacionado (opcional)</label>
+                        <textarea id="help-code" name="code" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Enviar Consulta</button>
+                        <button type="button" class="btn-secondary modal-close-btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <i class="fab fa-cuttlefish"></i>
+                <i class="fas fa-plus plus-icon"></i>
+                <i class="fas fa-plus plus-icon"></i>
+                <span class="brand-name">C++ Guide</span>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4 class="footer-title">Guías</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="cpp-guide.html" class="active">C++</a></li>
+                        <li><a href="imgui-guide.html">Dear ImGui</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-title">Recursos</h4>
+                    <ul>
+                        <li><a href="#">Documentación C++</a></li>
+                        <li><a href="#">Ejemplos de código</a></li>
+                        <li><a href="#">Ejercicios</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-title">Comunidad</h4>
+                    <ul>
+                        <li><a href="#">Foro</a></li>
+                        <li><a href="#">Discord</a></li>
+                        <li><a href="#">Contribuir</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 RataLife Guides. Todos los derechos reservados.</p>
+            <p>C++ es un lenguaje de programación creado por Bjarne Stroustrup.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/form-handler.js"></script>
+    <script src="scripts/security.js"></script>
+</body>
+</html>

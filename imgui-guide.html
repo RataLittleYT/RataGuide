@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dear ImGui Guide - By RataLife</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Mobile Warning -->
+    <div id="mobile-warning" class="mobile-warning">
+        <div class="warning-content">
+            <i class="fas fa-exclamation-triangle warning-icon"></i>
+            <h3>Recomendación</h3>
+            <p>Para una mejor experiencia, te recomendamos acceder desde un ordenador.</p>
+            <button id="continue-mobile" class="btn-primary">Continuar en móvil</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <i class="fas fa-code logo-icon"></i>
+                <span class="brand-name">Dear ImGui Guide</span>
+            </div>
+            
+            <div class="navbar-links">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#"><i class="fab fa-cuttlefish"></i> C++ <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cpp-guide.html">Guía Principal</a></li>
+                            <li><a href="imgui-guide.html" class="active">Dear ImGui</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contacto</a></li>
+                </ul>
+            </div>
+            
+            <div class="navbar-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero hero-imgui">
+        <div class="hero-content">
+            <h1 class="hero-title animate-typing">Guía Completa de ImGui</h1>
+            <p class="hero-subtitle">Crea interfaces gráficas inmediatas en C++ con esta poderosa biblioteca</p>
+            <div class="hero-buttons">
+                <a href="#intro" class="btn-primary btn-pulse">Comenzar</a>
+                <a href="#examples" class="btn-secondary">Ver Ejemplos</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <i class="fas fa-chevron-down scroll-icon bounce"></i>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container guide-container">
+        <!-- Table of Contents -->
+        <aside class="guide-toc">
+            <div class="toc-header">
+                <h3>Contenido</h3>
+                <i class="fas fa-window-maximize toc-icon"></i>
+            </div>
+            <ul class="toc-list">
+                <li><a href="#intro" class="toc-link">1. Introducción</a></li>
+                <li><a href="#setup" class="toc-link">2. Configuración</a></li>
+                <li><a href="#first-window" class="toc-link">3. Primera Ventana</a></li>
+                <li><a href="#widgets" class="toc-link">4. Widgets Básicos</a></li>
+                <li><a href="#layout" class="toc-link">5. Diseño</a></li>
+                <li><a href="#styling" class="toc-link">6. Estilos</a></li>
+                <li><a href="#advanced" class="toc-link">7. Temas Avanzados</a></li>
+                <li><a href="#integrations" class="toc-link">8. Integraciones</a></li>
+            </ul>
+            
+            <div class="toc-footer">
+                <button id="imgui-download" class="btn-secondary">
+                    <i class="fas fa-download"></i> Descargar ImGui
+                </button>
+            </div>
+        </aside>
+
+        <!-- Guide Content -->
+        <article class="guide-content">
+            <!-- Intro Section -->
+            <section id="intro" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">1. Introducción a Dear ImGui</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">¿Qué es Dear ImGui?</h3>
+                    <p>Dear ImGui (Immediate Mode Graphical User Interface) es una biblioteca ligera para C++ que permite crear interfaces gráficas de usuario de manera rápida y sencilla. A diferencia de los sistemas GUI tradicionales, ImGui sigue un paradigma de modo inmediato, lo que significa que la interfaz se reconstruye completamente en cada fotograma.</p>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-star"></i>
+                            <h4>Características principales</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>Modo inmediato:</strong> Más simple que el modo retenido tradicional.</li>
+                            <li><strong>Portátil:</strong> Funciona en múltiples plataformas y backends.</li>
+                            <li><strong>Sin dependencias:</strong> Solo requiere un backend de renderizado.</li>
+                            <li><strong>Personalizable:</strong> Estilos y temas completamente configurables.</li>
+                            <li><strong>Eficiente:</strong> Optimizado para herramientas y aplicaciones en tiempo real.</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Casos de uso típicos</h3>
+                    <p>Dear ImGui es ideal para:</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h4 class="feature-title">Herramientas de desarrollo</h4>
+                            <p class="feature-description">Depuradores, editores de niveles, inspectores de variables.</p>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h4 class="feature-title">Juegos</h4>
+                            <p class="feature-description">Interfaces de debug, menús de desarrollo.</p>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4 class="feature-title">Visualización de datos</h4>
+                            <p class="feature-description">Gráficos, métricas en tiempo real.</p>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-sliders-h"></i>
+                            </div>
+                            <h4 class="feature-title">Aplicaciones con controles</h4>
+                            <p class="feature-description">Editores de parámetros, paneles de control.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <div class="warning-header">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h4>No para todo</h4>
+                        </div>
+                        <p>ImGui no está diseñado para interfaces de usuario complejas orientadas al usuario final. Es ideal para herramientas y desarrollo, pero no reemplaza a bibliotecas como Qt o wxWidgets para aplicaciones generales.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Setup Section -->
+            <section id="setup" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">2. Configuración del Entorno</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Obteniendo Dear ImGui</h3>
+                    <p>Puedes descargar Dear ImGui de varias formas:</p>
+                    
+                    <div class="steps-box">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Desde GitHub (recomendado)</h4>
+                                <p>Clona el repositorio oficial:</p>
+                                <div class="code-block">
+                                    <pre><code class="language-bash">git clone https://github.com/ocornut/imgui.git</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Como submodulo</h4>
+                                <p>Si usas git en tu proyecto:</p>
+                                <div class="code-block">
+                                    <pre><code class="language-bash">git submodule add https://github.com/ocornut/imgui.git</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Descarga manual</h4>
+                                <p>Descarga el .zip desde <a href="https://github.com/ocornut/imgui/releases" target="_blank">las releases</a>.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="content-title">Estructura del proyecto</h3>
+                    <p>La estructura básica de ImGui es simple:</p>
+                    
+                    <div class="file-tree">
+                        <ul>
+                            <li class="folder">imgui/
+                                <ul>
+                                    <li class="file">imconfig.h</li>
+                                    <li class="file">imgui.h</li>
+                                    <li class="file">imgui.cpp</li>
+                                    <li class="file">imgui_demo.cpp</li>
+                                    <li class="file">imgui_draw.cpp</li>
+                                    <li class="file">imgui_widgets.cpp</li>
+                                    <li class="folder">backends/
+                                        <ul>
+                                            <li class="file">imgui_impl_glfw.h</li>
+                                            <li class="file">imgui_impl_glfw.cpp</li>
+                                            <li class="file">imgui_impl_opengl3.h</li>
+                                            <li class="file">imgui_impl_opengl3.cpp</li>
+                                            <li class="file">... otros backends</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Integración con un proyecto</h3>
+                    <p>Para integrar ImGui en tu proyecto:</p>
+                    
+                    <ol class="numbered-list">
+                        <li>Añade los archivos principales a tu proyecto (<code>imgui.cpp</code>, <code>imgui_draw.cpp</code>, <code>imgui_widgets.cpp</code>).</li>
+                        <li>Incluye <code>imgui.h</code> donde lo necesites.</li>
+                        <li>Elige un backend de renderizado (GLFW+OpenGL, SDL, DirectX, etc.).</li>
+                        <li>Configura el bucle principal para manejar ImGui.</li>
+                    </ol>
+                    
+                    <h3 class="content-title">Backends disponibles</h3>
+                    <p>ImGui necesita un backend para renderizado y manejo de entrada. Los más comunes:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Backend</th>
+                                    <th>Plataforma</th>
+                                    <th>Renderizador</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>GLFW</td>
+                                    <td>Multiplataforma</td>
+                                    <td>OpenGL, Vulkan</td>
+                                </tr>
+                                <tr>
+                                    <td>SDL</td>
+                                    <td>Multiplataforma</td>
+                                    <td>OpenGL, Direct3D</td>
+                                </tr>
+                                <tr>
+                                    <td>Win32</td>
+                                    <td>Windows</td>
+                                    <td>DirectX</td>
+                                </tr>
+                                <tr>
+                                    <td>Allegro</td>
+                                    <td>Multiplataforma</td>
+                                    <td>OpenGL</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="note-box">
+                        <div class="note-header">
+                            <i class="fas fa-lightbulb"></i>
+                            <h4>Consejo</h4>
+                        </div>
+                        <p>Para comenzar rápidamente, usa el combo GLFW + OpenGL3, que es multiplataforma y fácil de configurar.</p>
+                    </div>
+                </div>
+            </section>
+            
+                        <!-- First Window Section -->
+            <section id="first-window" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">3. Creando tu Primera Ventana</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Estructura básica de una aplicación con ImGui</h3>
+                    <p>Toda aplicación con ImGui sigue un flujo similar:</p>
+                    
+                    <div class="steps-box">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Inicialización</h4>
+                                <p>Configura el contexto de ImGui y los backends necesarios.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Bucle principal</h4>
+                                <p>Donde se manejan los frames de ImGui y se renderiza la interfaz.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Limpieza</h4>
+                                <p>Liberación de recursos al finalizar la aplicación.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="content-title">Tu primera ventana</h3>
+                    <p>Veamos cómo crear una ventana simple con un botón:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Ventana Básica</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">// Dentro de tu bucle principal
+ImGui::Begin("Mi Primera Ventana");
+ImGui::Text("¡Hola desde ImGui!");
+if (ImGui::Button("Presióname")) {
+    // Lógica cuando se presiona el botón
+    std::cout << "Botón presionado!\n";
+}
+ImGui::End();</code></pre>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h4>¿Cómo funciona?</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><code>ImGui::Begin()</code> inicia una nueva ventana.</li>
+                            <li><code>ImGui::Text()</code> muestra texto estático.</li>
+                            <li><code>ImGui::Button()</code> crea un botón clickeable.</li>
+                            <li><code>ImGui::End()</code> cierra la ventana.</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Manejando el estado</h3>
+                    <p>ImGui no maneja estado interno, así que debes gestionarlo tú:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// Variables de estado (deben persistir entre frames)
+static bool show_window = true;
+static int counter = 0;
+
+if (show_window) {
+    ImGui::Begin("Ventana con Estado", &show_window);
+    ImGui::Text("Contador: %d", counter);
+    if (ImGui::Button("Incrementar")) {
+        counter++;
+    }
+    ImGui::End();
+}</code></pre>
+                    </div>
+                    
+                    <div class="note-box">
+                        <div class="note-header">
+                            <i class="fas fa-lightbulb"></i>
+                            <h4>Consejo importante</h4>
+                        </div>
+                        <p>Usa variables <code>static</code> o variables miembro de clase para mantener el estado entre frames. Las variables locales se perderán en cada iteración del bucle.</p>
+                    </div>
+                    
+                    <h3 class="content-title">Ventanas modales</h3>
+                    <p>Puedes crear ventanas modales (que bloquean la interacción con otras ventanas):</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">if (ImGui::Button("Mostrar Modal")) {
+    ImGui::OpenPopup("Mi Modal");
+}
+
+if (ImGui::BeginPopupModal("Mi Modal", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
+    ImGui::Text("¡Esto es un diálogo modal!");
+    if (ImGui::Button("Cerrar")) {
+        ImGui::CloseCurrentPopup();
+    }
+    ImGui::EndPopup();
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+                        <!-- Widgets Section -->
+            <section id="widgets" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">4. Widgets Básicos</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Widgets de entrada</h3>
+                    <p>ImGui ofrece diversos widgets para interactuar con el usuario:</p>
+                    
+                    <div class="widgets-grid">
+                        <div class="widget-item">
+                            <div class="widget-icon">
+                                <i class="fas fa-sliders-h"></i>
+                            </div>
+                            <h4 class="widget-title">Slider</h4>
+                            <div class="code-block small">
+                                <pre><code class="language-cpp">float value = 0.5f;
+ImGui::SliderFloat("Deslizador", &value, 0.0f, 1.0f);</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="widget-item">
+                            <div class="widget-icon">
+                                <i class="fas fa-check-square"></i>
+                            </div>
+                            <h4 class="widget-title">Checkbox</h4>
+                            <div class="code-block small">
+                                <pre><code class="language-cpp">bool enabled = true;
+ImGui::Checkbox("Habilitado", &enabled);</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="widget-item">
+                            <div class="widget-icon">
+                                <i class="fas fa-font"></i>
+                            </div>
+                            <h4 class="widget-title">Input Text</h4>
+                            <div class="code-block small">
+                                <pre><code class="language-cpp">char text[128] = "Hola";
+ImGui::InputText("Texto", text, IM_ARRAYSIZE(text));</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="widget-item">
+                            <div class="widget-icon">
+                                <i class="fas fa-list"></i>
+                            </div>
+                            <h4 class="widget-title">Combo Box</h4>
+                            <div class="code-block small">
+                                <pre><code class="language-cpp">const char* items[] = {"Opción 1", "Opción 2", "Opción 3"};
+static int item_current = 0;
+ImGui::Combo("Combo", &item_current, items, IM_ARRAYSIZE(items));</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="content-title">Widgets de visualización</h3>
+                    <p>Elementos para mostrar información:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// Texto simple
+ImGui::Text("Texto estático");
+
+// Texto formateado
+ImGui::Text("FPS: %.1f", io.Framerate);
+
+// Etiqueta + valor en la misma línea
+ImGui::LabelText("Etiqueta", "Valor");
+
+// Barra de progreso
+ImGui::ProgressBar(0.75f, ImVec2(-FLT_MIN, 0), "75%");
+
+// Separador visual
+ImGui::Separator();
+
+// Bullet points
+ImGui::BulletText("Item 1");
+ImGui::BulletText("Item 2");</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Widgets de organización</h3>
+                    <p>Para agrupar y organizar elementos:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// Grupos con bordes
+ImGui::BeginGroup();
+ImGui::Text("Grupo 1");
+ImGui::Button("Botón A");
+ImGui::EndGroup();
+
+ImGui::SameLine();
+
+ImGui::BeginGroup();
+ImGui::Text("Grupo 2");
+ImGui::Button("Botón B");
+ImGui::EndGroup();
+
+// Árboles y secciones plegables
+if (ImGui::TreeNode("Sección avanzada")) {
+    ImGui::Text("Contenido oculto...");
+    ImGui::TreePop();
+}
+
+// Pestañas
+if (ImGui::BeginTabBar("MisPestañas")) {
+    if (ImGui::BeginTabItem("General")) {
+        ImGui::Text("Contenido pestaña General");
+        ImGui::EndTabItem();
+    }
+    if (ImGui::BeginTabItem("Avanzado")) {
+        ImGui::Text("Contenido pestaña Avanzado");
+        ImGui::EndTabItem();
+    }
+    ImGui::EndTabBar();
+}</code></pre>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <div class="warning-header">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h4>¡Cuidado con los IDs!</h4>
+                        </div>
+                        <p>ImGui usa los textos de los widgets como identificadores. Si necesitas varios widgets con el mismo texto, usa <code>##</code> para añadir un identificador único:</p>
+                        <div class="code-block small">
+                            <pre><code class="language-cpp">ImGui::Button("Aceptar##1");  // ID único: "Aceptar##1"
+ImGui::Button("Aceptar##2");  // ID único: "Aceptar##2"</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+                        <!-- Layout Section -->
+            <section id="layout" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">5. Diseño y Organización</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Posicionamiento de elementos</h3>
+                    <p>Controla cómo se disponen los widgets en pantalla:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// Elementos en la misma línea
+ImGui::Button("Botón 1");
+ImGui::SameLine();
+ImGui::Button("Botón 2");
+
+// Espaciado
+ImGui::Spacing();  // Espacio vertical
+ImGui::SameLine(0, 20);  // Espacio horizontal de 20px
+
+// Posicionamiento absoluto
+ImGui::SetCursorPos(ImVec2(100, 50));
+ImGui::Text("Posicionado en (100,50)");
+
+// Centrado
+ImGui::SetCursorPosX((ImGui::GetWindowSize().x - ImGui::CalcTextSize("Texto centrado").x) * 0.5f);
+ImGui::Text("Texto centrado");</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Tamaños y restricciones</h3>
+                    <p>Controla el tamaño de los widgets y ventanas:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// Tamaño fijo para un botón
+ImGui::Button("Botón Grande", ImVec2(200, 50));
+
+// Ventana con tamaño inicial
+ImGui::SetNextWindowSize(ImVec2(400, 300), ImGuiCond_FirstUseEver);
+ImGui::Begin("Ventana con tamaño personalizado");
+
+// Widget que ocupa todo el ancho disponible
+ImGui::Button("Botón ancho completo", ImVec2(-FLT_MIN, 0));</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Columnas</h3>
+                    <p>Crea diseños multi-columna:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// Diseño con 2 columnas
+ImGui::Columns(2, "misColumnas", true);
+ImGui::Text("Columna 1");
+ImGui::NextColumn();
+ImGui::Text("Columna 2");
+ImGui::Columns(1);  // Vuelve a 1 columna</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Docking (acoplamiento)</h3>
+                    <p>Para interfaces más complejas con ventanas acoplables:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// Habilita el espacio de docking
+ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
+
+// Ventana acoplable
+ImGui::Begin("Ventana Acoplable");
+ImGui::Text("Puedes arrastrar esta ventana para acoplarla");
+ImGui::End();</code></pre>
+                    </div>
+                    
+                    <div class="note-box">
+                        <div class="note-header">
+                            <i class="fas fa-lightbulb"></i>
+                            <h4>Consejo de diseño</h4>
+                        </div>
+                        <p>Usa <code>ImGui::BeginChild()</code> y <code>ImGui::EndChild()</code> para crear áreas desplazables independientes dentro de tus ventanas:</p>
+                        <div class="code-block small">
+                            <pre><code class="language-cpp">ImGui::BeginChild("PanelDesplazable", ImVec2(0, 200), true);
+// Contenido largo aquí...
+ImGui::EndChild();</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+                        <!-- Styling Section -->
+            <section id="styling" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">6. Personalización y Estilos</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Estilos básicos</h3>
+                    <p>Puedes personalizar casi todos los aspectos visuales de ImGui:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// Cambiar el estilo por defecto
+ImGuiStyle& style = ImGui::GetStyle();
+style.WindowRounding = 5.0f;  // Esquinas redondeadas
+style.FramePadding = ImVec2(10, 5);  // Más espacio en botones
+style.Colors[ImGuiCol_Button] = ImVec4(0.26f, 0.59f, 0.98f, 0.40f);  // Color de botón
+
+// Temas predefinidos
+ImGui::StyleColorsDark();    // Tema oscuro (por defecto)
+ImGui::StyleColorsLight();   // Tema claro
+ImGui::StyleColorsClassic(); // Tema clásico (similar a imgui 1.0)</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Colores personalizados</h3>
+                    <p>Puedes modificar todos los colores de la interfaz:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// Modificar colores específicos
+ImVec4* colors = ImGui::GetStyle().Colors;
+colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
+colors[ImGuiCol_WindowBg] = ImVec4(0.06f, 0.06f, 0.06f, 0.94f);
+colors[ImGuiCol_Button] = ImVec4(0.44f, 0.44f, 0.44f, 0.40f);
+colors[ImGuiCol_ButtonHovered] = ImVec4(0.46f, 0.47f, 0.48f, 1.00f);
+colors[ImGuiCol_ButtonActive] = ImVec4(0.42f, 0.42f, 0.42f, 1.00f);</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Fuentes personalizadas</h3>
+                    <p>Puedes cargar y usar diferentes fuentes:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// Cargar una fuente de mayor tamaño
+ImGuiIO& io = ImGui::GetIO();
+io.Fonts->AddFontFromFileTTF("arial.ttf", 18.0f);
+
+// Usar una fuente diferente para un texto específico
+ImFont* bold_font = io.Fonts->AddFontFromFileTTF("arialbd.ttf", 14.0f);
+ImGui::PushFont(bold_font);
+ImGui::Text("Este texto está en negrita");
+ImGui::PopFont();</code></pre>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-palette"></i>
+                            <h4>Herramientas útiles</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>ImGui Style Editor:</strong> Usa <code>ImGui::ShowStyleEditor()</code> para ajustar estilos interactivamente.</li>
+                            <li><strong>Generadores de temas:</strong> Herramientas online como <a href="https://github.com/ocornut/imgui/issues/707" target="_blank">ImThemes</a> pueden ayudarte a crear esquemas de color.</li>
+                            <li><strong>Font Awesome:</strong> Puedes integrar iconos con <a href="https://github.com/juliettef/IconFontCppHeaders" target="_blank">IconFontCppHeaders</a>.</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Estilos por widget</h3>
+                    <p>Puedes modificar el estilo de widgets individuales:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// Botón con estilo personalizado
+ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(1, 0, 0, 1));  // Botón rojo
+ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 10.0f);     // Esquinas redondeadas
+if (ImGui::Button("Botón especial")) {
+    // Acción del botón
+}
+ImGui::PopStyleVar();
+ImGui::PopStyleColor();</code></pre>
+                    </div>
+                </div>
+            </section>
+
+                        <!-- Advanced Section -->
+            <section id="advanced" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">7. Temas Avanzados</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Widgets personalizados</h3>
+                    <p>Puedes crear tus propios widgets usando las primitivas de dibujo:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// Widget de barra de progreso circular personalizado
+void DrawCircularProgress(float progress, float radius) {
+    ImVec2 center = ImGui::GetCursorScreenPos();
+    center.x += radius;
+    center.y += radius;
+    
+    // Fondo del círculo
+    ImGui::GetWindowDrawList()->AddCircle(center, radius, IM_COL32(100, 100, 100, 255), 0, 3.0f);
+    
+    // Parte completada
+    ImGui::GetWindowDrawList()->PathArcTo(center, radius, -IM_PI/2, -IM_PI/2 + 2*IM_PI*progress, 32);
+    ImGui::GetWindowDrawList()->PathStroke(IM_COL32(0, 255, 0, 255), false, 3.0f);
+    
+    // Texto en el centro
+    char text[32];
+    sprintf(text, "%.0f%%", progress*100);
+    ImVec2 text_size = ImGui::CalcTextSize(text);
+    ImGui::GetWindowDrawList()->AddText(
+        ImVec2(center.x - text_size.x/2, center.y - text_size.y/2),
+        IM_COL32(255, 255, 255, 255), text);
+    
+    // Ajusta el cursor para el siguiente widget
+    ImGui::Dummy(ImVec2(radius*2, radius*2));
+}
+
+// Uso:
+DrawCircularProgress(0.75f, 30.0f);</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Optimización</h3>
+                    <p>Consejos para mantener tu interfaz eficiente:</p>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <h4>Mejores prácticas</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>Evita recrear datos:</strong> Carga texturas y fuentes una vez al inicio.</li>
+                            <li><strong>Usa clippings:</strong> Para listas largas, usa <code>ImGuiListClipper</code>.</li>
+                            <li><strong>Reduce widgets ocultos:</strong> No crees widgets que no se van a mostrar.</li>
+                            <li><strong>Cachea cálculos costosos:</strong> Si un valor no cambia entre frames, no lo recalcules.</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Extensiones populares</h3>
+                    <p>La comunidad ha creado muchas extensiones útiles:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Extensión</th>
+                                    <th>Descripción</th>
+                                    <th>Enlace</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ImPlot</td>
+                                    <td>Gráficos y visualización de datos</td>
+                                    <td><a href="https://github.com/epezent/implot" target="_blank">GitHub</a></td>
+                                </tr>
+                                <tr>
+                                    <td>ImNodes</td>
+                                    <td>Sistema de nodos y conexiones</td>
+                                    <td><a href="https://github.com/Nelarius/imnodes" target="_blank">GitHub</a></td>
+                                </tr>
+                                <tr>
+                                    <td>ImGuiColorTextEdit</td>
+                                    <td>Editor de código con resaltado de sintaxis</td>
+                                    <td><a href="https://github.com/BalazsJako/ImGuiColorTextEdit" target="_blank">GitHub</a></td>
+                                </tr>
+                                <tr>
+                                    <td>ImGuizmo</td>
+                                    <td>Gizmos para manipulación 3D</td>
+                                    <td><a href="https://github.com/CedricGuillemet/ImGuizmo" target="_blank">GitHub</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3 class="content-title">Serialización del estado</h3>
+                    <p>Puedes guardar y cargar el estado de la interfaz:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// Guardar el estado
+ImGui::SaveIniSettingsToDisk("imgui.ini");
+
+// Cargar el estado
+ImGui::LoadIniSettingsFromDisk("imgui.ini");
+
+// También puedes usar strings en memoria
+std::string ini_data = ImGui::SaveIniSettingsToMemory();</code></pre>
+                    </div>
+                </div>
+            </section>
+
+                        <!-- Integrations Section -->
+            <section id="integrations" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">8. Integraciones con Otros Sistemas</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Integración con motores de juego</h3>
+                    <p>ImGui se integra fácilmente con motores populares:</p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-gamepad"></i>
+                            </div>
+                            <h4 class="feature-title">Unity</h4>
+                            <p class="feature-description">Usa paquetes como <a href="https://github.com/realgamessoftware/unity-imgui" target="_blank">Unity-ImGui</a>.</p>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                            <h4 class="feature-title">Unreal Engine</h4>
+                            <p class="feature-description">Usa <a href="https://github.com/segross/UnrealImGui" target="_blank">UnrealImGui</a>.</p>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h4 class="feature-title">Godot</h4>
+                            <p class="feature-description">Integración mediante <a href="https://github.com/pigpigyyy/Godot-ImGui-Demo" target="_blank">GDExtension</a>.</p>
+                        </div>
+                    </div>
+                    
+                    <h3 class="content-title">Integración con editores de código</h3>
+                    <p>Para desarrollo de herramientas:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">// Ejemplo: Integración con VS Code mediante extensiones
+// 1. Usa CMake para configurar tu proyecto
+// 2. Configura tasks.json y launch.json para depuración
+// 3. Usa la extensión C++ de Microsoft para IntelliSense</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Renderizadores personalizados</h3>
+                    <p>Si necesitas un backend no soportado oficialmente:</p>
+                    
+                    <ol class="numbered-list">
+                        <li>Implementa las funciones de renderizado necesarias.</li>
+                        <li>Procesa los comandos de dibujo de ImDrawData.</li>
+                        <li>Maneja correctamente las texturas y fuentes.</li>
+                    </ol>
+                    
+                    <div class="note-box">
+                        <div class="note-header">
+                            <i class="fas fa-code-branch"></i>
+                            <h4>Recursos adicionales</h4>
+                        </div>
+                        <p>Consulta la <a href="https://github.com/ocornut/imgui/wiki" target="_blank">wiki oficial</a> para ver integraciones con otros sistemas y tutoriales avanzados.</p>
+                    </div>
+                    
+                    <div class="section-footer">
+                        <h3 class="content-title">¡Felicidades!</h3>
+                        <p>Ahora tienes un conocimiento sólido de Dear ImGui. Continúa explorando y creando interfaces increíbles para tus herramientas y aplicaciones.</p>
+                        <div class="hero-buttons">
+                            <a href="#examples" class="btn-primary">Ver Ejemplos</a>
+                            <a href="https://github.com/ocornut/imgui" target="_blank" class="btn-secondary">Repositorio Oficial</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Examples Section -->
+            <section id="examples" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">Ejemplos Prácticos</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Demo integrada</h3>
+                    <p>ImGui incluye una demo completa que muestra todas sus capacidades. Para usarla:</p>
+                    
+                    <div class="code-block">
+                        <pre><code class="language-cpp">#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+
+// En tu bucle principal
+bool show_demo_window = true;
+ImGui::ShowDemoWindow(&show_demo_window);</code></pre>
+                    </div>
+                    
+                    <div class="imgui-demo-preview">
+                        <div class="demo-image">
+                            <img src="https://raw.githubusercontent.com/ocornut/imgui/master/docs/screenshots/v1.89-demo.png" alt="ImGui Demo">
+                        </div>
+                        <div class="demo-caption">
+                            <p>Ventana de demostración de Dear ImGui mostrando varios widgets y características.</p>
+                        </div>
+                    </div>
+                    
+                    <h3 class="content-title">Ejemplo básico completo</h3>
+                    <p>Aquí tienes un ejemplo mínimo funcional con GLFW y OpenGL:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">main.cpp</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+#include &lt;GLFW/glfw3.h&gt;
+
+int main() {
+    // Inicializa GLFW
+    if (!glfwInit()) return 1;
+    
+    // Crea ventana
+    GLFWwindow* window = glfwCreateWindow(1280, 720, "ImGui Example", NULL, NULL);
+    if (!window) {
+        glfwTerminate();
+        return 1;
+    }
+    glfwMakeContextCurrent(window);
+    
+    // Inicializa ImGui
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    
+    // Configura estilo
+    ImGui::StyleColorsDark();
+    
+    // Inicializa backends
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 130");
+    
+    // Variables de estado
+    bool show_window = true;
+    float slider_value = 0.5f;
+    
+    // Bucle principal
+    while (!glfwWindowShouldClose(window)) {
+        glfwPollEvents();
+        
+        // Limpia pantalla
+        glClear(GL_COLOR_BUFFER_BIT);
+        
+        // Nueva frame ImGui
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+        
+        // Crea tu interfaz
+        if (show_window) {
+            ImGui::Begin("Ventana de Ejemplo", &show_window);
+            ImGui::Text("¡Hola, mundo!");
+            ImGui::SliderFloat("Valor", &slider_value, 0.0f, 1.0f);
+            if (ImGui::Button("Cerrar")) {
+                show_window = false;
+            }
+            ImGui::End();
+        }
+        
+        // Renderiza ImGui
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        
+        // Intercambia buffers
+        glfwSwapBuffers(window);
+    }
+    
+    // Limpieza
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+    
+    glfwDestroyWindow(window);
+    glfwTerminate();
+    
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Help Section -->
+            <section id="contact" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">¿Problemas con ImGui?</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <div class="help-box">
+                        <div class="help-icon">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <div class="help-content">
+                            <h3>¿Atascado con ImGui?</h3>
+                            <p>Si tienes problemas de configuración o no entiendes algún concepto, envíanos tus preguntas con detalles sobre tu problema.</p>
+                            <button id="imgui-help-btn" class="btn-primary btn-pulse">Solicitar Ayuda</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <!-- Help Form Modal -->
+    <div id="imgui-help-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ayuda con Dear ImGui</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="imgui-help-form" action="https://formsubmit.co/your@email.com" method="POST">
+                    <input type="hidden" name="_subject" value="Ayuda con Dear ImGui">
+                    <input type="hidden" name="_captcha" value="false">
+                    
+                    <div class="form-group">
+                        <label for="imgui-help-name">Nombre</label>
+                        <input type="text" id="imgui-help-name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="imgui-help-email">Correo Electrónico</label>
+                        <input type="email" id="imgui-help-email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="imgui-help-section">Área del problema</label>
+                        <select id="imgui-help-section" name="section" required>
+                            <option value="" disabled selected>Selecciona una sección</option>
+                            <option value="Configuración">Configuración/Instalación</option>
+                            <option value="Widgets">Widgets básicos</option>
+                            <option value="Diseño">Diseño y organización</option>
+                            <option value="Estilos">Estilos y temas</option>
+                            <option value="Integración">Integración con backends</option>
+                            <option value="Otro">Otro problema</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="imgui-help-description">Descripción del problema</label>
+                        <textarea id="imgui-help-description" name="description" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="imgui-help-code">Código relevante (opcional)</label>
+                        <textarea id="imgui-help-code" name="code" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="imgui-help-backend">Backend usado</label>
+                        <input type="text" id="imgui-help-backend" name="backend" placeholder="GLFW+OpenGL, SDL, Win32+DirectX, etc.">
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Enviar Consulta</button>
+                        <button type="button" class="btn-secondary modal-close-btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <i class="fas fa-window-maximize"></i>
+                <span class="brand-name">Dear ImGui Guide</span>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4 class="footer-title">Guías</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="cpp-guide.html">C++</a></li>
+                        <li><a href="imgui-guide.html" class="active">Dear ImGui</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-title">Recursos</h4>
+                    <ul>
+                        <li><a href="https://github.com/ocornut/imgui" target="_blank">Repositorio Oficial</a></li>
+                        <li><a href="https://github.com/ocornut/imgui/wiki" target="_blank">Wiki</a></li>
+                        <li><a href="https://github.com/ocornut/imgui/issues" target="_blank">Issues</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-title">Comunidad</h4>
+                    <ul>
+                        <li><a href="https://discord.gg/NgJ4SEP" target="_blank">Discord</a></li>
+                        <li><a href="https://github.com/ocornut/imgui/discussions" target="_blank">Discusiones</a></li>
+                        <li><a href="https://github.com/ocornut/imgui/wiki/Useful-Extensions" target="_blank">Extensiones</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 RataLife Guides. Todos los derechos reservados.</p>
+            <p>Dear ImGui fue creado por Omar Cornut.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/form-handler.js"></script>
+    <script src="scripts/security.js"></script>
+</body>
+</html>

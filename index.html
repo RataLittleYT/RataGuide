@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Guides - By RataLife</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Mobile Warning -->
+    <div id="mobile-warning" class="mobile-warning">
+        <div class="warning-content">
+            <i class="fas fa-exclamation-triangle warning-icon"></i>
+            <h3>Recomendación</h3>
+            <p>Para una mejor experiencia, te recomendamos acceder desde un ordenador.</p>
+            <button id="continue-mobile" class="btn-primary">Continuar en móvil</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <i class="fas fa-code logo-icon"></i>
+                <span class="brand-name">RataLife Guides</span>
+            </div>
+            
+            <div class="navbar-links">
+                <ul>
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#"><i class="fab fa-cuttlefish"></i> C/C++ <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cpp-guide.html">Guía C++</a></li>
+                            <li><a href="imgui-guide.html">Dear ImGui</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#"><i class="fas fa-hashtag"></i> C# <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="coming-soon">Consola</a></li>
+                            <li><a href="#" class="coming-soon">Windows Forms</a></li>
+                            <li><a href="#" class="coming-soon">XML</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#"><i class="fab fa-python"></i> Python <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="coming-soon">Consola</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#"><i class="fab fa-html5"></i> Web <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="coming-soon">HTML/CSS</a></li>
+                            <li><a href="#" class="coming-soon">JavaScript</a></li>
+                            <li><a href="#" class="coming-soon">PHP</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contacto</a></li>
+                </ul>
+            </div>
+            
+            <div class="navbar-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title animate-typing">Guías de Programación</h1>
+            <p class="hero-subtitle">Aprende desde cero con tutoriales detallados y ejemplos prácticos</p>
+            <div class="hero-buttons">
+                <a href="#guides" class="btn-primary btn-pulse">Explorar Guías</a>
+                <a href="#about" class="btn-secondary">Sobre el Proyecto</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <i class="fas fa-chevron-down scroll-icon bounce"></i>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- About Section -->
+        <section id="about" class="section about-section">
+            <div class="section-header">
+                <h2 class="section-title">Sobre este Proyecto</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Bienvenido a <strong>RataLife Guides</strong>, un proyecto dedicado a proporcionar tutoriales completos y detallados sobre diversos lenguajes de programación y tecnologías.</p>
+                    <p>Cada guía está cuidadosamente elaborada para llevarte desde los conceptos más básicos hasta temas avanzados, con ejemplos prácticos y explicaciones claras.</p>
+                    <p>Actualmente estamos trabajando en expandir nuestro contenido, así que revisa frecuentemente para nuevas guías y actualizaciones.</p>
+                </div>
+                <div class="about-image">
+                    <div class="code-editor animate-float">
+                        <div class="editor-header">
+                            <div class="editor-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <div class="editor-title">example.cpp</div>
+                        </div>
+                        <div class="editor-content">
+                            <pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main() {
+    std::cout << "¡Bienvenido a RataLife Guides!\n";
+    std::cout << "Aprende programación con nosotros.\n";
+    return 0;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guides Section -->
+        <section id="guides" class="section guides-section">
+            <div class="section-header">
+                <h2 class="section-title">Nuestras Guías</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="guides-grid">
+                <!-- C++ Guide -->
+                <div class="guide-card card-hover">
+                    <div class="card-icon">
+                        <i class="fab fa-cuttlefish"></i>
+                        <i class="fas fa-plus plus-icon"></i>
+                        <i class="fas fa-plus plus-icon"></i>
+                    </div>
+                    <h3 class="card-title">C++</h3>
+                    <p class="card-description">Aprende C++ desde cero hasta nivel avanzado con nuestra guía completa.</p>
+                    <div class="card-links">
+                        <a href="cpp-guide.html" class="btn-card">Guía Principal</a>
+                        <div class="dropdown">
+                            <button class="btn-card dropdown-toggle">Más <i class="fas fa-chevron-down"></i></button>
+                            <div class="dropdown-content">
+                                <a href="imgui-guide.html">Dear ImGui</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- C# Guide -->
+                <div class="guide-card card-hover">
+                    <div class="card-icon">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <h3 class="card-title">C#</h3>
+                    <p class="card-description">Domina C# con nuestras guías de consola, Windows Forms y XML.</p>
+                    <div class="card-links">
+                        <a href="#" class="btn-card coming-soon">Consola</a>
+                        <div class="dropdown">
+                            <button class="btn-card dropdown-toggle">Más <i class="fas fa-chevron-down"></i></button>
+                            <div class="dropdown-content">
+                                <a href="#" class="coming-soon">Windows Forms</a>
+                                <a href="#" class="coming-soon">XML</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="coming-soon-badge">Próximamente</div>
+                </div>
+                
+                <!-- Python Guide -->
+                <div class="guide-card card-hover">
+                    <div class="card-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3 class="card-title">Python</h3>
+                    <p class="card-description">Aprende Python para automatización, análisis de datos y más.</p>
+                    <div class="card-links">
+                        <a href="#" class="btn-card coming-soon">Consola</a>
+                    </div>
+                    <div class="coming-soon-badge">Próximamente</div>
+                </div>
+                
+                <!-- Web Guide -->
+                <div class="guide-card card-hover">
+                    <div class="card-icon">
+                        <i class="fab fa-html5"></i>
+                        <i class="fab fa-css3-alt"></i>
+                        <i class="fab fa-js"></i>
+                    </div>
+                    <h3 class="card-title">Desarrollo Web</h3>
+                    <p class="card-description">Domina HTML, CSS, JavaScript y PHP para crear sitios web increíbles.</p>
+                    <div class="card-links">
+                        <a href="#" class="btn-card coming-soon">HTML/CSS</a>
+                        <div class="dropdown">
+                            <button class="btn-card dropdown-toggle">Más <i class="fas fa-chevron-down"></i></button>
+                            <div class="dropdown-content">
+                                <a href="#" class="coming-soon">JavaScript</a>
+                                <a href="#" class="coming-soon">PHP</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="coming-soon-badge">Próximamente</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section features-section">
+            <div class="section-header">
+                <h2 class="section-title">¿Por Qué Nuestras Guías?</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon animate-spin">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="feature-title">Ejemplos Prácticos</h3>
+                    <p class="feature-description">Cada concepto viene acompañado de ejemplos de código reales que puedes probar.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon animate-bounce">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="feature-title">Estructura Progresiva</h3>
+                    <p class="feature-description">Aprende desde lo básico hasta lo avanzado con una curva de aprendizaje suave.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon animate-pulse">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3 class="feature-title">Soporte Directo</h3>
+                    <p class="feature-description">¿Tienes dudas? Envíanos tus preguntas y te ayudaremos directamente.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon animate-float">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="feature-title">Enfoque Moderno</h3>
+                    <p class="feature-description">Nos enfocamos en las mejores prácticas y técnicas actualizadas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact-section">
+            <div class="section-header">
+                <h2 class="section-title">¿Necesitas Ayuda?</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3 class="contact-title">Envía tus dudas</h3>
+                    <p class="contact-description">Si tienes preguntas sobre alguna guía o necesitas ayuda con un concepto específico, no dudes en contactarnos.</p>
+                    
+                    <div class="contact-details">
+                        <div class="detail-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>support@ratalife.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Respuesta en 24-48 horas</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-social">
+                        <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="help-form" action="https://formsubmit.co/your@email.com" method="POST">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" value="https://yourdomain.com/thanks.html">
+                        
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Asunto</label>
+                            <select id="subject" name="subject" required>
+                                <option value="" disabled selected>Selecciona un tema</option>
+                                <option value="C++">C++</option>
+                                <option value="Dear ImGui">Dear ImGui</option>
+                                <option value="C#">C#</option>
+                                <option value="Python">Python</option>
+                                <option value="Web">Desarrollo Web</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="submit" class="btn-primary btn-pulse">Enviar Mensaje</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <i class="fas fa-code logo-icon"></i>
+                <span class="brand-name">RataLife Guides</span>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4 class="footer-title">Guías</h4>
+                    <ul>
+                        <li><a href="cpp-guide.html">C++</a></li>
+                        <li><a href="imgui-guide.html">Dear ImGui</a></li>
+                        <li><a href="#">C#</a></li>
+                        <li><a href="#">Python</a></li>
+                        <li><a href="#">Web</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 RataLife Guides. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/form-handler.js"></script>
+    <script src="scripts/security.js"></script>
+</body>
+</html>
