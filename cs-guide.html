@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# Console Guide - By RataLife</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Mobile Warning -->
+    <div id="mobile-warning" class="mobile-warning">
+        <div class="warning-content">
+            <i class="fas fa-exclamation-triangle warning-icon"></i>
+            <h3>Recomendación</h3>
+            <p>Para una mejor experiencia, te recomendamos acceder desde un ordenador.</p>
+            <button id="continue-mobile" class="btn-primary">Continuar en móvil</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <i class="fas fa-code logo-icon"></i>
+                <span class="brand-name">C# Guide</span>
+            </div>
+            
+            <div class="navbar-links">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="active"><i class="fas fa-hashtag"></i> C# <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" class="active">Guía Consola</a></li>
+                            <li><a href="csharp-forms-guide.html">Windows Forms</a></li>
+                            <li><a href="csharp-xml-guide.html">Trabajo con XML</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contacto</a></li>
+                </ul>
+            </div>
+            
+            <div class="navbar-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero hero-csharp">
+        <div class="hero-content">
+            <h1 class="hero-title animate-typing">Guía Completa de C# en Consola</h1>
+            <p class="hero-subtitle">Aprende programación en C# desde cero con ejemplos prácticos de consola</p>
+            <div class="hero-buttons">
+                <a href="#basics" class="btn-primary btn-pulse">Comenzar</a>
+                <a href="#contact" class="btn-secondary">¿Dudas?</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <i class="fas fa-chevron-down scroll-icon bounce"></i>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container guide-container">
+        <!-- Table of Contents -->
+        <aside class="guide-toc">
+            <div class="toc-header">
+                <h3>Contenido</h3>
+                <i class="fas fa-bookmark toc-icon"></i>
+            </div>
+            <ul class="toc-list">
+                <li><a href="#basics" class="toc-link">1. Fundamentos</a></li>
+                <li><a href="#variables" class="toc-link">2. Variables y Tipos</a></li>
+                <li><a href="#control" class="toc-link">3. Estructuras de Control</a></li>
+                <li><a href="#functions" class="toc-link">4. Métodos</a></li>
+                <li><a href="#oop" class="toc-link">5. Programación Orientada a Objetos</a></li>
+                <li><a href="#collections" class="toc-link">6. Colecciones</a></li>
+                <li><a href="#linq" class="toc-link">7. LINQ</a></li>
+                <li><a href="#advanced" class="toc-link">8. Temas Avanzados</a></li>
+            </ul>
+            
+            <div class="toc-footer">
+                <button id="print-guide" class="btn-secondary">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+            </div>
+        </aside>
+
+        <!-- Guide Content -->
+        <article class="guide-content">
+            <!-- Basics Section -->
+            <section id="basics" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">1. Fundamentos de C#</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">¿Qué es C#?</h3>
+                    <p>C# (pronunciado "C Sharp") es un lenguaje de programación moderno, orientado a objetos y de propósito general desarrollado por Microsoft en el año 2000. Es parte del ecosistema .NET y combina los conceptos de C++ con la simplicidad de Visual Basic.</p>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h4>Características clave</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>Orientado a objetos:</strong> Soporta encapsulamiento, herencia y polimorfismo</li>
+                            <li><strong>Tipado seguro:</strong> Previene errores comunes de tipo</li>
+                            <li><strong>Moderno:</strong> Funcionalidades como LINQ, async/await, propiedades automáticas</li>
+                            <li><strong>Multiplataforma:</strong> Gracias a .NET Core/.NET 5+</li>
+                            <li><strong>Gestión de memoria automática:</strong> Recolección de basura (GC)</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Tu primer programa en C#</h3>
+                    <p>El clásico "Hola Mundo" en C#:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Program.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Imprime "Hola Mundo!" en la consola
+        Console.WriteLine("Hola Mundo!");
+    }
+}</code></pre>
+                    </div>
+                    
+                    <div class="explanation-box">
+                        <h4>Explicación:</h4>
+                        <ol>
+                            <li><code>using System;</code>: Importa el espacio de nombres System que contiene clases fundamentales.</li>
+                            <li><code>class Program</code>: Define una clase llamada Program (convención para el programa principal).</li>
+                            <li><code>static void Main()</code>: Punto de entrada del programa. Debe ser estático y puede devolver void o int.</li>
+                            <li><code>Console.WriteLine</code>: Método para imprimir texto en la consola con salto de línea.</li>
+                            <li><code>//</code>: Comentario de una línea que el compilador ignora.</li>
+                        </ol>
+                    </div>
+                    
+                    <h3 class="content-title">Compilación y ejecución</h3>
+                    <p>Para compilar y ejecutar un programa en C#:</p>
+                    
+                    <div class="steps-box">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Crea un proyecto</h4>
+                                <p>Usa el CLI de .NET para crear un nuevo proyecto de consola:</p>
+                                <div class="code-block inline">
+                                    <pre><code class="language-bash">dotnet new console -n MiPrimerPrograma</code></pre>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Escribe el código</h4>
+                                <p>Edita el archivo <code>Program.cs</code> con tu código.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Ejecuta el programa</h4>
+                                <div class="code-block inline">
+                                    <pre><code class="language-bash">dotnet run</code></pre>
+                                </div>
+                                <p>Deberías ver la salida: <code>Hola Mundo!</code></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="content-title">Entrada y Salida Básica</h3>
+                    <p>Interacción con el usuario en la consola:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">EntradaSalida.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">Console.Write("Ingresa tu nombre: "); // Escribe sin salto de línea
+string nombre = Console.ReadLine();    // Lee entrada del usuario
+
+Console.Write("Ingresa tu edad: ");
+int edad = Convert.ToInt32(Console.ReadLine());
+
+Console.WriteLine($"Hola {nombre}, tienes {edad} años."); // Interpolación de strings</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Variables Section -->
+            <section id="variables" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">2. Variables y Tipos de Datos</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Tipos de Datos Básicos</h3>
+                    <p>C# es un lenguaje fuertemente tipado con varios tipos de datos integrados:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Tipo</th>
+                                    <th>Descripción</th>
+                                    <th>Ejemplo</th>
+                                    <th>Valor por defecto</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>int</code></td>
+                                    <td>Entero de 32 bits con signo</td>
+                                    <td><code>42</code></td>
+                                    <td><code>0</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>double</code></td>
+                                    <td>Número de punto flotante de 64 bits</td>
+                                    <td><code>3.14159</code></td>
+                                    <td><code>0.0</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>decimal</code></td>
+                                    <td>Número decimal de alta precisión (128 bits)</td>
+                                    <td><code>123.45m</code></td>
+                                    <td><code>0.0m</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>char</code></td>
+                                    <td>Carácter Unicode (16 bits)</td>
+                                    <td><code>'A'</code></td>
+                                    <td><code>'\0'</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>string</code></td>
+                                    <td>Secuencia de caracteres</td>
+                                    <td><code>"Hola"</code></td>
+                                    <td><code>null</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>bool</code></td>
+                                    <td>Valor booleano</td>
+                                    <td><code>true</code>, <code>false</code></td>
+                                    <td><code>false</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="note-box">
+                        <div class="note-header">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <h4>Tipos por valor vs. por referencia</h4>
+                        </div>
+                        <p>En C#, los tipos simples como <code>int</code>, <code>double</code>, <code>bool</code> son tipos por valor (almacenan el valor directamente). Los tipos como <code>string</code>, arrays y clases son tipos por referencia (almacenan una referencia al valor).</p>
+                    </div>
+                    
+                    <h3 class="content-title">Declaración de Variables</h3>
+                    <p>Las variables se declaran con un tipo y un nombre:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Variables.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">int edad = 25;                  // Entero
+double precio = 99.95;          // Punto flotante
+decimal saldo = 1500.75m;       // Decimal (para dinero)
+char inicial = 'R';             // Carácter
+string nombre = "RataLife";     // Cadena de texto
+bool esValido = true;           // Booleano</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Constantes</h3>
+                    <p>Usa <code>const</code> para valores que no deben cambiar:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Constantes.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">const double PI = 3.1415926535;
+const int DIAS_SEMANA = 7;
+const string EMPRESA = "RataLife Corp";</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Inferencia de Tipos (var)</h3>
+                    <p>Puedes usar <code>var</code> para que el compilador infiera el tipo:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">VarExample.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">var nombre = "RataLife";    // string
+var version = 1.2;         // double
+var iteraciones = 10;      // int
+var lista = new List&lt;int&gt;(); // List&lt;int&gt;</code></pre>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <div class="warning-header">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h4>Precaución con var</h4>
+                        </div>
+                        <p>Usa <code>var</code> cuando el tipo sea obvio. Evítalo cuando reduzca la legibilidad del código.</p>
+                    </div>
+                    
+                    <h3 class="content-title">Conversión de Tipos</h3>
+                    <p>C# ofrece varias formas de convertir entre tipos:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Conversiones.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">// Conversión implícita (segura)
+int entero = 10;
+double doble = entero; // Conversión automática
+
+// Conversión explícita (casting)
+double pi = 3.14159;
+int piEntero = (int)pi; // piEntero = 3 (pierde decimales)
+
+// Conversión con métodos
+string texto = "123";
+int numero = Convert.ToInt32(texto); // Usando Convert
+int numero2 = int.Parse(texto);     // Usando Parse
+int numero3;
+int.TryParse(texto, out numero3);   // TryParse (seguro)</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Control Structures Section -->
+            <section id="control" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">3. Estructuras de Control</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Condicionales</h3>
+                    <p>C# ofrece varias estructuras para controlar el flujo del programa:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Condicionales.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">// if-else
+int edad = 18;
+if (edad >= 18)
+{
+    Console.WriteLine("Mayor de edad");
+}
+else
+{
+    Console.WriteLine("Menor de edad");
+}
+
+// switch-case (moderno con patrones)
+string dia = "Lunes";
+switch (dia)
+{
+    case "Lunes":
+        Console.WriteLine("Inicio de semana");
+        break;
+    case "Viernes":
+        Console.WriteLine("¡Fin de semana cerca!");
+        break;
+    default:
+        Console.WriteLine("Día normal");
+        break;
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Bucles</h3>
+                    <p>C# proporciona varios tipos de bucles:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Bucles.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">// for loop
+for (int i = 0; i < 5; i++)
+{
+    Console.WriteLine($"Iteración {i}");
+}
+
+// while loop
+int contador = 0;
+while (contador < 5)
+{
+    Console.WriteLine($"Contador: {contador}");
+    contador++;
+}
+
+// do-while loop
+int num = 0;
+do
+{
+    Console.WriteLine($"Número: {num}");
+    num++;
+} while (num < 5);
+
+// foreach loop (para colecciones)
+string[] colores = { "Rojo", "Verde", "Azul" };
+foreach (string color in colores)
+{
+    Console.WriteLine(color);
+}</code></pre>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h4>Control de bucles</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><code>break</code>: Termina el bucle inmediatamente</li>
+                            <li><code>continue</code>: Salta a la siguiente iteración</li>
+                            <li><code>return</code>: Sale del método actual</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Operador Ternario</h3>
+                    <p>Una forma concisa de escribir condicionales simples:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Ternario.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">int a = 10, b = 20;
+int mayor = (a > b) ? a : b;
+Console.WriteLine($"El mayor es: {mayor}");
+
+// También para asignaciones condicionales
+string resultado = (a > b) ? "a es mayor" : "b es mayor";</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Excepciones Básicas</h3>
+                    <p>Manejo de errores con try-catch:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Excepciones.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">try
+{
+    Console.Write("Ingresa un número: ");
+    int numero = int.Parse(Console.ReadLine());
+    Console.WriteLine($"Ingresaste: {numero}");
+}
+catch (FormatException)
+{
+    Console.WriteLine("Error: No ingresaste un número válido.");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Error inesperado: {ex.Message}");
+}
+finally
+{
+    Console.WriteLine("Este bloque siempre se ejecuta.");
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Functions Section -->
+            <section id="functions" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">4. Métodos</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Definición de Métodos</h3>
+                    <p>Los métodos permiten organizar el código en bloques reutilizables:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Metodos.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">using System;
+
+class Calculadora
+{
+    // Método estático que devuelve un int
+    public static int Sumar(int a, int b)
+    {
+        return a + b;
+    }
+    
+    // Método que no devuelve valor (void)
+    public void Saludar(string nombre)
+    {
+        Console.WriteLine($"Hola, {nombre}!");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Llamar método estático
+        int resultado = Calculadora.Sumar(5, 3);
+        Console.WriteLine($"5 + 3 = {resultado}");
+        
+        // Llamar método de instancia
+        Calculadora calc = new Calculadora();
+        calc.Saludar("RataLife");
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Parámetros y Argumentos</h3>
+                    <p>C# ofrece varias formas de trabajar con parámetros:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Parametros.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">// Parámetros por valor (copia)
+void IncrementarValor(int x)
+{
+    x++;
+}
+
+// Parámetros por referencia (original)
+void IncrementarReferencia(ref int x)
+{
+    x++;
+}
+
+// Parámetros de salida (out)
+void Dividir(int a, int b, out int cociente, out int residuo)
+{
+    cociente = a / b;
+    residuo = a % b;
+}
+
+// Parámetros opcionales con valor por defecto
+void Saludar(string nombre = "Usuario", string saludo = "Hola")
+{
+    Console.WriteLine($"{saludo}, {nombre}!");
+}
+
+static void Main()
+{
+    int num = 5;
+    IncrementarValor(num);    // num sigue siendo 5
+    IncrementarReferencia(ref num); // num ahora es 6
+    
+    int coc, res;
+    Dividir(10, 3, out coc, out res);
+    Console.WriteLine($"10/3 = {coc} con residuo {res}");
+    
+    Saludar(); // Usa valores por defecto
+    Saludar("Juan", "Buen día"); // Pasa argumentos
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Sobrecarga de Métodos</h3>
+                    <p>C# permite múltiples métodos con el mismo nombre pero diferentes parámetros:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Sobrecarga.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">class Mostrador
+{
+    public void Mostrar(int x)
+    {
+        Console.WriteLine($"Entero: {x}");
+    }
+    
+    public void Mostrar(double x)
+    {
+        Console.WriteLine($"Double: {x}");
+    }
+    
+    public void Mostrar(string x)
+    {
+        Console.WriteLine($"Cadena: {x}");
+    }
+}
+
+static void Main()
+{
+    Mostrador m = new Mostrador();
+    m.Mostrar(5);        // Entero: 5
+    m.Mostrar(3.14);     // Double: 3.14
+    m.Mostrar("Hola");   // Cadena: Hola
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Métodos Recursivos</h3>
+                    <p>Un método que se llama a sí mismo:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Recursion.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">int Factorial(int n)
+{
+    if (n <= 1) return 1;
+    return n * Factorial(n - 1);
+}
+
+static void Main()
+{
+    Console.WriteLine($"5! = {Factorial(5)}"); // 120
+}</code></pre>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <div class="warning-header">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <h4>Cuidado con la recursión</h4>
+                        </div>
+                        <p>La recursión puede causar desbordamiento de pila (stack overflow) si no tiene una condición de salida adecuada o si se hace demasiado profunda.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- OOP Section -->
+            <section id="oop" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">5. Programación Orientada a Objetos</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Clases y Objetos</h3>
+                    <p>Las clases son la base de la POO en C#:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Clases.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">class Persona
+{
+    // Campos (privados por convención)
+    private string nombre;
+    private int edad;
+    
+    // Propiedades (públicas)
+    public string Nombre
+    {
+        get { return nombre; }
+        set { nombre = value; }
+    }
+    
+    public int Edad
+    {
+        get => edad; // Expresión-bodied member
+        set => edad = (value >= 0) ? value : 0; // Validación
+    }
+    
+    // Constructor
+    public Persona(string nombre, int edad)
+    {
+        Nombre = nombre;
+        Edad = edad;
+    }
+    
+    // Método
+    public void Saludar()
+    {
+        Console.WriteLine($"Hola, soy {Nombre} y tengo {Edad} años.");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Persona juan = new Persona("Juan", 25);
+        juan.Saludar();
+        juan.Edad = 26; // Usando setter
+        Console.WriteLine($"Nueva edad: {juan.Edad}"); // Usando getter
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Propiedades Automáticas</h3>
+                    <p>Forma abreviada de definir propiedades:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Propiedades.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">class Producto
+{
+    // Propiedad automática con inicialización
+    public string Nombre { get; set; } = "Sin nombre";
+    
+    // Propiedad de solo lectura
+    public DateTime FechaCreacion { get; } = DateTime.Now;
+    
+    // Propiedad con lógica privada
+    public decimal Precio { get; private set; }
+    
+    public void AplicarDescuento(decimal porcentaje)
+    {
+        Precio *= (1 - porcentaje / 100);
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Herencia</h3>
+                    <p>Una clase puede heredar de otra:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Herencia.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">class Empleado : Persona
+{
+    public string Puesto { get; set; }
+    public decimal Salario { get; set; }
+    
+    public Empleado(string nombre, int edad, string puesto, decimal salario)
+        : base(nombre, edad) // Llama al constructor base
+    {
+        Puesto = puesto;
+        Salario = salario;
+    }
+    
+    public void MostrarInfo()
+    {
+        Saludar(); // Método heredado
+        Console.WriteLine($"Puesto: {Puesto}, Salario: {Salario:C}");
+    }
+}
+
+static void Main()
+{
+    Empleado maria = new Empleado("Maria", 30, "Desarrolladora", 50000);
+    maria.MostrarInfo();
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Polimorfismo</h3>
+                    <p>Las clases derivadas pueden sobrescribir métodos:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Polimorfismo.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">class Animal
+{
+    public virtual void HacerSonido()
+    {
+        Console.WriteLine("Sonido genérico");
+    }
+}
+
+class Perro : Animal
+{
+    public override void HacerSonido()
+    {
+        Console.WriteLine("Guau guau!");
+    }
+}
+
+class Gato : Animal
+{
+    public override void HacerSonido()
+    {
+        Console.WriteLine("Miau!");
+    }
+}
+
+static void Main()
+{
+    Animal[] animales = { new Perro(), new Gato() };
+    
+    foreach (Animal animal in animales)
+    {
+        animal.HacerSonido(); // Comportamiento polimórfico
+    }
+}</code></pre>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h4>Conceptos clave de POO en C#</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>Encapsulamiento:</strong> Ocultar detalles con <code>private</code>/<code>public</code></li>
+                            <li><strong>Abstracción:</strong> Clases abstractas e interfaces</li>
+                            <li><strong>Herencia:</strong> <code>class Derivada : Base</code></li>
+                            <li><strong>Polimorfismo:</strong> <code>virtual</code>/<code>override</code></li>
+                            <li><strong>Constructores:</strong> Inicialización de objetos</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Collections Section -->
+            <section id="collections" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">6. Colecciones</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Arrays</h3>
+                    <p>Estructura básica para almacenar múltiples valores:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Arrays.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">// Array unidimensional
+int[] numeros = new int[5] { 1, 2, 3, 4, 5 };
+string[] nombres = { "Ana", "Juan", "María" };
+
+// Array multidimensional
+int[,] matriz = new int[2, 3] { { 1, 2, 3 }, { 4, 5, 6 } };
+
+// Array de arrays (jagged)
+int[][] jagged = new int[3][];
+jagged[0] = new int[] { 1, 2 };
+jagged[1] = new int[] { 3, 4, 5 };
+jagged[2] = new int[] { 6 };
+
+// Recorrer arrays
+foreach (int num in numeros)
+{
+    Console.WriteLine(num);
+}
+
+for (int i = 0; i < matriz.GetLength(0); i++)
+{
+    for (int j = 0; j < matriz.GetLength(1); j++)
+    {
+        Console.Write($"{matriz[i, j]} ");
+    }
+    Console.WriteLine();
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Listas</h3>
+                    <p><code>List&lt;T&gt;</code> es una colección dinámica muy utilizada:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Listas.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">using System.Collections.Generic;
+
+List&lt;string&gt; frutas = new List&lt;string&gt; { "Manzana", "Banana" };
+
+// Agregar elementos
+frutas.Add("Naranja");
+frutas.AddRange(new[] { "Uva", "Pera" });
+
+// Acceder por índice
+Console.WriteLine(frutas[0]); // Manzana
+
+// Insertar y remover
+frutas.Insert(1, "Kiwi");
+frutas.Remove("Banana");
+frutas.RemoveAt(0);
+
+// Ordenar
+frutas.Sort();
+
+// Buscar
+bool tieneUva = frutas.Contains("Uva");
+int indicePera = frutas.IndexOf("Pera");
+
+// Capacidad y conteo
+Console.WriteLine($"Capacidad: {frutas.Capacity}, Count: {frutas.Count}");
+
+// Recorrer
+foreach (string fruta in frutas)
+{
+    Console.WriteLine(fruta);
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Diccionarios</h3>
+                    <p><code>Dictionary&lt;TKey, TValue&gt;</code> almacena pares clave-valor:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Diccionarios.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">Dictionary&lt;string, int&gt; edades = new Dictionary&lt;string, int&gt;
+{
+    ["Juan"] = 25,
+    ["María"] = 30
+};
+
+// Agregar elementos
+edades.Add("Pedro", 28);
+edades["Ana"] = 22; // Sintaxis alternativa
+
+// Acceder
+Console.WriteLine($"Edad de Juan: {edades["Juan"]}");
+
+// Verificar clave
+if (edades.ContainsKey("María"))
+{
+    Console.WriteLine("María existe en el diccionario");
+}
+
+// Recorrer
+foreach (KeyValuePair&lt;string, int&gt; kvp in edades)
+{
+    Console.WriteLine($"{kvp.Key}: {kvp.Value} años");
+}
+
+// Eliminar
+edades.Remove("Pedro");</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Otras Colecciones</h3>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Colección</th>
+                                    <th>Descripción</th>
+                                    <th>Ejemplo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>Stack&lt;T&gt;</code></td>
+                                    <td>LIFO (último en entrar, primero en salir)</td>
+                                    <td><code>var pila = new Stack&lt;int&gt;();</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>Queue&lt;T&gt;</code></td>
+                                    <td>FIFO (primero en entrar, primero en salir)</td>
+                                    <td><code>var cola = new Queue&lt;string&gt;();</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>HashSet&lt;T&gt;</code></td>
+                                    <td>Colección de elementos únicos</td>
+                                    <td><code>var set = new HashSet&lt;int&gt;();</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>LinkedList&lt;T&gt;</code></td>
+                                    <td>Lista doblemente enlazada</td>
+                                    <td><code>var lista = new LinkedList&lt;string&gt;();</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- LINQ Section -->
+            <section id="linq" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">7. LINQ (Language Integrated Query)</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Introducción a LINQ</h3>
+                    <p>LINQ permite consultar colecciones de manera declarativa:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">LINQ.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">using System.Linq;
+
+List&lt;int&gt; numeros = new List&lt;int&gt; { 5, 2, 8, 1, 9, 3, 6, 4, 7 };
+
+// Sintaxis de método
+var mayoresA5 = numeros.Where(n => n > 5).OrderBy(n => n).ToList();
+
+// Sintaxis de consulta (similar a SQL)
+var pares = from n in numeros
+            where n % 2 == 0
+            orderby n descending
+            select n;
+
+// Ejecución inmediata vs diferida
+var primeros3 = numeros.Take(3).ToList(); // Ejecución inmediata
+var query = numeros.Skip(2); // Ejecución diferida
+
+// Proyecciones
+var cuadrados = numeros.Select(n => n * n);
+var nombres = new List&lt;string&gt; { "Ana", "Juan", "María" };
+var iniciales = nombres.Select(n => n[0]); // ['A', 'J', 'M']
+
+// Agregaciones
+int maximo = numeros.Max();
+double promedio = numeros.Average();
+int suma = numeros.Sum();
+
+// Elementos
+int primero = numeros.First();
+int ultimo = numeros.Last();
+int unico = numeros.Single(n => n == 1); // Lanza excepción si no hay exactamente uno
+
+// Agrupamiento
+var grupos = from n in numeros
+             group n by n % 2 into g
+             select new { EsPar = g.Key == 0, Numeros = g };
+
+foreach (var grupo in grupos)
+{
+    Console.WriteLine($"Números {(grupo.EsPar ? "pares" : "impares")}:");
+    foreach (int n in grupo.Numeros)
+    {
+        Console.WriteLine(n);
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">LINQ con Objetos</h3>
+                    <p>Consultas más complejas con objetos personalizados:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">LINQObjects.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">class Persona
+{
+    public string Nombre { get; set; }
+    public int Edad { get; set; }
+    public string Ciudad { get; set; }
+}
+
+List&lt;Persona&gt; personas = new List&lt;Persona&gt;
+{
+    new Persona { Nombre = "Juan", Edad = 25, Ciudad = "Madrid" },
+    new Persona { Nombre = "María", Edad = 30, Ciudad = "Barcelona" },
+    new Persona { Nombre = "Pedro", Edad = 22, Ciudad = "Madrid" },
+    new Persona { Nombre = "Ana", Edad = 35, Ciudad = "Valencia" }
+};
+
+// Personas de Madrid mayores de 20 años
+var madrid = personas.Where(p => p.Ciudad == "Madrid" && p.Edad > 20)
+                     .OrderBy(p => p.Nombre)
+                     .Select(p => new { p.Nombre, p.Edad });
+
+// Agrupar por ciudad
+var porCiudad = from p in personas
+                group p by p.Ciudad into g
+                select new
+                {
+                    Ciudad = g.Key,
+                    Personas = g.OrderBy(p => p.Nombre),
+                    EdadPromedio = g.Average(p => p.Edad)
+                };
+
+// Join entre colecciones
+List&lt;Ciudad&gt; ciudades = new List&lt;Ciudad&gt;
+{
+    new Ciudad { Nombre = "Madrid", Pais = "España" },
+    new Ciudad { Nombre = "Barcelona", Pais = "España" }
+};
+
+var joinQuery = from p in personas
+                join c in ciudades on p.Ciudad equals c.Nombre
+                select new { p.Nombre, p.Edad, c.Pais };</code></pre>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h4>Ventajas de LINQ</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>Legibilidad:</strong> Código más expresivo y fácil de entender</li>
+                            <li><strong>Productividad:</strong> Menos código para operaciones complejas</li>
+                            <li><strong>Tipado seguro:</strong> Errores detectados en tiempo de compilación</li>
+                            <li><strong>Extensible:</strong> Puedes crear tus propios operadores LINQ</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Advanced Topics Section -->
+            <section id="advanced" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">8. Temas Avanzados</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Delegados y Eventos</h3>
+                    <p>Mecanismos para trabajar con referencias a métodos:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Delegados.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">// Definir un delegado
+delegate void MostrarMensaje(string mensaje);
+
+class Programa
+{
+    static void MostrarEnConsola(string msg)
+    {
+        Console.WriteLine($"CONSOLA: {msg}");
+    }
+    
+    static void MostrarEnMayusculas(string msg)
+    {
+        Console.WriteLine(msg.ToUpper());
+    }
+    
+    static void Main()
+    {
+        // Instanciar delegado
+        MostrarMensaje mostrar = MostrarEnConsola;
+        mostrar("Hola Mundo"); // Llama a MostrarEnConsola
+        
+        // Multicast delegate
+        mostrar += MostrarEnMayusculas;
+        mostrar("Adiós"); // Llama a ambos métodos
+        
+        // Delegados predefinidos (Action, Func, Predicate)
+        Action&lt;string&gt; action = MostrarEnConsola;
+        Func&lt;int, int, int&gt; sumar = (a, b) => a + b;
+        Predicate&lt;int&gt; esPar = n => n % 2 == 0;
+        
+        // Eventos
+        var boton = new Boton();
+        boton.Click += (sender, e) => Console.WriteLine("Botón clickeado!");
+        boton.Presionar();
+    }
+}
+
+class Boton
+{
+    public event EventHandler Click;
+    
+    public void Presionar()
+    {
+        Click?.Invoke(this, EventArgs.Empty);
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Expresiones Lambda</h3>
+                    <p>Funciones anónimas útiles para delegados y LINQ:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Lambdas.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">// Lambda simple
+Func&lt;int, int&gt; cuadrado = x => x * x;
+Console.WriteLine(cuadrado(5)); // 25
+
+// Lambda con múltiples parámetros
+Func&lt;int, int, int&gt; sumar = (a, b) => a + b;
+
+// Lambda con cuerpo de expresión
+Action&lt;string&gt; saludar = nombre =>
+{
+    string saludo = $"Hola, {nombre}!";
+    Console.WriteLine(saludo);
+};
+
+// Uso en LINQ
+var numeros = new List&lt;int&gt; { 1, 2, 3, 4, 5 };
+var pares = numeros.Where(n => n % 2 == 0);
+
+// Captura de variables
+int factor = 2;
+var multiplicados = numeros.Select(n => n * factor);</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Nullable Types</h3>
+                    <p>Permite que los tipos por valor puedan ser null:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Nullable.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-csharp">int? numero = null; // Equivalente a Nullable&lt;int&gt;
+
+if (numero.HasValue)
+{
+    Console.WriteLine($"Valor: {numero.Value}");
+}
+else
+{
+    Console.WriteLine("No tiene valor");
+}
+
+// Operador de coalescencia nula
+int valorReal = numero ?? 0; // Si numero es null, usa 0
+
+// Nullable con tipos personalizados
+DateTime? fecha = null;
+fecha = DateTime.Now;</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Novedades de C# Moderno</h3>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="feature-title">C# 6.0</h4>
+                            <ul class="feature-list">
+                                <li>Interpolación de strings ($"")</li>
+                                <li>Null-conditional operator (?.)</li>
+                                <li>Expression-bodied members</li>
+                                <li>nameof operator</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="feature-title">C# 7.0</h4>
+                            <ul class="feature-list">
+                                <li>Tuplas y deconstrucción</li>
+                                <li>Pattern matching</li>
+                                <li>Local functions</li>
+                                <li>Ref returns y locals</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="feature-title">C# 8.0+</h4>
+                            <ul class="feature-list">
+                                <li>Nullable reference types</li>
+                                <li>Ranges e índices</li>
+                                <li>Async streams</li>
+                                <li>Pattern matching mejorado</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="note-box">
+                        <div class="note-header">
+                            <i class="fas fa-book"></i>
+                            <h4>Recursos para aprender más</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><a href="https://docs.microsoft.com/es-es/dotnet/csharp/" target="_blank">Documentación oficial de C#</a></li>
+                            <li><a href="https://dotnet.microsoft.com/learn/csharp" target="_blank">Tutoriales interactivos</a></li>
+                            <li><a href="https://csharp.net-tutorials.com/" target="_blank">C# Net Tutorials</a></li>
+                            <li><a href="https://github.com/JamesNK/Newtonsoft.Json" target="_blank">Newtonsoft.Json (JSON popular)</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Help Section -->
+            <section id="contact" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">¿Necesitas Ayuda?</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <div class="help-box">
+                        <div class="help-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="help-content">
+                            <h3>¿Tienes dudas sobre C#?</h3>
+                            <p>Si hay algún concepto que no entiendes o necesitas ayuda con tu código, envíanos tus preguntas y te ayudaremos.</p>
+                            <button id="open-help-form" class="btn-primary btn-pulse">Solicitar Ayuda</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <!-- Help Form Modal -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Formulario de Ayuda</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="csharp-help-form" action="https://formsubmit.co/ratalittle893@gmail.com" method="POST">
+                    <input type="hidden" name="_subject" value="Ayuda con C#">
+                    <input type="hidden" name="_captcha" value="false">
+                    
+                    <div class="form-group">
+                        <label for="help-name">Nombre</label>
+                        <input type="text" id="help-name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-email">Correo Electrónico</label>
+                        <input type="email" id="help-email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-section">Sección relacionada</label>
+                        <select id="help-section" name="section" required>
+                            <option value="" disabled selected>Selecciona una sección</option>
+                            <option value="Fundamentos">1. Fundamentos</option>
+                            <option value="Variables">2. Variables y Tipos</option>
+                            <option value="Control">3. Estructuras de Control</option>
+                            <option value="Métodos">4. Métodos</option>
+                            <option value="POO">5. Programación Orientada a Objetos</option>
+                            <option value="Colecciones">6. Colecciones</option>
+                            <option value="LINQ">7. LINQ</option>
+                            <option value="Avanzado">8. Temas Avanzados</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-question">Tu pregunta o problema</label>
+                        <textarea id="help-question" name="question" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-code">Código relacionado (opcional)</label>
+                        <textarea id="help-code" name="code" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Enviar Consulta</button>
+                        <button type="button" class="btn-secondary modal-close-btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <i class="fas fa-hashtag"></i>
+                <span class="brand-name">C# Console Guide</span>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4 class="footer-title">Guías</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="#" class="active">C# Consola</a></li>
+                        <li><a href="csharp-forms-guide.html">Windows Forms</a></li>
+                        <li><a href="csharp-xml-guide.html">Trabajo con XML</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-title">Recursos</h4>
+                    <ul>
+                        <li><a href="https://docs.microsoft.com/es-es/dotnet/csharp/" target="_blank">Documentación C#</a></li>
+                        <li><a href="https://dotnet.microsoft.com/" target="_blank">Plataforma .NET</a></li>
+                        <li><a href="https://github.com/dotnet/samples" target="_blank">Ejemplos de código</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-title">Comunidad</h4>
+                    <ul>
+                        <li><a href="https://stackoverflow.com/questions/tagged/c%23" target="_blank">Stack Overflow</a></li>
+                        <li><a href="https://www.reddit.com/r/csharp/" target="_blank">Reddit C#</a></li>
+                        <li><a href="https://discord.gg/csharp" target="_blank">Discord C#</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 RataLife Guides. Todos los derechos reservados.</p>
+            <p>C# y .NET son marcas registradas de Microsoft Corporation.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/form-handler.js"></script>
+    <script src="scripts/security.js"></script>
+</body>
+</html>
