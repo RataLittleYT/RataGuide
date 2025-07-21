@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# Windows Forms Guide - By RataLife</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Mobile Warning -->
+    <div id="mobile-warning" class="mobile-warning">
+        <div class="warning-content">
+            <i class="fas fa-exclamation-triangle warning-icon"></i>
+            <h3>Recomendación</h3>
+            <p>Para una mejor experiencia, te recomendamos acceder desde un ordenador.</p>
+            <button id="continue-mobile" class="btn-primary">Continuar en móvil</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <i class="fas fa-code logo-icon"></i>
+                <span class="brand-name">C# Guide</span>
+            </div>
+            
+            <div class="navbar-links">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="active"><i class="fas fa-hashtag"></i> C# <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="csharp-console-guide.html">Guía Consola</a></li>
+                            <li><a href="#" class="active">Windows Forms</a></li>
+                            <li><a href="csharp-xml-guide.html">Trabajo con XML</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contacto</a></li>
+                </ul>
+            </div>
+            
+            <div class="navbar-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero hero-csharp">
+        <div class="hero-content">
+            <h1 class="hero-title animate-typing">Guía Completa de C# Windows Forms</h1>
+            <p class="hero-subtitle">Aprende desarrollo de aplicaciones de escritorio con Windows Forms desde cero</p>
+            <div class="hero-buttons">
+                <a href="#basics" class="btn-primary btn-pulse">Comenzar</a>
+                <a href="#contact" class="btn-secondary">¿Dudas?</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <i class="fas fa-chevron-down scroll-icon bounce"></i>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container guide-container">
+        <!-- Table of Contents -->
+        <aside class="guide-toc">
+            <div class="toc-header">
+                <h3>Contenido</h3>
+                <i class="fas fa-bookmark toc-icon"></i>
+            </div>
+            <ul class="toc-list">
+                <li><a href="#basics" class="toc-link">1. Fundamentos</a></li>
+                <li><a href="#controls" class="toc-link">2. Controles Básicos</a></li>
+                <li><a href="#events" class="toc-link">3. Manejo de Eventos</a></li>
+                <li><a href="#dialogs" class="toc-link">4. Cuadros de Diálogo</a></li>
+                <li><a href="#layouts" class="toc-link">5. Diseño de Formularios</a></li>
+                <li><a href="#data" class="toc-link">6. Trabajo con Datos</a></li>
+                <li><a href="#advanced" class="toc-link">7. Temas Avanzados</a></li>
+            </ul>
+            
+            <div class="toc-footer">
+                <button id="print-guide" class="btn-secondary">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+            </div>
+        </aside>
+
+        <!-- Guide Content -->
+        <article class="guide-content">
+            <!-- Basics Section -->
+            <section id="basics" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">1. Fundamentos de Windows Forms</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">¿Qué es Windows Forms?</h3>
+                    <p>Windows Forms es un framework para crear aplicaciones de escritorio para Windows utilizando C# y .NET. Proporciona una amplia gama de controles visuales que permiten crear interfaces de usuario ricas y funcionales.</p>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h4>Características clave</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>Basado en controles:</strong> Botones, cuadros de texto, listas, etc.</li>
+                            <li><strong>Diseño visual:</strong> Puedes diseñar formularios con el diseñador de Visual Studio</li>
+                            <li><strong>Modelo de eventos:</strong> Responde a acciones del usuario como clicks y teclas</li>
+                            <li><strong>Integración con .NET:</strong> Acceso completo a las bibliotecas de .NET</li>
+                            <li><strong>Arquitectura MVC:</strong> Separa lógica de negocio de la interfaz de usuario</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Tu primer proyecto en Windows Forms</h3>
+                    <p>Creación de un formulario básico con un botón:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Program.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Windows.Forms;
+
+namespace MiPrimerFormulario
+{
+    static class Program
+    {
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Form1());
+        }
+    }
+}</code></pre>
+                    </div>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Form1.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Windows.Forms;
+
+namespace MiPrimerFormulario
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+            
+            // Crear un botón programáticamente
+            Button btnSaludo = new Button();
+            btnSaludo.Text = "Saludar";
+            btnSaludo.Location = new System.Drawing.Point(50, 50);
+            btnSaludo.Click += BtnSaludo_Click;
+            
+            this.Controls.Add(btnSaludo);
+        }
+
+        private void BtnSaludo_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("¡Hola desde Windows Forms!");
+        }
+    }
+}</code></pre>
+                    </div>
+                    
+                    <div class="explanation-box">
+                        <h4>Explicación:</h4>
+                        <ol>
+                            <li><code>Application.Run(new Form1())</code>: Inicia la aplicación mostrando Form1.</li>
+                            <li><code>InitializeComponent()</code>: Método generado por el diseñador para inicializar componentes.</li>
+                            <li><code>Button</code>: Control que representa un botón clickeable.</li>
+                            <li><code>Click += BtnSaludo_Click</code>: Asocia el evento Click con el método manejador.</li>
+                            <li><code>MessageBox.Show</code>: Muestra un cuadro de diálogo con un mensaje.</li>
+                        </ol>
+                    </div>
+                    
+                    <h3 class="content-title">Creación de un proyecto</h3>
+                    <p>Para crear un proyecto de Windows Forms:</p>
+                    
+                    <div class="steps-box">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Crea un proyecto</h4>
+                                <p>En Visual Studio, selecciona "Nuevo proyecto" y elige "Aplicación de Windows Forms (.NET Framework)" o "Aplicación de Windows Forms (.NET)"</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Diseña el formulario</h4>
+                                <p>Usa el diseñador visual para agregar controles desde el cuadro de herramientas.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Escribe el código</h4>
+                                <p>Haz doble clic en controles para generar manejadores de eventos o escribe código en los archivos .cs.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h4>Ejecuta el programa</h4>
+                                <p>Presiona F5 o haz clic en "Iniciar" para ejecutar tu aplicación.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="content-title">Estructura de un proyecto</h3>
+                    <p>Un proyecto típico de Windows Forms contiene:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Archivo/Carpeta</th>
+                                    <th>Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>Program.cs</code></td>
+                                    <td>Punto de entrada de la aplicación</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Form1.cs</code></td>
+                                    <td>Código del formulario principal</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Form1.Designer.cs</code></td>
+                                    <td>Código generado por el diseñador</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Form1.resx</code></td>
+                                    <td>Recursos del formulario (imágenes, cadenas)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Properties/</code></td>
+                                    <td>Configuración de la aplicación (icono, versión)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>References/</code></td>
+                                    <td>Ensamblados referenciados</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Controls Section -->
+            <section id="controls" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">2. Controles Básicos</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Controles Comunes</h3>
+                    <p>Windows Forms ofrece una variedad de controles para construir interfaces:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Control</th>
+                                    <th>Descripción</th>
+                                    <th>Propiedades Clave</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>Button</code></td>
+                                    <td>Botón clickeable</td>
+                                    <td><code>Text, Enabled, Visible, BackColor</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>Label</code></td>
+                                    <td>Muestra texto estático</td>
+                                    <td><code>Text, Font, ForeColor, AutoSize</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>TextBox</code></td>
+                                    <td>Entrada de texto</td>
+                                    <td><code>Text, Multiline, PasswordChar, ReadOnly</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>ComboBox</code></td>
+                                    <td>Lista desplegable</td>
+                                    <td><code>Items, SelectedItem, DropDownStyle</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>ListBox</code></td>
+                                    <td>Lista de elementos</td>
+                                    <td><code>Items, SelectedIndex, SelectionMode</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>CheckBox</code></td>
+                                    <td>Casilla de verificación</td>
+                                    <td><code>Checked, CheckState, ThreeState</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>RadioButton</code></td>
+                                    <td>Botón de opción</td>
+                                    <td><code>Checked, AutoCheck, Group</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>DateTimePicker</code></td>
+                                    <td>Selector de fecha/hora</td>
+                                    <td><code>Value, Format, MinDate, MaxDate</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>PictureBox</code></td>
+                                    <td>Muestra imágenes</td>
+                                    <td><code>Image, SizeMode, BorderStyle</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3 class="content-title">Ejemplo: Formulario de Registro</h3>
+                    <p>Creación de un formulario con múltiples controles:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">RegistroForm.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">public partial class RegistroForm : Form
+{
+    public RegistroForm()
+    {
+        InitializeComponent();
+        
+        // Configurar controles
+        txtNombre.Text = "Ingrese su nombre";
+        txtNombre.ForeColor = Color.Gray;
+        
+        dtpNacimiento.Value = DateTime.Now.AddYears(-18);
+        dtpNacimiento.MaxDate = DateTime.Now;
+        
+        // Llenar ComboBox
+        cmbPais.Items.AddRange(new string[] { "España", "México", "Argentina", "Colombia" });
+        cmbPais.SelectedIndex = 0;
+        
+        // Configurar botón
+        btnRegistrar.Enabled = false;
+    }
+
+    private void txtNombre_Enter(object sender, EventArgs e)
+    {
+        if (txtNombre.Text == "Ingrese su nombre")
+        {
+            txtNombre.Text = "";
+            txtNombre.ForeColor = Color.Black;
+        }
+    }
+
+    private void txtNombre_Leave(object sender, EventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(txtNombre.Text))
+        {
+            txtNombre.Text = "Ingrese su nombre";
+            txtNombre.ForeColor = Color.Gray;
+        }
+    }
+
+    private void txtNombre_TextChanged(object sender, EventArgs e)
+    {
+        btnRegistrar.Enabled = !string.IsNullOrWhiteSpace(txtNombre.Text) && 
+                              txtNombre.Text != "Ingrese su nombre";
+    }
+
+    private void btnRegistrar_Click(object sender, EventArgs e)
+    {
+        string mensaje = $"Nombre: {txtNombre.Text}\n" +
+                        $"Fecha Nacimiento: {dtpNacimiento.Value.ToShortDateString()}\n" +
+                        $"País: {cmbPais.SelectedItem}\n" +
+                        $"Acepta términos: {(chkTerminos.Checked ? "Sí" : "No")}";
+        
+        MessageBox.Show(mensaje, "Datos Registrados", 
+                      MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
+}</code></pre>
+                    </div>
+                    
+                    <div class="explanation-box">
+                        <h4>Funcionalidades implementadas:</h4>
+                        <ul>
+                            <li><strong>Placeholder en TextBox:</strong> Muestra texto gris cuando está vacío.</li>
+                            <li><strong>Validación de entrada:</strong> Habilita el botón solo cuando hay texto válido.</li>
+                            <li><strong>Interacción entre controles:</strong> Los cambios en un control afectan a otros.</li>
+                            <li><strong>Mensaje de confirmación:</strong> Muestra los datos ingresados al hacer clic.</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Contenedores de Controles</h3>
+                    <p>Controles que ayudan a organizar la interfaz:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Contenedor</th>
+                                    <th>Descripción</th>
+                                    <th>Uso Típico</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>Panel</code></td>
+                                    <td>Área rectangular para agrupar controles</td>
+                                    <td>Agrupar controles relacionados</td>
+                                </tr>
+                                <tr>
+                                    <td><code>GroupBox</code></td>
+                                    <td>Panel con borde y título</td>
+                                    <td>Agrupar RadioButtons o controles relacionados</td>
+                                </tr>
+                                <tr>
+                                    <td><code>TabControl</code></td>
+                                    <td>Contenedor con pestañas</td>
+                                    <td>Organizar muchas opciones en poco espacio</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SplitContainer</code></td>
+                                    <td>Divide el área en paneles ajustables</td>
+                                    <td>Interfaces con paneles laterales</td>
+                                </tr>
+                                <tr>
+                                    <td><code>FlowLayoutPanel</code></td>
+                                    <td>Organiza controles en flujo horizontal/vertical</td>
+                                    <td>Controles que deben ajustarse automáticamente</td>
+                                </tr>
+                                <tr>
+                                    <td><code>TableLayoutPanel</code></td>
+                                    <td>Organiza controles en una cuadrícula</td>
+                                    <td>Formularios con disposición tabular</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Events Section -->
+            <section id="events" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">3. Manejo de Eventos</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Modelo de Eventos en Windows Forms</h3>
+                    <p>Los eventos permiten que tu aplicación responda a acciones del usuario o del sistema:</p>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h4>Conceptos clave</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>Publicador:</strong> El control que genera el evento (ej. Button)</li>
+                            <li><strong>Suscriptor:</strong> El método que maneja el evento</li>
+                            <li><strong>Delegado:</strong> Define la firma del método manejador</li>
+                            <li><strong>EventArgs:</strong> Clase que contiene datos sobre el evento</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Eventos Comunes</h3>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Evento</th>
+                                    <th>Control Típico</th>
+                                    <th>Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>Click</code></td>
+                                    <td>Button, Form</td>
+                                    <td>Ocurre al hacer clic en el control</td>
+                                </tr>
+                                <tr>
+                                    <td><code>TextChanged</code></td>
+                                    <td>TextBox, ComboBox</td>
+                                    <td>Ocurre cuando cambia el texto</td>
+                                </tr>
+                                <tr>
+                                    <td><code>CheckedChanged</code></td>
+                                    <td>CheckBox, RadioButton</td>
+                                    <td>Ocurre cuando cambia el estado</td>
+                                </tr>
+                                <tr>
+                                    <td><code>SelectedIndexChanged</code></td>
+                                    <td>ComboBox, ListBox</td>
+                                    <td>Ocurre cuando cambia la selección</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Enter/Leave</code></td>
+                                    <td>Cualquier control</td>
+                                    <td>Ocurre cuando el control gana/pierde el foco</td>
+                                </tr>
+                                <tr>
+                                    <td><code>KeyDown/KeyUp</code></td>
+                                    <td>Cualquier control</td>
+                                    <td>Ocurre al presionar/soltar una tecla</td>
+                                </tr>
+                                <tr>
+                                    <td><code>MouseEnter/MouseLeave</code></td>
+                                    <td>Cualquier control</td>
+                                    <td>Ocurre cuando el mouse entra/sale del control</td>
+                                </tr>
+                                <tr>
+                                    <td><code>FormClosing</code></td>
+                                    <td>Form</td>
+                                    <td>Ocurre antes de que el formulario se cierre</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Load</code></td>
+                                    <td>Form</td>
+                                    <td>Ocurre cuando el formulario se carga</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3 class="content-title">Manejo de Eventos</h3>
+                    <p>Hay varias formas de manejar eventos en Windows Forms:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">EventosForm.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">public partial class EventosForm : Form
+{
+    public EventosForm()
+    {
+        InitializeComponent();
+        
+        // 1. Usando el diseñador (genera automáticamente)
+        btnDesigner.Click += btnDesigner_Click;
+        
+        // 2. Método anónimo
+        btnAnonimo.Click += delegate (object sender, EventArgs e)
+        {
+            MessageBox.Show("Manejador anónimo");
+        };
+        
+        // 3. Expresión lambda
+        btnLambda.Click += (s, e) => 
+        {
+            MessageBox.Show("Expresión lambda");
+        };
+        
+        // 4. Múltiples controles con el mismo manejador
+        btnMulti1.Click += BtnMulti_Click;
+        btnMulti2.Click += BtnMulti_Click;
+        
+        // 5. Evento personalizado
+        MiControlPersonalizado.MiEventoPersonalizado += (s, e) =>
+        {
+            MessageBox.Show($"Evento personalizado: {e.MiDato}");
+        };
+    }
+    
+    // 1. Manejador generado por el diseñador
+    private void btnDesigner_Click(object sender, EventArgs e)
+    {
+        MessageBox.Show("Manejador del diseñador");
+    }
+    
+    // 4. Manejador compartido
+    private void BtnMulti_Click(object sender, EventArgs e)
+    {
+        Button btn = (Button)sender;
+        MessageBox.Show($"Click en {btn.Name}");
+    }
+}
+
+// Clase con evento personalizado
+public class MiControlPersonalizado : Control
+{
+    public event EventHandler&lt;MiEventArgs&gt; MiEventoPersonalizado;
+    
+    protected virtual void OnMiEventoPersonalizado(string dato)
+    {
+        MiEventoPersonalizado?.Invoke(this, new MiEventArgs(dato));
+    }
+    
+    // Lógica que dispara el evento...
+}
+
+public class MiEventArgs : EventArgs
+{
+    public string MiDato { get; }
+    
+    public MiEventArgs(string dato)
+    {
+        MiDato = dato;
+    }
+}</code></pre>
+                    </div>
+                    
+                    <div class="note-box">
+                        <div class="note-header">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <h4>Mejores prácticas para eventos</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li>Usa nombres descriptivos para los manejadores (ej. <code>btnAceptar_Click</code>)</li>
+                            <li>Desuscribe eventos cuando ya no sean necesarios para evitar memory leaks</li>
+                            <li>Para eventos compartidos, usa el parámetro <code>sender</code> para identificar el control</li>
+                            <li>Mantén el código en manejadores corto, delega lógica compleja a otros métodos</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Eventos de Teclado y Ratón</h3>
+                    <p>Ejemplo avanzado de manejo de eventos de entrada:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">InputEventsForm.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">public partial class InputEventsForm : Form
+{
+    private Point startPoint;
+    private bool isDrawing = false;
+    
+    public InputEventsForm()
+    {
+        InitializeComponent();
+        
+        // Configurar eventos
+        this.KeyPreview = true; // Recibir eventos de teclado del formulario
+        
+        pnlDibujo.MouseDown += PnlDibujo_MouseDown;
+        pnlDibujo.MouseMove += PnlDibujo_MouseMove;
+        pnlDibujo.MouseUp += PnlDibujo_MouseUp;
+        this.KeyDown += InputEventsForm_KeyDown;
+    }
+    
+    private void PnlDibujo_MouseDown(object sender, MouseEventArgs e)
+    {
+        if (e.Button == MouseButtons.Left)
+        {
+            isDrawing = true;
+            startPoint = e.Location;
+            
+            // Crear un nuevo "lápiz"
+            Graphics g = pnlDibujo.CreateGraphics();
+            g.FillEllipse(Brushes.Black, e.X - 2, e.Y - 2, 4, 4);
+            g.Dispose();
+        }
+    }
+    
+    private void PnlDibujo_MouseMove(object sender, MouseEventArgs e)
+    {
+        if (isDrawing)
+        {
+            Graphics g = pnlDibujo.CreateGraphics();
+            g.DrawLine(Pens.Black, startPoint, e.Location);
+            g.Dispose();
+            startPoint = e.Location;
+        }
+    }
+    
+    private void PnlDibujo_MouseUp(object sender, MouseEventArgs e)
+    {
+        isDrawing = false;
+    }
+    
+    private void InputEventsForm_KeyDown(object sender, KeyEventArgs e)
+    {
+        switch (e.KeyCode)
+        {
+            case Keys.Escape:
+                pnlDibujo.Invalidate(); // Limpiar el panel
+                break;
+            case Keys.S when e.Control:
+                // Ctrl+S para guardar
+                GuardarDibujo();
+                break;
+        }
+    }
+    
+    private void GuardarDibujo()
+    {
+        Bitmap bmp = new Bitmap(pnlDibujo.Width, pnlDibujo.Height);
+        pnlDibujo.DrawToBitmap(bmp, pnlDibujo.ClientRectangle);
+        
+        SaveFileDialog sfd = new SaveFileDialog();
+        sfd.Filter = "Imagen PNG|*.png|Imagen JPEG|*.jpg";
+        
+        if (sfd.ShowDialog() == DialogResult.OK)
+        {
+            ImageFormat formato = Path.GetExtension(sfd.FileName) == ".png" ? 
+                               ImageFormat.Png : ImageFormat.Jpeg;
+            bmp.Save(sfd.FileName, formato);
+        }
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Dialogs Section -->
+            <section id="dialogs" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">4. Cuadros de Diálogo</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Diálogos Estándar</h3>
+                    <p>Windows Forms incluye diálogos predefinidos para tareas comunes:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Diálogo</th>
+                                    <th>Descripción</th>
+                                    <th>Método Clave</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>MessageBox</code></td>
+                                    <td>Muestra mensajes al usuario</td>
+                                    <td><code>Show(texto, título, botones, icono)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>OpenFileDialog</code></td>
+                                    <td>Seleccionar archivo(s) para abrir</td>
+                                    <td><code>ShowDialog(), FileName, FileNames</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>SaveFileDialog</code></td>
+                                    <td>Seleccionar archivo para guardar</td>
+                                    <td><code>ShowDialog(), FileName</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>FolderBrowserDialog</code></td>
+                                    <td>Seleccionar carpeta</td>
+                                    <td><code>ShowDialog(), SelectedPath</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>ColorDialog</code></td>
+                                    <td>Seleccionar color</td>
+                                    <td><code>ShowDialog(), Color</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>FontDialog</code></td>
+                                    <td>Seleccionar fuente</td>
+                                    <td><code>ShowDialog(), Font</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>PrintDialog</code></td>
+                                    <td>Configurar impresión</td>
+                                    <td><code>ShowDialog()</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3 class="content-title">Uso de Diálogos</h3>
+                    <p>Ejemplos prácticos de diálogos comunes:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">DialogosForm.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">public partial class DialogosForm : Form
+{
+    public DialogosForm()
+    {
+        InitializeComponent();
+    }
+    
+    // MessageBox
+    private void btnMensaje_Click(object sender, EventArgs e)
+    {
+        DialogResult result = MessageBox.Show(
+            "¿Está seguro de eliminar este registro?",
+            "Confirmación",
+            MessageBoxButtons.YesNoCancel,
+            MessageBoxIcon.Warning,
+            MessageBoxDefaultButton.Button2);
+            
+        if (result == DialogResult.Yes)
+        {
+            // Lógica para eliminar
+            MessageBox.Show("Registro eliminado", "Éxito", 
+                          MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+        else if (result == DialogResult.No)
+        {
+            // Otra acción
+        }
+    }
+    
+    // OpenFileDialog
+    private void btnAbrir_Click(object sender, EventArgs e)
+    {
+        OpenFileDialog ofd = new OpenFileDialog();
+        ofd.Title = "Seleccione un archivo de imagen";
+        ofd.Filter = "Imágenes|*.jpg;*.png;*.bmp|Todos los archivos|*.*";
+        ofd.Multiselect = true;
+        
+        if (ofd.ShowDialog() == DialogResult.OK)
+        {
+            foreach (string archivo in ofd.FileNames)
+            {
+                lstArchivos.Items.Add(archivo);
+            }
+        }
+    }
+    
+    // SaveFileDialog
+    private void btnGuardar_Click(object sender, EventArgs e)
+    {
+        SaveFileDialog sfd = new SaveFileDialog();
+        sfd.Filter = "Archivo de texto|*.txt|Documento Word|*.docx";
+        sfd.DefaultExt = "txt";
+        sfd.AddExtension = true;
+        sfd.OverwritePrompt = true;
+        
+        if (sfd.ShowDialog() == DialogResult.OK)
+        {
+            File.WriteAllText(sfd.FileName, txtContenido.Text);
+        }
+    }
+    
+    // ColorDialog y FontDialog
+    private void btnEstilo_Click(object sender, EventArgs e)
+    {
+        ColorDialog cd = new ColorDialog();
+        cd.Color = txtEjemplo.ForeColor;
+        
+        if (cd.ShowDialog() == DialogResult.OK)
+        {
+            txtEjemplo.ForeColor = cd.Color;
+        }
+        
+        FontDialog fd = new FontDialog();
+        fd.Font = txtEjemplo.Font;
+        fd.ShowColor = false; // Ya configuramos el color
+        
+        if (fd.ShowDialog() == DialogResult.OK)
+        {
+            txtEjemplo.Font = fd.Font;
+        }
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Formularios Personalizados como Diálogos</h3>
+                    <p>Puedes crear tus propios diálogos personalizados:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">LoginDialog.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">public partial class LoginDialog : Form
+{
+    public string Usuario { get; private set; }
+    public string Contrasena { get; private set; }
+    
+    public LoginDialog()
+    {
+        InitializeComponent();
+        this.DialogResult = DialogResult.Cancel; // Por defecto es Cancel
+    }
+    
+    private void btnAceptar_Click(object sender, EventArgs e)
+    {
+        if (string.IsNullOrWhiteSpace(txtUsuario.Text) || 
+            string.IsNullOrWhiteSpace(txtContrasena.Text))
+        {
+            MessageBox.Show("Debe ingresar usuario y contraseña", "Error", 
+                          MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return;
+        }
+        
+        Usuario = txtUsuario.Text;
+        Contrasena = txtContrasena.Text;
+        this.DialogResult = DialogResult.OK;
+        this.Close();
+    }
+    
+    private void btnCancelar_Click(object sender, EventArgs e)
+    {
+        this.Close();
+    }
+}
+
+// Uso desde otro formulario:
+private void btnLogin_Click(object sender, EventArgs e)
+{
+    LoginDialog login = new LoginDialog();
+    
+    if (login.ShowDialog() == DialogResult.OK)
+    {
+        // Verificar credenciales
+        if (Autenticar(login.Usuario, login.Contrasena))
+        {
+            MessageBox.Show("Bienvenido!", "Éxito");
+        }
+        else
+        {
+            MessageBox.Show("Credenciales incorrectas", "Error");
+        }
+    }
+    else
+    {
+        MessageBox.Show("Inicio de sesión cancelado", "Información");
+    }
+    
+    login.Dispose();
+}</code></pre>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h4>Mejores prácticas para diálogos</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li>Usa <code>ShowDialog()</code> para diálogos modales que deben completarse</li>
+                            <li>Configura propiedades como <code>Title</code>, <code>Filter</code> para mejor UX</li>
+                            <li>Verifica siempre el <code>DialogResult</code> antes de procesar</li>
+                            <li>Para diálogos personalizados, expone propiedades para acceder a los datos</li>
+                            <li>Implementa validación en diálogos de entrada</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Layouts Section -->
+            <section id="layouts" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">5. Diseño de Formularios</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Propiedades de Diseño</h3>
+                    <p>Propiedades clave para controlar el diseño de formularios y controles:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Propiedad</th>
+                                    <th>Descripción</th>
+                                    <th>Valores Comunes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>Dock</code></td>
+                                    <td>Ancla el control a los bordes del contenedor</td>
+                                    <td><code>None, Top, Bottom, Left, Right, Fill</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>Anchor</code></td>
+                                    <td>Mantiene distancias constantes a los bordes</td>
+                                    <td>Combinaciones de <code>Top, Bottom, Left, Right</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>AutoSize</code></td>
+                                    <td>Ajusta el tamaño automáticamente</td>
+                                    <td><code>true, false</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>Margin</code></td>
+                                    <td>Espacio exterior del control</td>
+                                    <td>Valores en píxeles para cada lado</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Padding</code></td>
+                                    <td>Espacio interior del control</td>
+                                    <td>Valores en píxeles para cada lado</td>
+                                </tr>
+                                <tr>
+                                    <td><code>MinimumSize</code></td>
+                                    <td>Tamaño mínimo del formulario/control</td>
+                                    <td><code>Width, Height</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>MaximumSize</code></td>
+                                    <td>Tamaño máximo del formulario/control</td>
+                                    <td><code>Width, Height</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>StartPosition</code></td>
+                                    <td>Posición inicial del formulario</td>
+                                    <td><code>Manual, CenterScreen, WindowsDefaultLocation</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3 class="content-title">Diseño Responsivo</h3>
+                    <p>Técnicas para crear formularios que se adaptan a diferentes tamaños:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">ResponsiveForm.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">public partial class ResponsiveForm : Form
+{
+    private TableLayoutPanel mainTable;
+    private Button btnEjemplo;
+    private TextBox txtEjemplo;
+    
+    public ResponsiveForm()
+    {
+        InitializeComponent();
+        CrearControlesProgramaticamente();
+        ConfigurarDiseñoResponsivo();
+    }
+    
+    private void CrearControlesProgramaticamente()
+    {
+        // Configurar TableLayoutPanel principal
+        mainTable = new TableLayoutPanel();
+        mainTable.Dock = DockStyle.Fill;
+        mainTable.ColumnCount = 3;
+        mainTable.RowCount = 4;
+        mainTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+        mainTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60));
+        mainTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20));
+        
+        for (int i = 0; i < mainTable.RowCount; i++)
+        {
+            mainTable.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+        }
+        
+        // Crear controles
+        btnEjemplo = new Button();
+        btnEjemplo.Text = "Botón Responsivo";
+        btnEjemplo.Dock = DockStyle.Fill;
+        btnEjemplo.Margin = new Padding(5);
+        
+        txtEjemplo = new TextBox();
+        txtEjemplo.Dock = DockStyle.Fill;
+        txtEjemplo.Multiline = true;
+        txtEjemplo.ScrollBars = ScrollBars.Vertical;
+        txtEjemplo.Margin = new Padding(5);
+        
+        // Agregar controles al TableLayoutPanel
+        mainTable.Controls.Add(btnEjemplo, 1, 1);
+        mainTable.Controls.Add(txtEjemplo, 1, 2);
+        
+        // Hacer que el TextBox ocupe 2 filas
+        txtEjemplo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | 
+                           AnchorStyles.Left | AnchorStyles.Right;
+        
+        // Agregar TableLayoutPanel al formulario
+        this.Controls.Add(mainTable);
+    }
+    
+    private void ConfigurarDiseñoResponsivo()
+    {
+        // Configurar el formulario
+        this.Text = "Formulario Responsivo";
+        this.MinimumSize = new Size(300, 200);
+        this.StartPosition = FormStartPosition.CenterScreen;
+        
+        // Manejar el evento Resize
+        this.Resize += ResponsiveForm_Resize;
+    }
+    
+    private void ResponsiveForm_Resize(object sender, EventArgs e)
+    {
+        // Ajustar tamaño de fuente según el tamaño del formulario
+        if (this.Width < 500)
+        {
+            btnEjemplo.Font = new Font(btnEjemplo.Font.FontFamily, 8);
+        }
+        else
+        {
+            btnEjemplo.Font = new Font(btnEjemplo.Font.FontFamily, 10);
+        }
+        
+        // Ajustar número de columnas/rows según orientación
+        if (this.ClientSize.Width > this.ClientSize.Height)
+        {
+            // Modo horizontal
+            mainTable.ColumnCount = 3;
+            mainTable.RowCount = 2;
+            mainTable.SetColumnSpan(txtEjemplo, 2);
+        }
+        else
+        {
+            // Modo vertical
+            mainTable.ColumnCount = 1;
+            mainTable.RowCount = 4;
+            mainTable.SetColumnSpan(txtEjemplo, 1);
+        }
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Controles de Diseño Avanzado</h3>
+                    <p>Windows Forms ofrece controles especializados para diseño complejo:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">AdvancedLayoutForm.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">public partial class AdvancedLayoutForm : Form
+{
+    public AdvancedLayoutForm()
+    {
+        InitializeComponent();
+        ConfigurarSplitContainer();
+        ConfigurarTabControl();
+        ConfigurarFlowLayout();
+    }
+    
+    private void ConfigurarSplitContainer()
+    {
+        // SplitContainer horizontal con proporción 30/70
+        SplitContainer splitMain = new SplitContainer();
+        splitMain.Dock = DockStyle.Fill;
+        splitMain.Orientation = Orientation.Horizontal;
+        splitMain.SplitterDistance = (int)(this.ClientSize.Height * 0.3);
+        splitMain.FixedPanel = FixedPanel.Panel1;
+        
+        // Panel superior (30%)
+        TreeView treeView = new TreeView();
+        treeView.Dock = DockStyle.Fill;
+        treeView.Nodes.Add("Elemento 1");
+        treeView.Nodes.Add("Elemento 2");
+        splitMain.Panel1.Controls.Add(treeView);
+        
+        // Panel inferior (70%)
+        SplitContainer splitSecondary = new SplitContainer();
+        splitSecondary.Dock = DockStyle.Fill;
+        splitSecondary.SplitterDistance = (int)(this.ClientSize.Width * 0.2);
+        
+        // Panel izquierdo (20% del espacio restante)
+        ListBox listBox = new ListBox();
+        listBox.Dock = DockStyle.Fill;
+        listBox.Items.AddRange(new string[] { "Opción A", "Opción B", "Opción C" });
+        splitSecondary.Panel1.Controls.Add(listBox);
+        
+        // Panel derecho (80% del espacio restante)
+        PropertyGrid propGrid = new PropertyGrid();
+        propGrid.Dock = DockStyle.Fill;
+        propGrid.SelectedObject = this;
+        splitSecondary.Panel2.Controls.Add(propGrid);
+        
+        splitMain.Panel2.Controls.Add(splitSecondary);
+        this.Controls.Add(splitMain);
+    }
+    
+    private void ConfigurarTabControl()
+    {
+        TabControl tabControl = new TabControl();
+        tabControl.Dock = DockStyle.Fill;
+        
+        // Pestaña 1
+        TabPage tabPage1 = new TabPage("Configuración");
+        tabPage1.Controls.Add(new PropertyGrid() { Dock = DockStyle.Fill });
+        
+        // Pestaña 2
+        TabPage tabPage2 = new TabPage("Documentación");
+        WebBrowser browser = new WebBrowser();
+        browser.Dock = DockStyle.Fill;
+        browser.Navigate("https://docs.microsoft.com");
+        tabPage2.Controls.Add(browser);
+        
+        tabControl.TabPages.Add(tabPage1);
+        tabControl.TabPages.Add(tabPage2);
+        
+        // Agregar a un panel existente
+        pnlContenedor.Controls.Add(tabControl);
+    }
+    
+    private void ConfigurarFlowLayout()
+    {
+        FlowLayoutPanel flowPanel = new FlowLayoutPanel();
+        flowPanel.Dock = DockStyle.Bottom;
+        flowPanel.Height = 100;
+        flowPanel.FlowDirection = FlowDirection.LeftToRight;
+        flowPanel.WrapContents = true;
+        flowPanel.AutoScroll = true;
+        
+        for (int i = 1; i <= 20; i++)
+        {
+            Button btn = new Button();
+            btn.Text = $"Botón {i}";
+            btn.Margin = new Padding(5);
+            btn.Width = 80;
+            flowPanel.Controls.Add(btn);
+        }
+        
+        this.Controls.Add(flowPanel);
+    }
+}</code></pre>
+                    </div>
+                    
+                    <div class="note-box">
+                        <div class="note-header">
+                            <i class="fas fa-lightbulb"></i>
+                            <h4>Consejos para diseño efectivo</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li>Usa <code>Dock</code> y <code>Anchor</code> para diseños flexibles</li>
+                            <li>Agrupa controles relacionados con <code>Panel</code> o <code>GroupBox</code></li>
+                            <li>Utiliza <code>TableLayoutPanel</code> para alineación precisa</li>
+                            <li>Considera el flujo de trabajo del usuario al organizar controles</li>
+                            <li>Mantén consistencia en tamaños, colores y fuentes</li>
+                            <li>Prueba tu interfaz en diferentes resoluciones</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Data Section -->
+            <section id="data" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">6. Trabajo con Datos</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Controles de Datos</h3>
+                    <p>Windows Forms ofrece controles especializados para mostrar y editar datos:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Control</th>
+                                    <th>Descripción</th>
+                                    <th>Características Clave</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>DataGridView</code></td>
+                                    <td>Cuadrícula para mostrar datos tabulares</td>
+                                    <td>Edición in situ, ordenamiento, filtrado, estilos</td>
+                                </tr>
+                                <tr>
+                                    <td><code>BindingSource</code></td>
+                                    <td>Intermediario entre datos y controles</td>
+                                    <td>Navegación, filtrado, ordenamiento</td>
+                                </tr>
+                                <tr>
+                                    <td><code>BindingNavigator</code></td>
+                                    <td>Barra de navegación para datos</td>
+                                    <td>Botones para mover, agregar, eliminar registros</td>
+                                </tr>
+                                <tr>
+                                    <td><code>Chart</code></td>
+                                    <td>Control para mostrar gráficos</td>
+                                    <td>Múltiples tipos de gráficos, series, leyendas</td>
+                                </tr>
+                                <tr>
+                                    <td><code>ListBox</code>/<code>ComboBox</code></td>
+                                    <td>Pueden enlazarse a datos</td>
+                                    <td><code>DataSource, DisplayMember, ValueMember</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3 class="content-title">Enlace de Datos (Data Binding)</h3>
+                    <p>El enlace de datos conecta controles con fuentes de datos:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">DataBindingForm.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">public partial class DataBindingForm : Form
+{
+    private BindingSource bindingSource = new BindingSource();
+    private List&lt;Producto&gt; productos = new List&lt;Producto&gt;();
+    
+    public DataBindingForm()
+    {
+        InitializeComponent();
+        CargarDatos();
+        ConfigurarDataBinding();
+    }
+    
+    private void CargarDatos()
+    {
+        // Datos de ejemplo (en una app real podrían venir de una base de datos)
+        productos.Add(new Producto(1, "Laptop", 1200.50m, 10));
+        productos.Add(new Producto(2, "Mouse", 25.99m, 50));
+        productos.Add(new Producto(3, "Teclado", 45.75m, 30));
+    }
+    
+    private void ConfigurarDataBinding()
+    {
+        // Configurar BindingSource
+        bindingSource.DataSource = productos;
+        
+        // Enlazar DataGridView
+        dgvProductos.DataSource = bindingSource;
+        dgvProductos.AutoGenerateColumns = true;
+        
+        // Enlazar controles individuales
+        txtId.DataBindings.Add("Text", bindingSource, "Id", true, DataSourceUpdateMode.OnValidation);
+        txtNombre.DataBindings.Add("Text", bindingSource, "Nombre");
+        txtPrecio.DataBindings.Add("Text", bindingSource, "Precio", true, DataSourceUpdateMode.OnValidation, "0.00");
+        txtStock.DataBindings.Add("Text", bindingSource, "Stock");
+        
+        // Configurar BindingNavigator
+        bindingNavigator.BindingSource = bindingSource;
+        
+        // Configurar formato de la grilla
+        dgvProductos.Columns["Precio"].DefaultCellStyle.Format = "C2";
+        dgvProductos.Columns["Precio"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        dgvProductos.Columns["Stock"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+    }
+    
+    private void btnAgregar_Click(object sender, EventArgs e)
+    {
+        Producto nuevo = new Producto(0, "Nuevo Producto", 0, 0);
+        productos.Add(nuevo);
+        bindingSource.MoveLast();
+    }
+    
+    private void btnEliminar_Click(object sender, EventArgs e)
+    {
+        if (bindingSource.Current != null)
+        {
+            bindingSource.RemoveCurrent();
+        }
+    }
+    
+    private void btnGuardar_Click(object sender, EventArgs e)
+    {
+        bindingSource.EndEdit();
+        
+        // Aquí normalmente guardarías en una base de datos
+        MessageBox.Show("Cambios guardados", "Información");
+    }
+}
+
+public class Producto
+{
+    public int Id { get; set; }
+    public string Nombre { get; set; }
+    public decimal Precio { get; set; }
+    public int Stock { get; set; }
+    
+    public Producto(int id, string nombre, decimal precio, int stock)
+    {
+        Id = id;
+        Nombre = nombre;
+        Precio = precio;
+        Stock = stock;
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">DataGridView Avanzado</h3>
+                    <p>Personalización avanzada del control DataGridView:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">AdvancedDataGridViewForm.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">public partial class AdvancedDataGridViewForm : Form
+{
+    public AdvancedDataGridViewForm()
+    {
+        InitializeComponent();
+        ConfigurarDataGridView();
+        CargarDatos();
+    }
+    
+    private void ConfigurarDataGridView()
+    {
+        // Configuración básica
+        dgvEmpleados.AllowUserToAddRows = false;
+        dgvEmpleados.AllowUserToDeleteRows = false;
+        dgvEmpleados.ReadOnly = true;
+        dgvEmpleados.MultiSelect = false;
+        dgvEmpleados.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        dgvEmpleados.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        
+        // Configurar columnas manualmente
+        dgvEmpleados.Columns.Clear();
+        
+        // Columna de texto normal
+        DataGridViewTextBoxColumn colNombre = new DataGridViewTextBoxColumn();
+        colNombre.Name = "Nombre";
+        colNombre.HeaderText = "Nombre Completo";
+        colNombre.FillWeight = 30;
+        dgvEmpleados.Columns.Add(colNombre);
+        
+        // Columna de combobox
+        DataGridViewComboBoxColumn colDepartamento = new DataGridViewComboBoxColumn();
+        colDepartamento.Name = "Departamento";
+        colDepartamento.HeaderText = "Departamento";
+        colDepartamento.DataSource = new string[] { "Ventas", "TI", "RH", "Contabilidad" };
+        colDepartamento.FillWeight = 20;
+        dgvEmpleados.Columns.Add(colDepartamento);
+        
+        // Columna de checkbox
+        DataGridViewCheckBoxColumn colActivo = new DataGridViewCheckBoxColumn();
+        colActivo.Name = "Activo";
+        colActivo.HeaderText = "Activo?";
+        colActivo.FillWeight = 10;
+        dgvEmpleados.Columns.Add(colActivo);
+        
+        // Columna de imagen
+        DataGridViewImageColumn colFoto = new DataGridViewImageColumn();
+        colFoto.Name = "Foto";
+        colFoto.HeaderText = "Foto";
+        colFoto.ImageLayout = DataGridViewImageCellLayout.Zoom;
+        colFoto.FillWeight = 15;
+        dgvEmpleados.Columns.Add(colFoto);
+        
+        // Columna personalizada (botón)
+        DataGridViewButtonColumn colAccion = new DataGridViewButtonColumn();
+        colAccion.Name = "Accion";
+        colAccion.HeaderText = "Acción";
+        colAccion.Text = "Detalles";
+        colAccion.UseColumnTextForButtonValue = true;
+        colAccion.FillWeight = 25;
+        dgvEmpleados.Columns.Add(colAccion);
+        
+        // Estilos
+        dgvEmpleados.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray;
+        dgvEmpleados.ColumnHeadersDefaultCellStyle.Font = new Font(dgvEmpleados.Font, FontStyle.Bold);
+        
+        // Eventos
+        dgvEmpleados.CellClick += DgvEmpleados_CellClick;
+        dgvEmpleados.CellFormatting += DgvEmpleados_CellFormatting;
+    }
+    
+    private void CargarDatos()
+    {
+        List&lt;Empleado&gt; empleados = new List&lt;Empleado&gt;();
+        
+        // Datos de ejemplo
+        empleados.Add(new Empleado("Juan Pérez", "Ventas", true, Properties.Resources.user1));
+        empleados.Add(new Empleado("María Gómez", "TI", true, Properties.Resources.user2));
+        empleados.Add(new Empleado("Pedro Ramírez", "Contabilidad", false, null));
+        
+        dgvEmpleados.DataSource = empleados;
+    }
+    
+    private void DgvEmpleados_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+    {
+        if (dgvEmpleados.Columns[e.ColumnIndex].Name == "Foto" && e.Value == null)
+        {
+            e.Value = Properties.Resources.default_user;
+        }
+    }
+    
+    private void DgvEmpleados_CellClick(object sender, DataGridViewCellEventArgs e)
+    {
+        if (e.RowIndex >= 0 && dgvEmpleados.Columns[e.ColumnIndex].Name == "Accion")
+        {
+            Empleado emp = (Empleado)dgvEmpleados.Rows[e.RowIndex].DataBoundItem;
+            MessageBox.Show($"Detalles de {emp.Nombre}\nDepartamento: {emp.Departamento}", 
+                          "Detalles del Empleado");
+        }
+    }
+}
+
+public class Empleado
+{
+    public string Nombre { get; set; }
+    public string Departamento { get; set; }
+    public bool Activo { get; set; }
+    public Image Foto { get; set; }
+    
+    public Empleado(string nombre, string departamento, bool activo, Image foto)
+    {
+        Nombre = nombre;
+        Departamento = departamento;
+        Activo = activo;
+        Foto = foto;
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Trabajo con Bases de Datos</h3>
+                    <p>Conexión a bases de datos usando ADO.NET:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">DatabaseForm.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">public partial class DatabaseForm : Form
+{
+    private SqlConnection connection;
+    private SqlDataAdapter adapter;
+    private DataTable table;
+    private BindingSource bindingSource = new BindingSource();
+    
+    public DatabaseForm()
+    {
+        InitializeComponent();
+        ConfigurarConexion();
+        CargarDatos();
+    }
+    
+    private void ConfigurarConexion()
+    {
+        // Cadena de conexión (normalmente se guarda en configuración)
+        string connectionString = "Server=localhost;Database=MiBaseDatos;Integrated Security=True;";
+        connection = new SqlConnection(connectionString);
+        
+        // Configurar DataAdapter con comandos CRUD
+        adapter = new SqlDataAdapter();
+        
+        // Select
+        adapter.SelectCommand = new SqlCommand("SELECT * FROM Productos", connection);
+        
+        // Insert
+        adapter.InsertCommand = new SqlCommand(
+            "INSERT INTO Productos (Nombre, Precio, Stock) VALUES (@Nombre, @Precio, @Stock)", 
+            connection);
+        adapter.InsertCommand.Parameters.Add("@Nombre", SqlDbType.NVarChar, 50, "Nombre");
+        adapter.InsertCommand.Parameters.Add("@Precio", SqlDbType.Decimal, 0, "Precio");
+        adapter.InsertCommand.Parameters.Add("@Stock", SqlDbType.Int, 0, "Stock");
+        
+        // Update
+        adapter.UpdateCommand = new SqlCommand(
+            "UPDATE Productos SET Nombre = @Nombre, Precio = @Precio, Stock = @Stock WHERE Id = @Id", 
+            connection);
+        adapter.UpdateCommand.Parameters.Add("@Nombre", SqlDbType.NVarChar, 50, "Nombre");
+        adapter.UpdateCommand.Parameters.Add("@Precio", SqlDbType.Decimal, 0, "Precio");
+        adapter.UpdateCommand.Parameters.Add("@Stock", SqlDbType.Int, 0, "Stock");
+        adapter.UpdateCommand.Parameters.Add("@Id", SqlDbType.Int, 0, "Id");
+        
+        // Delete
+        adapter.DeleteCommand = new SqlCommand(
+            "DELETE FROM Productos WHERE Id = @Id", 
+            connection);
+        adapter.DeleteCommand.Parameters.Add("@Id", SqlDbType.Int, 0, "Id");
+    }
+    
+    private void CargarDatos()
+    {
+        try
+        {
+            table = new DataTable();
+            adapter.Fill(table);
+            
+            bindingSource.DataSource = table;
+            dgvProductos.DataSource = bindingSource;
+            
+            // Configurar formato
+            dgvProductos.Columns["Id"].Visible = false;
+            dgvProductos.Columns["Precio"].DefaultCellStyle.Format = "C2";
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error al cargar datos: {ex.Message}", "Error");
+        }
+    }
+    
+    private void btnGuardar_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            bindingSource.EndEdit();
+            adapter.Update(table);
+            MessageBox.Show("Cambios guardados correctamente", "Éxito");
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error al guardar: {ex.Message}", "Error");
+        }
+    }
+    
+    private void btnBuscar_Click(object sender, EventArgs e)
+    {
+        string filtro = txtBusqueda.Text.Trim();
+        
+        if (!string.IsNullOrEmpty(filtro))
+        {
+            bindingSource.Filter = $"Nombre LIKE '%{filtro}%'";
+        }
+        else
+        {
+            bindingSource.Filter = "";
+        }
+    }
+    
+    private void DatabaseForm_FormClosing(object sender, FormClosingEventArgs e)
+    {
+        if (connection.State != ConnectionState.Closed)
+        {
+            connection.Close();
+        }
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Advanced Topics Section -->
+            <section id="advanced" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">7. Temas Avanzados</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Controles Personalizados</h3>
+                    <p>Creación de controles personalizados para reutilización:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">CustomControls.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">// Control de usuario compuesto
+public partial class EmailInput : UserControl
+{
+    public EmailInput()
+    {
+        InitializeComponent();
+    }
+    
+    // Propiedad personalizada
+    public string Email
+    {
+        get => txtEmail.Text;
+        set => txtEmail.Text = value;
+    }
+    
+    // Evento personalizado
+    public event EventHandler EmailValidado;
+    
+    private void btnValidar_Click(object sender, EventArgs e)
+    {
+        if (EsEmailValido(txtEmail.Text))
+        {
+            lblEstado.Text = "✓";
+            lblEstado.ForeColor = Color.Green;
+            EmailValidado?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            lblEstado.Text = "✗";
+            lblEstado.ForeColor = Color.Red;
+        }
+    }
+    
+    private bool EsEmailValido(string email)
+    {
+        try
+        {
+            var addr = new System.Net.Mail.MailAddress(email);
+            return addr.Address == email;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+}
+
+// Control personalizado dibujado
+public class GradientPanel : Panel
+{
+    public Color ColorInicio { get; set; } = Color.Blue;
+    public Color ColorFin { get; set; } = Color.White;
+    public float Angulo { get; set; } = 90f;
+    
+    protected override void OnPaint(PaintEventArgs e)
+    {
+        base.OnPaint(e);
+        
+        using (LinearGradientBrush brush = new LinearGradientBrush(
+            this.ClientRectangle, 
+            ColorInicio, 
+            ColorFin, 
+            Angulo))
+        {
+            e.Graphics.FillRectangle(brush, this.ClientRectangle);
+        }
+    }
+}
+
+// Uso en un formulario
+public partial class CustomControlsForm : Form
+{
+    public CustomControlsForm()
+    {
+        InitializeComponent();
+        
+        // Usar control de usuario
+        EmailInput emailInput = new EmailInput();
+        emailInput.Dock = DockStyle.Top;
+        emailInput.EmailValidado += (s, e) => 
+        {
+            MessageBox.Show("Email válido!");
+        };
+        this.Controls.Add(emailInput);
+        
+        // Usar control dibujado
+        GradientPanel gradientPanel = new GradientPanel();
+        gradientPanel.Dock = DockStyle.Fill;
+        gradientPanel.ColorInicio = Color.Purple;
+        gradientPanel.ColorFin = Color.Pink;
+        this.Controls.Add(gradientPanel);
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Hilos y Operaciones Asíncronas</h3>
+                    <p>Manejo de operaciones largas sin bloquear la interfaz:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">AsyncForm.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">public partial class AsyncForm : Form
+{
+    public AsyncForm()
+    {
+        InitializeComponent();
+    }
+    
+    // Método sincrónico (bloquea la UI)
+    private void btnSync_Click(object sender, EventArgs e)
+    {
+        lblEstado.Text = "Procesando...";
+        this.Cursor = Cursors.WaitCursor;
+        
+        // Simular trabajo largo
+        ProcesamientoLargo();
+        
+        lblEstado.Text = "Completado";
+        this.Cursor = Cursors.Default;
+    }
+    
+    // Método usando BackgroundWorker (patrón antiguo)
+    private void btnBackgroundWorker_Click(object sender, EventArgs e)
+    {
+        BackgroundWorker worker = new BackgroundWorker();
+        worker.WorkerReportsProgress = true;
+        
+        worker.DoWork += (s, args) =>
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+                Thread.Sleep(500); // Trabajo simulado
+                worker.ReportProgress(i * 10);
+            }
+        };
+        
+        worker.ProgressChanged += (s, args) =>
+        {
+            progressBar.Value = args.ProgressPercentage;
+            lblProgreso.Text = $"{args.ProgressPercentage}%";
+        };
+        
+        worker.RunWorkerCompleted += (s, args) =>
+        {
+            lblEstado.Text = "Completado con BackgroundWorker";
+        };
+        
+        lblEstado.Text = "Procesando con BackgroundWorker...";
+        worker.RunWorkerAsync();
+    }
+    
+    // Método asíncrono moderno (async/await)
+    private async void btnAsync_Click(object sender, EventArgs e)
+    {
+        lblEstado.Text = "Procesando asíncronamente...";
+        this.Cursor = Cursors.WaitCursor;
+        btnAsync.Enabled = false;
+        
+        try
+        {
+            // Ejecutar tarea en segundo plano
+            await Task.Run(() => ProcesamientoLargo());
+            
+            lblEstado.Text = "Completado asíncronamente";
+        }
+        catch (Exception ex)
+        {
+            lblEstado.Text = $"Error: {ex.Message}";
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+            btnAsync.Enabled = true;
+        }
+    }
+    
+    private void ProcesamientoLargo()
+    {
+        // Simular trabajo que toma tiempo
+        Thread.Sleep(3000);
+    }
+    
+    // Ejemplo con progreso y cancelación
+    private async void btnProgreso_Click(object sender, EventArgs e)
+    {
+        var progress = new Progress&lt;int&gt;(porcentaje =>
+        {
+            progressBar.Value = porcentaje;
+            lblProgreso.Text = $"{porcentaje}%";
+        });
+        
+        var cancellationTokenSource = new CancellationTokenSource();
+        btnCancelar.Enabled = true;
+        btnCancelar.Click += (s, args) => cancellationTokenSource.Cancel();
+        
+        try
+        {
+            await Task.Run(() => ProcesamientoConProgreso(progress, cancellationTokenSource.Token));
+            lblEstado.Text = "Proceso completado";
+        }
+        catch (OperationCanceledException)
+        {
+            lblEstado.Text = "Proceso cancelado";
+        }
+        finally
+        {
+            btnCancelar.Enabled = false;
+        }
+    }
+    
+    private void ProcesamientoConProgreso(IProgress&lt;int&gt; progress, CancellationToken token)
+    {
+        for (int i = 0; i <= 100; i++)
+        {
+            token.ThrowIfCancellationRequested();
+            Thread.Sleep(50); // Trabajo simulado
+            progress.Report(i);
+        }
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Interoperabilidad</h3>
+                    <p>Integración con APIs de Windows y otros componentes:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">InteropForm.cs</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">public partial class InteropForm : Form
+{
+    // Importar funciones de la API de Windows
+    [DllImport("user32.dll")]
+    private static extern bool FlashWindow(IntPtr hWnd, bool bInvert);
+    
+    [DllImport("user32.dll")]
+    private static extern int SendMessage(IntPtr hWnd, int msg, int wParam, int lParam);
+    
+    [DllImport("user32.dll")]
+    private static extern bool ReleaseCapture();
+    
+    private const int WM_NCLBUTTONDOWN = 0xA1;
+    private const int HT_CAPTION = 0x2;
+    
+    public InteropForm()
+    {
+        InitializeComponent();
+        
+        // Configurar evento para mover formulario sin bordes
+        this.MouseDown += InteropForm_MouseDown;
+    }
+    
+    private void InteropForm_MouseDown(object sender, MouseEventArgs e)
+    {
+        if (e.Button == MouseButtons.Left)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+        }
+    }
+    
+    private void btnFlash_Click(object sender, EventArgs e)
+    {
+        FlashWindow(this.Handle, true);
+    }
+    
+    private void btnWebBrowser_Click(object sender, EventArgs e)
+    {
+        // Ejemplo de integración con WebBrowser
+        webBrowser.Navigate("https://www.google.com");
+    }
+    
+    private void btnExcel_Click(object sender, EventArgs e)
+    {
+        // Ejemplo de automatización de Office
+        try
+        {
+            Microsoft.Office.Interop.Excel.Application excelApp = 
+                new Microsoft.Office.Interop.Excel.Application();
+            excelApp.Visible = true;
+            
+            var workbook = excelApp.Workbooks.Add();
+            var worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
+            
+            worksheet.Cells[1, 1] = "Datos desde Windows Forms";
+            
+            for (int i = 1; i <= 10; i++)
+            {
+                worksheet.Cells[i + 1, 1] = $"Item {i}";
+            }
+            
+            // Liberar objetos COM
+            Marshal.ReleaseComObject(worksheet);
+            Marshal.ReleaseComObject(workbook);
+            Marshal.ReleaseComObject(excelApp);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error con Excel: {ex.Message}");
+        }
+    }
+    
+    private void btnWMI_Click(object sender, EventArgs e)
+    {
+        // Ejemplo de consulta WMI
+        try
+        {
+            var searcher = new ManagementObjectSearcher(
+                "SELECT * FROM Win32_Processor");
+                
+            var collection = searcher.Get();
+            
+            StringBuilder sb = new StringBuilder();
+            foreach (var obj in collection)
+            {
+                sb.AppendLine($"Procesador: {obj["Name"]}");
+                sb.AppendLine($"Núcleos: {obj["NumberOfCores"]}");
+                sb.AppendLine();
+            }
+            
+            txtInfo.Text = sb.ToString();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"Error WMI: {ex.Message}");
+        }
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Patrones y Mejores Prácticas</h3>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="feature-title">Modelo MVVM</h4>
+                            <ul class="feature-list">
+                                <li>Separa lógica de negocio (Model)</li>
+                                <li>Vista (View) solo muestra datos</li>
+                                <li>ViewModel media entre ambos</li>
+                                <li>Usa binding para sincronización</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="feature-title">Inyección de Dependencias</h4>
+                            <ul class="feature-list">
+                                <li>Centraliza creación de objetos</li>
+                                <li>Facilita testing y mantenimiento</li>
+                                <li>Usa interfaces para abstracción</li>
+                                <li>Implementa con contenedores DI</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="feature-title">Patrón Repository</h4>
+                            <ul class="feature-list">
+                                <li>Abstrae acceso a datos</li>
+                                <li>Centraliza operaciones CRUD</li>
+                                <li>Facilita cambio de fuente de datos</li>
+                                <li>Mejora testabilidad</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="note-box">
+                        <div class="note-header">
+                            <i class="fas fa-book"></i>
+                            <h4>Recursos para aprender más</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><a href="https://docs.microsoft.com/es-es/dotnet/desktop/winforms/" target="_blank">Documentación oficial de Windows Forms</a></li>
+                            <li><a href="https://github.com/dotnet/winforms" target="_blank">Código fuente de Windows Forms</a></li>
+                            <li><a href="https://www.learn-winforms.com/" target="_blank">Tutoriales avanzados</a></li>
+                            <li><a href="https://github.com/microsoft/WinForms-Designer" target="_blank">Diseñador de Windows Forms</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Help Section -->
+            <section id="contact" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">¿Necesitas Ayuda?</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <div class="help-box">
+                        <div class="help-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="help-content">
+                            <h3>¿Tienes dudas sobre Windows Forms?</h3>
+                            <p>Si hay algún concepto que no entiendes o necesitas ayuda con tu aplicación, envíanos tus preguntas y te ayudaremos.</p>
+                            <button id="open-help-form" class="btn-primary btn-pulse">Solicitar Ayuda</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <!-- Help Form Modal -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Formulario de Ayuda</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="csharp-help-form" action="https://formsubmit.co/ratalittle893@gmail.com" method="POST">
+                    <input type="hidden" name="_subject" value="Ayuda con Windows Forms">
+                    <input type="hidden" name="_captcha" value="false">
+                    
+                    <div class="form-group">
+                        <label for="help-name">Nombre</label>
+                        <input type="text" id="help-name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-email">Correo Electrónico</label>
+                        <input type="email" id="help-email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-section">Sección relacionada</label>
+                        <select id="help-section" name="section" required>
+                            <option value="" disabled selected>Selecciona una sección</option>
+                            <option value="Fundamentos">1. Fundamentos</option>
+                            <option value="Controles">2. Controles Básicos</option>
+                            <option value="Eventos">3. Manejo de Eventos</option>
+                            <option value="Diálogos">4. Cuadros de Diálogo</option>
+                            <option value="Diseño">5. Diseño de Formularios</option>
+                            <option value="Datos">6. Trabajo con Datos</option>
+                            <option value="Avanzado">7. Temas Avanzados</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-question">Tu pregunta o problema</label>
+                        <textarea id="help-question" name="question" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-code">Código relacionado (opcional)</label>
+                        <textarea id="help-code" name="code" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Enviar Consulta</button>
+                        <button type="button" class="btn-secondary modal-close-btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <i class="fas fa-hashtag"></i>
+                <span class="brand-name">C# Windows Forms Guide</span>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4 class="footer-title">Guías</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="csharp-console-guide.html">C# Consola</a></li>
+                        <li><a href="#" class="active">Windows Forms</a></li>
+                        <li><a href="csharp-xml-guide.html">Trabajo con XML</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-title">Recursos</h4>
+                    <ul>
+                        <li><a href="https://docs.microsoft.com/es-es/dotnet/desktop/winforms/" target="_blank">Documentación Windows Forms</a></li>
+                        <li><a href="https://dotnet.microsoft.com/" target="_blank">Plataforma .NET</a></li>
+                        <li><a href="https://github.com/dotnet/winforms-samples" target="_blank">Ejemplos de código</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-title">Comunidad</h4>
+                    <ul>
+                        <li><a href="https://stackoverflow.com/questions/tagged/winforms" target="_blank">Stack Overflow</a></li>
+                        <li><a href="https://www.reddit.com/r/dotnet/" target="_blank">Reddit .NET</a></li>
+                        <li><a href="https://discord.gg/dotnet" target="_blank">Discord .NET</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 RataLife Guides. Todos los derechos reservados.</p>
+            <p>C#, Windows Forms y .NET son marcas registradas de Microsoft Corporation.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/form-handler.js"></script>
+    <script src="scripts/security.js"></script>
+</body>
+</html>

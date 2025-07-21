@@ -37,13 +37,14 @@
                         <a href="#" class="active"><i class="fas fa-hashtag"></i> C# <i class="fas fa-chevron-down dropdown-icon"></i></a>
                         <ul class="dropdown-menu">
                             <li><a href="#" class="active">Guía Consola</a></li>
-                            <li><a href="csharp-forms-guide.html">Windows Forms</a></li>
+                            <li><a href="cs-froms.html">Windows Forms</a></li>
                             <li><a href="csharp-xml-guide.html">Trabajo con XML</a></li>
                         </ul>
                     </li>
                     <li><a href="#contact"><i class="fas fa-envelope"></i> Contacto</a></li>
                 </ul>
             </div>
+            
             
             <div class="navbar-toggle">
                 <i class="fas fa-bars"></i>
@@ -127,7 +128,7 @@
                             <span class="code-title">Program.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">using System;
+                        <pre><code class="language-cpp">using System;
 
 class Program
 {
@@ -193,7 +194,7 @@ class Program
                             <span class="code-title">EntradaSalida.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">Console.Write("Ingresa tu nombre: "); // Escribe sin salto de línea
+                        <pre><code class="language-cpp">Console.Write("Ingresa tu nombre: "); // Escribe sin salto de línea
 string nombre = Console.ReadLine();    // Lee entrada del usuario
 
 Console.Write("Ingresa tu edad: ");
@@ -282,7 +283,7 @@ Console.WriteLine($"Hola {nombre}, tienes {edad} años."); // Interpolación de 
                             <span class="code-title">Variables.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">int edad = 25;                  // Entero
+                        <pre><code class="language-cpp">int edad = 25;                  // Entero
 double precio = 99.95;          // Punto flotante
 decimal saldo = 1500.75m;       // Decimal (para dinero)
 char inicial = 'R';             // Carácter
@@ -298,7 +299,7 @@ bool esValido = true;           // Booleano</code></pre>
                             <span class="code-title">Constantes.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">const double PI = 3.1415926535;
+                        <pre><code class="language-cpp">const double PI = 3.1415926535;
 const int DIAS_SEMANA = 7;
 const string EMPRESA = "RataLife Corp";</code></pre>
                     </div>
@@ -311,7 +312,7 @@ const string EMPRESA = "RataLife Corp";</code></pre>
                             <span class="code-title">VarExample.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">var nombre = "RataLife";    // string
+                        <pre><code class="language-cpp">var nombre = "RataLife";    // string
 var version = 1.2;         // double
 var iteraciones = 10;      // int
 var lista = new List&lt;int&gt;(); // List&lt;int&gt;</code></pre>
@@ -333,7 +334,7 @@ var lista = new List&lt;int&gt;(); // List&lt;int&gt;</code></pre>
                             <span class="code-title">Conversiones.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">// Conversión implícita (segura)
+                        <pre><code class="language-cpp">// Conversión implícita (segura)
 int entero = 10;
 double doble = entero; // Conversión automática
 
@@ -367,7 +368,7 @@ int.TryParse(texto, out numero3);   // TryParse (seguro)</code></pre>
                             <span class="code-title">Condicionales.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">// if-else
+                        <pre><code class="language-cpp">// if-else
 int edad = 18;
 if (edad >= 18)
 {
@@ -402,7 +403,7 @@ switch (dia)
                             <span class="code-title">Bucles.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">// for loop
+                        <pre><code class="language-cpp">// for loop
 for (int i = 0; i < 5; i++)
 {
     Console.WriteLine($"Iteración {i}");
@@ -452,7 +453,7 @@ foreach (string color in colores)
                             <span class="code-title">Ternario.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">int a = 10, b = 20;
+                        <pre><code class="language-cpp">int a = 10, b = 20;
 int mayor = (a > b) ? a : b;
 Console.WriteLine($"El mayor es: {mayor}");
 
@@ -468,7 +469,7 @@ string resultado = (a > b) ? "a es mayor" : "b es mayor";</code></pre>
                             <span class="code-title">Excepciones.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">try
+                        <pre><code class="language-cpp">try
 {
     Console.Write("Ingresa un número: ");
     int numero = int.Parse(Console.ReadLine());
@@ -506,7 +507,7 @@ finally
                             <span class="code-title">Metodos.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">using System;
+                        <pre><code class="language-cpp">using System;
 
 class Calculadora
 {
@@ -546,7 +547,7 @@ class Program
                             <span class="code-title">Parametros.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">// Parámetros por valor (copia)
+                        <pre><code class="language-cpp">// Parámetros por valor (copia)
 void IncrementarValor(int x)
 {
     x++;
@@ -594,7 +595,7 @@ static void Main()
                             <span class="code-title">Sobrecarga.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">class Mostrador
+                        <pre><code class="language-cpp">class Mostrador
 {
     public void Mostrar(int x)
     {
@@ -629,7 +630,7 @@ static void Main()
                             <span class="code-title">Recursion.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">int Factorial(int n)
+                        <pre><code class="language-cpp">int Factorial(int n)
 {
     if (n <= 1) return 1;
     return n * Factorial(n - 1);
@@ -667,7 +668,7 @@ static void Main()
                             <span class="code-title">Clases.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">class Persona
+                        <pre><code class="language-cpp">class Persona
 {
     // Campos (privados por convención)
     private string nombre;
@@ -720,7 +721,7 @@ class Program
                             <span class="code-title">Propiedades.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">class Producto
+                        <pre><code class="language-cpp">class Producto
 {
     // Propiedad automática con inicialización
     public string Nombre { get; set; } = "Sin nombre";
@@ -746,7 +747,7 @@ class Program
                             <span class="code-title">Herencia.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">class Empleado : Persona
+                        <pre><code class="language-cpp">class Empleado : Persona
 {
     public string Puesto { get; set; }
     public decimal Salario { get; set; }
@@ -780,7 +781,7 @@ static void Main()
                             <span class="code-title">Polimorfismo.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">class Animal
+                        <pre><code class="language-cpp">class Animal
 {
     public virtual void HacerSonido()
     {
@@ -847,7 +848,7 @@ static void Main()
                             <span class="code-title">Arrays.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">// Array unidimensional
+                        <pre><code class="language-cpp">// Array unidimensional
 int[] numeros = new int[5] { 1, 2, 3, 4, 5 };
 string[] nombres = { "Ana", "Juan", "María" };
 
@@ -884,7 +885,7 @@ for (int i = 0; i < matriz.GetLength(0); i++)
                             <span class="code-title">Listas.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">using System.Collections.Generic;
+                        <pre><code class="language-cpp">using System.Collections.Generic;
 
 List&lt;string&gt; frutas = new List&lt;string&gt; { "Manzana", "Banana" };
 
@@ -925,7 +926,7 @@ foreach (string fruta in frutas)
                             <span class="code-title">Diccionarios.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">Dictionary&lt;string, int&gt; edades = new Dictionary&lt;string, int&gt;
+                        <pre><code class="language-cpp">Dictionary&lt;string, int&gt; edades = new Dictionary&lt;string, int&gt;
 {
     ["Juan"] = 25,
     ["María"] = 30
@@ -1007,7 +1008,7 @@ edades.Remove("Pedro");</code></pre>
                             <span class="code-title">LINQ.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">using System.Linq;
+                        <pre><code class="language-cpp">using System.Linq;
 
 List&lt;int&gt; numeros = new List&lt;int&gt; { 5, 2, 8, 1, 9, 3, 6, 4, 7 };
 
@@ -1062,7 +1063,7 @@ foreach (var grupo in grupos)
                             <span class="code-title">LINQObjects.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">class Persona
+                        <pre><code class="language-cpp">class Persona
 {
     public string Nombre { get; set; }
     public int Edad { get; set; }
@@ -1135,7 +1136,7 @@ var joinQuery = from p in personas
                             <span class="code-title">Delegados.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">// Definir un delegado
+                        <pre><code class="language-cpp">// Definir un delegado
 delegate void MostrarMensaje(string mensaje);
 
 class Programa
@@ -1191,7 +1192,7 @@ class Boton
                             <span class="code-title">Lambdas.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">// Lambda simple
+                        <pre><code class="language-cpp">// Lambda simple
 Func&lt;int, int&gt; cuadrado = x => x * x;
 Console.WriteLine(cuadrado(5)); // 25
 
@@ -1222,7 +1223,7 @@ var multiplicados = numeros.Select(n => n * factor);</code></pre>
                             <span class="code-title">Nullable.cs</span>
                             <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
                         </div>
-                        <pre><code class="language-csharp">int? numero = null; // Equivalente a Nullable&lt;int&gt;
+                        <pre><code class="language-cpp">int? numero = null; // Equivalente a Nullable&lt;int&gt;
 
 if (numero.HasValue)
 {
@@ -1391,7 +1392,7 @@ fecha = DateTime.Now;</code></pre>
                     <ul>
                         <li><a href="index.html">Inicio</a></li>
                         <li><a href="#" class="active">C# Consola</a></li>
-                        <li><a href="csharp-forms-guide.html">Windows Forms</a></li>
+                        <li><a href="cs-froms.html">Windows Forms</a></li>
                         <li><a href="csharp-xml-guide.html">Trabajo con XML</a></li>
                     </ul>
                 </div>
