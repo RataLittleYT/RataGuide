@@ -1,0 +1,2241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# XML Guide - By RataLife</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/animations.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Mobile Warning -->
+    <div id="mobile-warning" class="mobile-warning">
+        <div class="warning-content">
+            <i class="fas fa-exclamation-triangle warning-icon"></i>
+            <h3>Recomendación</h3>
+            <p>Para una mejor experiencia, te recomendamos acceder desde un ordenador.</p>
+            <button id="continue-mobile" class="btn-primary">Continuar en móvil</button>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <i class="fas fa-code logo-icon"></i>
+                <span class="brand-name">C# Guide</span>
+            </div>
+            
+            <div class="navbar-links">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#"><i class="fas fa-hashtag"></i> C# <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="csharp-console-guide.html">Guía Consola</a></li>
+                            <li><a href="cs-froms.html">Windows Forms</a></li>
+                            <li><a href="#" class="active">Trabajo con XML</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact"><i class="fas fa-envelope"></i> Contacto</a></li>
+                </ul>
+            </div>
+            
+            <div class="navbar-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero hero-csharp">
+        <div class="hero-content">
+            <h1 class="hero-title animate-typing">Guía Completa de C# con XML</h1>
+            <p class="hero-subtitle">Aprende a trabajar con XML en C#: lectura, escritura, serialización y más</p>
+            <div class="hero-buttons">
+                <a href="#basics" class="btn-primary btn-pulse">Comenzar</a>
+                <a href="#contact" class="btn-secondary">¿Dudas?</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <i class="fas fa-chevron-down scroll-icon bounce"></i>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container guide-container">
+        <!-- Table of Contents -->
+        <aside class="guide-toc">
+            <div class="toc-header">
+                <h3>Contenido</h3>
+                <i class="fas fa-bookmark toc-icon"></i>
+            </div>
+            <ul class="toc-list">
+                <li><a href="#basics" class="toc-link">1. Fundamentos XML</a></li>
+                <li><a href="#reading" class="toc-link">2. Lectura de XML</a></li>
+                <li><a href="#writing" class="toc-link">3. Escritura de XML</a></li>
+                <li><a href="#linq" class="toc-link">4. LINQ to XML</a></li>
+                <li><a href="#serialization" class="toc-link">5. Serialización</a></li>
+                <li><a href="#validation" class="toc-link">6. Validación</a></li>
+                <li><a href="#advanced" class="toc-link">7. Temas Avanzados</a></li>
+            </ul>
+            
+            <div class="toc-footer">
+                <button id="print-guide" class="btn-secondary">
+                    <i class="fas fa-print"></i> Imprimir
+                </button>
+            </div>
+        </aside>
+
+        <!-- Guide Content -->
+        <article class="guide-content">
+            <!-- Basics Section -->
+            <section id="basics" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">1. Fundamentos XML</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">¿Qué es XML?</h3>
+                    <p>XML (eXtensible Markup Language) es un lenguaje de marcado diseñado para almacenar y transportar datos de manera estructurada. A diferencia de HTML, XML no tiene etiquetas predefinidas, lo que lo hace altamente flexible.</p>
+                    
+                    <div class="info-box">
+                        <div class="info-header">
+                            <i class="fas fa-info-circle"></i>
+                            <h4>Características clave</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><strong>Auto-descriptivo:</strong> La estructura y el significado de los datos están contenidos en el documento</li>
+                            <li><strong>Extensible:</strong> Puedes definir tus propias etiquetas según tus necesidades</li>
+                            <li><strong>Independiente:</strong> No depende de plataforma o lenguaje</li>
+                            <li><strong>Estandarizado:</strong> Mantenido por el W3C</li>
+                            <li><strong>Jerárquico:</strong> Los datos se organizan en una estructura de árbol</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Estructura básica de XML</h3>
+                    <p>Un documento XML típico contiene:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Ejemplo XML</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;catalogo&gt;
+    &lt;libro id="101"&gt;
+        &lt;titulo&gt;Programación en C#&lt;/titulo&gt;
+        &lt;autor&gt;Juan Pérez&lt;/autor&gt;
+        &lt;genero&gt;Programación&lt;/genero&gt;
+        &lt;precio&gt;29.99&lt;/precio&gt;
+        &lt;publicacion año="2020"/&gt;
+    &lt;/libro&gt;
+    &lt;libro id="102"&gt;
+        &lt;titulo&gt;Aprendiendo XML&lt;/titulo&gt;
+        &lt;autor&gt;María Gómez&lt;/autor&gt;
+        &lt;genero&gt;Tecnología&lt;/genero&gt;
+        &lt;precio&gt;24.50&lt;/precio&gt;
+        &lt;publicacion año="2021"/&gt;
+    &lt;/libro&gt;
+&lt;/catalogo&gt;</code></pre>
+                    </div>
+                    
+                    <div class="explanation-box">
+                        <h4>Componentes del XML:</h4>
+                        <ol>
+                            <li><strong>Declaración XML:</strong> <code>&lt;?xml ... ?&gt;</code> especifica la versión y codificación</li>
+                            <li><strong>Elemento raíz:</strong> <code>&lt;catalogo&gt;</code> es el contenedor principal</li>
+                            <li><strong>Elementos:</strong> <code>&lt;libro&gt;</code>, <code>&lt;titulo&gt;</code>, etc. contienen los datos</li>
+                            <li><strong>Atributos:</strong> <code>id="101"</code> proporcionan metadatos sobre los elementos</li>
+                            <li><strong>Contenido:</strong> Texto entre las etiquetas de apertura y cierre</li>
+                        </ol>
+                    </div>
+                    
+                    <h3 class="content-title">Espacios de nombres en XML</h3>
+                    <p>Los espacios de nombres evitan conflictos entre elementos con el mismo nombre:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">XML con namespaces</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">&lt;?xml version="1.0"?&gt;
+&lt;libros xmlns="http://www.ejemplo.com/libros"
+        xmlns:aut="http://www.ejemplo.com/autores"&gt;
+    &lt;libro&gt;
+        &lt;titulo&gt;Aprendiendo C#&lt;/titulo&gt;
+        &lt;aut:autor&gt;
+            &lt;aut:nombre&gt;Juan Pérez&lt;/aut:nombre&gt;
+            &lt;aut:nacionalidad&gt;México&lt;/aut:nacionalidad&gt;
+        &lt;/aut:autor&gt;
+    &lt;/libro&gt;
+&lt;/libros&gt;</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Clases para trabajar con XML en C#</h3>
+                    <p>.NET proporciona varias clases en el espacio de nombres <code>System.Xml</code>:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Clase</th>
+                                    <th>Descripción</th>
+                                    <th>Cuándo usarla</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>XmlDocument</code></td>
+                                    <td>Modelo DOM completo del documento</td>
+                                    <td>Cuando necesitas acceso completo a todo el documento</td>
+                                </tr>
+                                <tr>
+                                    <td><code>XmlReader/XmlWriter</code></td>
+                                    <td>Lectura/escritura secuencial</td>
+                                    <td>Para archivos grandes o procesamiento eficiente</td>
+                                </tr>
+                                <tr>
+                                    <td><code>XDocument</code></td>
+                                    <td>Modelo LINQ to XML</td>
+                                    <td>Cuando prefieres sintaxis LINQ y manipulación fácil</td>
+                                </tr>
+                                <tr>
+                                    <td><code>XmlSerializer</code></td>
+                                    <td>Serialización de objetos</td>
+                                    <td>Para convertir objetos a XML y viceversa</td>
+                                </tr>
+                                <tr>
+                                    <td><code>XmlSchema</code></td>
+                                    <td>Validación de esquemas</td>
+                                    <td>Para validar estructura y tipos de datos</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Reading Section -->
+            <section id="reading" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">2. Lectura de XML</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Usando XmlDocument</h3>
+                    <p><code>XmlDocument</code> carga todo el documento en memoria para su manipulación:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Lectura con XmlDocument</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Xml;
+
+class XmlDocumentExample
+{
+    static void Main()
+    {
+        // Cargar el documento XML
+        XmlDocument doc = new XmlDocument();
+        doc.Load("libros.xml"); // También puedes usar LoadXml con una cadena XML
+        
+        // Obtener el nodo raíz
+        XmlNode root = doc.DocumentElement;
+        
+        // Leer atributos del nodo raíz
+        Console.WriteLine($"Elemento raíz: {root.Name}");
+        Console.WriteLine($"Número de libros: {root.ChildNodes.Count}");
+        
+        // Recorrer los libros
+        foreach (XmlNode libro in root.SelectNodes("libro"))
+        {
+            string id = libro.Attributes["id"].Value;
+            string titulo = libro.SelectSingleNode("titulo").InnerText;
+            string autor = libro.SelectSingleNode("autor").InnerText;
+            string precio = libro.SelectSingleNode("precio").InnerText;
+            
+            Console.WriteLine($"\nLibro ID: {id}");
+            Console.WriteLine($"Título: {titulo}");
+            Console.WriteLine($"Autor: {autor}");
+            Console.WriteLine($"Precio: {precio}");
+        }
+        
+        // Consulta XPath avanzada
+        XmlNodeList librosCaros = root.SelectNodes("libro[precio > 25]");
+        Console.WriteLine($"\nLibros con precio > 25: {librosCaros.Count}");
+    }
+}</code></pre>
+                    </div>
+                    
+                    <div class="note-box">
+                        <div class="note-header">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <h4>Consideraciones XmlDocument</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li>Carga todo el documento en memoria (no ideal para archivos muy grandes)</li>
+                            <li>Ofrece métodos para modificar la estructura del XML</li>
+                            <li>Soporta XPath para consultas complejas</li>
+                            <li>Más lento que <code>XmlReader</code> para solo lectura</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Usando XmlReader</h3>
+                    <p><code>XmlReader</code> proporciona acceso secuencial, de solo avance y de solo lectura:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Lectura con XmlReader</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Xml;
+
+class XmlReaderExample
+{
+    static void Main()
+    {
+        // Configuración del XmlReader
+        XmlReaderSettings settings = new XmlReaderSettings();
+        settings.IgnoreWhitespace = true;
+        settings.IgnoreComments = true;
+        
+        using (XmlReader reader = XmlReader.Create("libros.xml", settings))
+        {
+            while (reader.Read())
+            {
+                // Solo procesar elementos de inicio
+                if (reader.NodeType == XmlNodeType.Element)
+                {
+                    switch (reader.Name)
+                    {
+                        case "libro":
+                            Console.WriteLine($"\nID Libro: {reader.GetAttribute("id")}");
+                            break;
+                            
+                        case "titulo":
+                            // ReadElementContentAsString() avanza el reader
+                            Console.WriteLine($"Título: {reader.ReadElementContentAsString()}");
+                            break;
+                            
+                        case "autor":
+                            Console.WriteLine($"Autor: {reader.ReadElementContentAsString()}");
+                            break;
+                            
+                        case "precio":
+                            decimal precio = reader.ReadElementContentAsDecimal();
+                            Console.WriteLine($"Precio: {precio:C}");
+                            break;
+                    }
+                }
+            }
+        }
+        
+        // Lectura más eficiente para archivos grandes
+        using (XmlReader reader = XmlReader.Create("libros_grandes.xml"))
+        {
+            while (reader.ReadToFollowing("libro"))
+            {
+                string id = reader.GetAttribute("id");
+                reader.ReadToFollowing("titulo");
+                string titulo = reader.ReadElementContentAsString();
+                
+                Console.WriteLine($"Libro {id}: {titulo}");
+            }
+        }
+    }
+}</code></pre>
+                    </div>
+                    
+                    <div class="explanation-box">
+                        <h4>Ventajas de XmlReader:</h4>
+                        <ul>
+                            <li><strong>Eficiente en memoria:</strong> No carga todo el documento</li>
+                            <li><strong>Rápido:</strong> Ideal para archivos grandes</li>
+                            <li><strong>Flexible:</strong> Puedes saltar a secciones relevantes</li>
+                            <li><strong>Seguro:</strong> Puede validar contra un esquema durante la lectura</li>
+                        </ul>
+                    </div>
+                    
+                    <h3 class="content-title">Usando XDocument (LINQ to XML)</h3>
+                    <p>LINQ to XML proporciona una forma más moderna e intuitiva de trabajar con XML:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Lectura con XDocument</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Linq;
+using System.Xml.Linq;
+
+class XDocumentExample
+{
+    static void Main()
+    {
+        // Cargar el documento
+        XDocument doc = XDocument.Load("libros.xml");
+        
+        // Obtener el elemento raíz
+        XElement root = doc.Root;
+        
+        // Consulta básica
+        var libros = from libro in root.Elements("libro")
+                    select new {
+                        Id = libro.Attribute("id").Value,
+                        Titulo = libro.Element("titulo").Value,
+                        Precio = decimal.Parse(libro.Element("precio").Value)
+                    };
+        
+        foreach (var libro in libros)
+        {
+            Console.WriteLine($"{libro.Id}: {libro.Titulo} - {libro.Precio:C}");
+        }
+        
+        // Consulta con filtro
+        var librosCaros = from libro in root.Elements("libro")
+                         where decimal.Parse(libro.Element("precio").Value) > 25
+                         orderby libro.Element("titulo").Value
+                         select libro.Element("titulo").Value;
+        
+        Console.WriteLine("\nLibros caros:");
+        foreach (string titulo in librosCaros)
+        {
+            Console.WriteLine(titulo);
+        }
+        
+        // Manejo de namespaces
+        XNamespace ns = "http://www.ejemplo.com/libros";
+        XNamespace aut = "http://www.ejemplo.com/autores";
+        
+        var autores = from libro in doc.Descendants(ns + "libro")
+                     select new {
+                         Titulo = libro.Element(ns + "titulo").Value,
+                         Autor = libro.Element(aut + "autor").Element(aut + "nombre").Value
+                     };
+    }
+}</code></pre>
+                    </div>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="feature-title">Ventajas XDocument</h4>
+                            <ul class="feature-list">
+                                <li>Sintaxis más intuitiva y concisa</li>
+                                <li>Integración con LINQ para consultas potentes</li>
+                                <li>Facilita la creación y transformación de XML</li>
+                                <li>Mejor manejo de espacios de nombres</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="feature-title">Métodos útiles</h4>
+                            <ul class="feature-list">
+                                <li><code>Elements()</code>: Obtiene elementos hijos</li>
+                                <li><code>Descendants()</code>: Busca en todos los niveles</li>
+                                <li><code>Attribute()</code>: Obtiene un atributo</li>
+                                <li><code>Value</code>: Obtiene el contenido</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Writing Section -->
+            <section id="writing" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">3. Escritura de XML</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Usando XmlWriter</h3>
+                    <p><code>XmlWriter</code> proporciona una forma rápida y eficiente de generar XML:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Escritura con XmlWriter</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Xml;
+
+class XmlWriterExample
+{
+    static void Main()
+    {
+        // Configuración de XmlWriter
+        XmlWriterSettings settings = new XmlWriterSettings();
+        settings.Indent = true;
+        settings.IndentChars = "  ";
+        settings.NewLineOnAttributes = true;
+        
+        using (XmlWriter writer = XmlWriter.Create("nuevos_libros.xml", settings))
+        {
+            writer.WriteStartDocument();
+            
+            // Comentario
+            writer.WriteComment("Archivo generado automáticamente");
+            
+            // Elemento raíz
+            writer.WriteStartElement("biblioteca");
+            
+            // Primer libro
+            writer.WriteStartElement("libro");
+            writer.WriteAttributeString("id", "201");
+            
+            writer.WriteElementString("titulo", "Aprendiendo .NET");
+            writer.WriteElementString("autor", "Carlos Ruiz");
+            writer.WriteElementString("precio", "35.99");
+            
+            writer.WriteStartElement("detalles");
+            writer.WriteElementString("paginas", "450");
+            writer.WriteElementString("formato", "Tapa blanda");
+            writer.WriteEndElement(); // Cierra detalles
+            
+            writer.WriteEndElement(); // Cierra libro
+            
+            // Segundo libro con contenido más complejo
+            writer.WriteStartElement("libro");
+            writer.WriteAttributeString("id", "202");
+            writer.WriteAttributeString("categoria", "programacion");
+            
+            writer.WriteStartElement("titulo");
+            writer.WriteString("C# Avanzado ");
+            writer.WriteElementString("subtitulo", "Patrones y técnicas");
+            writer.WriteEndElement(); // Cierra titulo
+            
+            writer.WriteElementString("precio", "42.50");
+            
+            writer.WriteEndElement(); // Cierra libro
+            
+            writer.WriteEndElement(); // Cierra biblioteca
+            writer.WriteEndDocument();
+        }
+        
+        Console.WriteLine("XML generado exitosamente");
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Usando XDocument (LINQ to XML)</h3>
+                    <p>Creación de XML con una sintaxis más declarativa:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Escritura con XDocument</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Xml.Linq;
+
+class XDocumentWriteExample
+{
+    static void Main()
+    {
+        // Crear documento con estructura funcional
+        XDocument doc = new XDocument(
+            new XDeclaration("1.0", "utf-8", "yes"),
+            new XComment("Archivo generado con LINQ to XML"),
+            new XElement("biblioteca",
+                new XElement("libro",
+                    new XAttribute("id", "301"),
+                    new XElement("titulo", "Programación Funcional en C#"),
+                    new XElement("autor", "Ana López"),
+                    new XElement("precio", "38.75"),
+                    new XElement("detalles",
+                        new XElement("paginas", "320"),
+                        new XElement("formato", "Digital")
+                    )
+                ),
+                new XElement("libro",
+                    new XAttribute("id", "302"),
+                    new XAttribute("categoria", "patrones"),
+                    new XElement("titulo", 
+                        "Diseño de Software ",
+                        new XElement("subtitulo", "Principios SOLID")),
+                    new XElement("precio", "45.00")
+                )
+            )
+        );
+        
+        // Guardar a archivo
+        doc.Save("biblioteca_linq.xml");
+        
+        // Crear XML dinámicamente desde datos
+        var libros = new[] {
+            new { Id = 401, Titulo = "Entity Framework Core", Autor = "Miguel Castro", Precio = 39.99m },
+            new { Id = 402, Titulo = "ASP.NET MVC", Autor = "Julia Martínez", Precio = 37.50m }
+        };
+        
+        XDocument docFromData = new XDocument(
+            new XElement("libros",
+                from libro in libros
+                select new XElement("libro",
+                    new XAttribute("id", libro.Id),
+                    new XElement("titulo", libro.Titulo),
+                    new XElement("autor", libro.Autor),
+                    new XElement("precio", libro.Precio)
+                )
+            )
+        );
+        
+        docFromData.Save("libros_dinamicos.xml");
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Modificación de XML existente</h3>
+                    <p>Técnicas para actualizar documentos XML:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Modificación de XML</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Linq;
+using System.Xml.Linq;
+
+class XmlModificationExample
+{
+    static void Main()
+    {
+        // Cargar documento existente
+        XDocument doc = XDocument.Load("libros.xml");
+        
+        // Agregar un nuevo libro
+        XElement nuevoLibro = new XElement("libro",
+            new XAttribute("id", "501"),
+            new XElement("titulo", "Nuevo Libro de C#"),
+            new XElement("autor", "Autor Desconocido"),
+            new XElement("precio", "29.99")
+        );
+        
+        doc.Root.Add(nuevoLibro);
+        
+        // Actualizar precio de un libro específico
+        var libroActualizar = doc.Descendants("libro")
+                               .FirstOrDefault(l => l.Attribute("id").Value == "101");
+        
+        if (libroActualizar != null)
+        {
+            libroActualizar.Element("precio").Value = "34.99";
+        }
+        
+        // Eliminar libros con precio menor a 20
+        doc.Descendants("libro")
+           .Where(l => decimal.Parse(l.Element("precio").Value) < 20)
+           .Remove();
+        
+        // Agregar un atributo a todos los libros
+        foreach (var libro in doc.Descendants("libro"))
+        {
+            libro.SetAttributeValue("disponible", "true");
+        }
+        
+        // Guardar cambios
+        doc.Save("libros_actualizados.xml");
+        
+        // Transformación de XML
+        XDocument transformed = new XDocument(
+            new XElement("catalogo_actualizado",
+                from libro in doc.Descendants("libro")
+                select new XElement("libro",
+                    new XAttribute("codigo", libro.Attribute("id").Value),
+                    new XElement("nombre", libro.Element("titulo").Value),
+                    new XElement("precio_con_iva", 
+                        decimal.Parse(libro.Element("precio").Value) * 1.16m)
+                )
+            )
+        );
+        
+        transformed.Save("libros_transformados.xml");
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- LINQ Section -->
+            <section id="linq" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">4. LINQ to XML</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Consultas básicas con LINQ to XML</h3>
+                    <p>LINQ to XML permite consultar documentos XML como si fueran bases de datos:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Consultas LINQ to XML</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Linq;
+using System.Xml.Linq;
+
+class LinqToXmlBasic
+{
+    static void Main()
+    {
+        XDocument doc = XDocument.Load("libros.xml");
+        
+        // Consulta simple: todos los títulos
+        var titulos = from libro in doc.Descendants("libro")
+                     select libro.Element("titulo").Value;
+        
+        Console.WriteLine("Todos los títulos:");
+        foreach (string titulo in titulos)
+        {
+            Console.WriteLine(titulo);
+        }
+        
+        // Consulta con filtro y ordenamiento
+        var librosCaros = from libro in doc.Descendants("libro")
+                         where decimal.Parse(libro.Element("precio").Value) > 30
+                         orderby libro.Element("autor").Value descending
+                         select new {
+                             Titulo = libro.Element("titulo").Value,
+                             Autor = libro.Element("autor").Value,
+                             Precio = decimal.Parse(libro.Element("precio").Value)
+                         };
+        
+        Console.WriteLine("\nLibros caros ordenados por autor (desc):");
+        foreach (var libro in librosCaros)
+        {
+            Console.WriteLine($"{libro.Titulo} - {libro.Autor} - {libro.Precio:C}");
+        }
+        
+        // Consulta con agrupación
+        var librosPorAutor = from libro in doc.Descendants("libro")
+                            group libro by libro.Element("autor").Value into grupo
+                            select new {
+                                Autor = grupo.Key,
+                                Cantidad = grupo.Count(),
+                                PrecioPromedio = grupo.Average(l => decimal.Parse(l.Element("precio").Value))
+                            };
+        
+        Console.WriteLine("\nLibros por autor:");
+        foreach (var grupo in librosPorAutor)
+        {
+            Console.WriteLine($"{grupo.Autor}: {grupo.Cantidad} libros, promedio {grupo.PrecioPromedio:C}");
+        }
+        
+        // Consulta con join
+        XDocument autoresDoc = XDocument.Load("autores.xml");
+        
+        var librosConAutores = from libro in doc.Descendants("libro")
+                              join autor in autoresDoc.Descendants("autor")
+                              on libro.Element("autor").Value equals autor.Element("nombre").Value
+                              select new {
+                                  Titulo = libro.Element("titulo").Value,
+                                  Autor = libro.Element("autor").Value,
+                                  Nacionalidad = autor.Element("nacionalidad").Value
+                              };
+        
+        Console.WriteLine("\nLibros con información de autores:");
+        foreach (var item in librosConAutores)
+        {
+            Console.WriteLine($"{item.Titulo} - {item.Autor} ({item.Nacionalidad})");
+        }
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Métodos de extensión LINQ</h3>
+                    <p>Además de la sintaxis de consulta, puedes usar métodos de extensión:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Métodos de extensión LINQ</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Linq;
+using System.Xml.Linq;
+
+class LinqMethodsExample
+{
+    static void Main()
+    {
+        XDocument doc = XDocument.Load("libros.xml");
+        
+        // Where, OrderBy, Select
+        var librosFiltrados = doc.Descendants("libro")
+            .Where(l => decimal.Parse(l.Element("precio").Value) < 30)
+            .OrderBy(l => l.Element("autor").Value)
+            .Select(l => new {
+                Titulo = l.Element("titulo").Value,
+                Precio = decimal.Parse(l.Element("precio").Value)
+            });
+        
+        Console.WriteLine("Libros económicos:");
+        foreach (var libro in librosFiltrados)
+        {
+            Console.WriteLine($"{libro.Titulo} - {libro.Precio:C}");
+        }
+        
+        // First, Single, Any, All
+        XElement primerLibro = doc.Descendants("libro").First();
+        Console.WriteLine($"\nPrimer libro: {primerLibro.Element("titulo").Value}");
+        
+        bool hayLibrosCaros = doc.Descendants("libro")
+            .Any(l => decimal.Parse(l.Element("precio").Value) > 100);
+        Console.WriteLine($"¿Hay libros muy caros? {hayLibrosCaros}");
+        
+        // Aggregate, Sum, Max
+        decimal totalValorInventario = doc.Descendants("libro")
+            .Sum(l => decimal.Parse(l.Element("precio").Value));
+        Console.WriteLine($"Valor total del inventario: {totalValorInventario:C}");
+        
+        // GroupBy
+        var agrupamiento = doc.Descendants("libro")
+            .GroupBy(l => l.Element("genero").Value)
+            .Select(g => new {
+                Genero = g.Key,
+                Cantidad = g.Count(),
+                PrecioMaximo = g.Max(l => decimal.Parse(l.Element("precio").Value))
+            });
+        
+        Console.WriteLine("\nLibros por género:");
+        foreach (var grupo in agrupamiento)
+        {
+            Console.WriteLine($"{grupo.Genero}: {grupo.Cantidad} libros, máximo {grupo.PrecioMaximo:C}");
+        }
+        
+        // ToDictionary
+        var diccionarioLibros = doc.Descendants("libro")
+            .ToDictionary(
+                l => l.Attribute("id").Value,
+                l => l.Element("titulo").Value
+            );
+        
+        Console.WriteLine("\nDiccionario de libros:");
+        foreach (var kvp in diccionarioLibros)
+        {
+            Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+        }
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Manipulación avanzada con LINQ to XML</h3>
+                    <p>Técnicas avanzadas para transformar y manipular XML:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Manipulación avanzada</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Linq;
+using System.Xml.Linq;
+
+class AdvancedLinqToXml
+{
+    static void Main()
+    {
+        // Transformación de XML
+        XDocument original = XDocument.Load("libros.xml");
+        
+        XDocument transformado = new XDocument(
+            new XElement("reporte_libros",
+                new XElement("total_libros", original.Descendants("libro").Count()),
+                new XElement("libros",
+                    from libro in original.Descendants("libro")
+                    select new XElement("libro",
+                        new XAttribute("codigo", libro.Attribute("id").Value),
+                        new XElement("titulo_autor", 
+                            $"{libro.Element("titulo").Value} - {libro.Element("autor").Value}"),
+                        new XElement("precio_con_descuento", 
+                            decimal.Parse(libro.Element("precio").Value) * 0.9m)
+                    )
+                ),
+                new XElement("resumen_autores",
+                    from autor in original.Descendants("libro")
+                    group autor by autor.Element("autor").Value into g
+                    select new XElement("autor",
+                        new XAttribute("nombre", g.Key),
+                        new XAttribute("libros_publicados", g.Count())
+                    )
+                )
+            )
+        );
+        
+        transformado.Save("reporte_transformado.xml");
+        
+        // Manipulación de árbol XML
+        XElement raiz = original.Root;
+        
+        // Añadir un nuevo elemento al principio
+        raiz.AddFirst(new XElement("encabezado",
+            new XElement("fecha_generacion", DateTime.Now.ToString("yyyy-MM-dd")),
+            new XElement("total_libros", raiz.Elements("libro").Count())
+        ));
+        
+        // Reemplazar elementos
+        XElement libroViejo = raiz.Elements("libro").First();
+        XElement libroNuevo = new XElement("libro",
+            new XAttribute("id", "999"),
+            new XElement("titulo", "Nueva Edición"),
+            new XElement("autor", libroViejo.Element("autor").Value),
+            new XElement("precio", "49.99")
+        );
+        libroViejo.ReplaceWith(libroNuevo);
+        
+        // Clonar elementos
+        XElement ultimoLibro = raiz.Elements("libro").Last();
+        XElement libroClonado = new XElement(ultimoLibro);
+        libroClonado.Attribute("id").Value = "1000";
+        libroClonado.Element("titulo").Value = "Copia de " + libroClonado.Element("titulo").Value;
+        raiz.Add(libroClonado);
+        
+        // Manipulación de atributos
+        foreach (XElement libro in raiz.Elements("libro"))
+        {
+            libro.SetAttributeValue("actualizado", "true");
+            
+            if (libro.Attribute("categoria") == null)
+            {
+                libro.SetAttributeValue("categoria", "general");
+            }
+        }
+        
+        original.Save("libros_modificados.xml");
+        
+        // Proyección a otros formatos
+        var reporteHtml = new XDocument(
+            new XElement("html",
+                new XElement("head",
+                    new XElement("title", "Reporte de Libros")
+                ),
+                new XElement("body",
+                    new XElement("h1", "Lista de Libros"),
+                    new XElement("ul",
+                        from libro in original.Descendants("libro")
+                        select new XElement("li",
+                            new XElement("strong", libro.Element("titulo").Value),
+                            $" por {libro.Element("autor").Value} - ",
+                            new XElement("em", decimal.Parse(libro.Element("precio").Value).ToString("C"))
+                        )
+                    )
+                )
+            )
+        );
+        
+        reporteHtml.Save("reporte_libros.html");
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Serialization Section -->
+            <section id="serialization" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">5. Serialización XML</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Serialización básica con XmlSerializer</h3>
+                    <p>Convertir objetos a XML y viceversa:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Serialización básica</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.IO;
+using System.Xml.Serialization;
+
+// Clases para serialización
+[XmlRoot("biblioteca")]
+public class Biblioteca
+{
+    [XmlElement("libro")]
+    public List&lt;Libro&gt; Libros { get; set; } = new List&lt;Libro&gt;();
+    
+    [XmlAttribute("fecha_creacion")]
+    public DateTime FechaCreacion { get; set; } = DateTime.Now;
+}
+
+public class Libro
+{
+    [XmlAttribute("id")]
+    public int Id { get; set; }
+    
+    [XmlElement("titulo")]
+    public string Titulo { get; set; }
+    
+    [XmlElement("autor")]
+    public string Autor { get; set; }
+    
+    [XmlElement("precio")]
+    public decimal Precio { get; set; }
+    
+    [XmlElement("publicado")]
+    public bool Publicado { get; set; }
+    
+    [XmlIgnore]
+    public string InformacionInterna { get; set; } // No se serializa
+}
+
+class XmlSerializationExample
+{
+    static void Main()
+    {
+        // Crear datos de ejemplo
+        Biblioteca biblioteca = new Biblioteca();
+        biblioteca.Libros.Add(new Libro {
+            Id = 1,
+            Titulo = "C# Básico",
+            Autor = "Juan Pérez",
+            Precio = 29.99m,
+            Publicado = true
+        });
+        biblioteca.Libros.Add(new Libro {
+            Id = 2,
+            Titulo = "ASP.NET Avanzado",
+            Autor = "María Gómez",
+            Precio = 39.50m,
+            Publicado = false
+        });
+        
+        // Serializar a XML
+        XmlSerializer serializer = new XmlSerializer(typeof(Biblioteca));
+        
+        using (TextWriter writer = new StreamWriter("biblioteca_serializada.xml"))
+        {
+            serializer.Serialize(writer, biblioteca);
+        }
+        
+        Console.WriteLine("Objeto serializado a XML exitosamente");
+        
+        // Deserializar desde XML
+        Biblioteca bibliotecaLeida;
+        
+        using (TextReader reader = new StreamReader("biblioteca_serializada.xml"))
+        {
+            bibliotecaLeida = (Biblioteca)serializer.Deserialize(reader);
+        }
+        
+        Console.WriteLine("\nLibros deserializados:");
+        foreach (var libro in bibliotecaLeida.Libros)
+        {
+            Console.WriteLine($"{libro.Titulo} - {libro.Autor} - {libro.Precio:C}");
+        }
+        
+        // Serializar con configuraciones adicionales
+        XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+        ns.Add("", ""); // Eliminar namespaces
+        
+        XmlWriterSettings settings = new XmlWriterSettings();
+        settings.Indent = true;
+        settings.OmitXmlDeclaration = true;
+        
+        using (XmlWriter writer = XmlWriter.Create("biblioteca_personalizada.xml", settings))
+        {
+            serializer.Serialize(writer, biblioteca, ns);
+        }
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Personalización de la serialización</h3>
+                    <p>Control avanzado sobre el proceso de serialización:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Serialización personalizada</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.IO;
+using System.Xml.Serialization;
+
+// Personalización avanzada con atributos
+[XmlRoot("producto")]
+public class Producto
+{
+    [XmlAttribute("codigo")]
+    public string Codigo { get; set; }
+    
+    [XmlElement("nombre")]
+    public string Nombre { get; set; }
+    
+    [XmlElement("precio")]
+    public decimal Precio { get; set; }
+    
+    [XmlElement("fecha_creacion", DataType = "date")]
+    public DateTime FechaCreacion { get; set; }
+    
+    [XmlArray("categorias")]
+    [XmlArrayItem("categoria")]
+    public List&lt;string&gt; Categorias { get; set; }
+    
+    [XmlElement("detalles")]
+    public DetallesProducto Detalles { get; set; }
+    
+    // Serialización de enumerados como texto
+    [XmlElement("estado")]
+    public EstadoProducto Estado { get; set; }
+}
+
+public class DetallesProducto
+{
+    [XmlElement("descripcion")]
+    public string Descripcion { get; set; }
+    
+    [XmlElement("peso")]
+    public decimal Peso { get; set; }
+    
+    [XmlElement("dimensiones")]
+    public Dimensiones Dimensiones { get; set; }
+}
+
+public class Dimensiones
+{
+    [XmlAttribute("unidad")]
+    public string Unidad { get; set; } = "cm";
+    
+    [XmlElement("largo")]
+    public decimal Largo { get; set; }
+    
+    [XmlElement("ancho")]
+    public decimal Ancho { get; set; }
+    
+    [XmlElement("alto")]
+    public decimal Alto { get; set; }
+}
+
+public enum EstadoProducto
+{
+    [XmlEnum("activo")]
+    Activo,
+    [XmlEnum("descontinuado")]
+    Descontinuado,
+    [XmlEnum("nuevo")]
+    Nuevo
+}
+
+class AdvancedSerialization
+{
+    static void Main()
+    {
+        Producto producto = new Producto
+        {
+            Codigo = "PRD-1001",
+            Nombre = "Laptop Gamer",
+            Precio = 1299.99m,
+            FechaCreacion = new DateTime(2023, 1, 15),
+            Categorias = new List&lt;string&gt; { "Tecnología", "Computación", "Gaming" },
+            Detalles = new DetallesProducto
+            {
+                Descripcion = "Laptop de alto rendimiento para juegos",
+                Peso = 2.5m,
+                Dimensiones = new Dimensiones
+                {
+                    Largo = 35.5m,
+                    Ancho = 24.3m,
+                    Alto = 2.4m
+                }
+            },
+            Estado = EstadoProducto.Activo
+        };
+        
+        // Serializar con formato personalizado
+        XmlSerializer serializer = new XmlSerializer(typeof(Producto));
+        
+        using (TextWriter writer = new StreamWriter("producto_serializado.xml"))
+        {
+            serializer.Serialize(writer, producto);
+        }
+        
+        // Serializar a string
+        string xmlString;
+        using (StringWriter stringWriter = new StringWriter())
+        {
+            serializer.Serialize(stringWriter, producto);
+            xmlString = stringWriter.ToString();
+        }
+        
+        Console.WriteLine("XML generado:");
+        Console.WriteLine(xmlString);
+        
+        // Controlar eventos de serialización
+        Producto producto2 = new Producto
+        {
+            Codigo = "PRD-1002",
+            Nombre = "Teclado Mecánico",
+            Precio = 89.99m
+        };
+        
+        serializer = new XmlSerializer(typeof(Producto));
+        
+        // Suscribirse a eventos
+        serializer.UnknownNode += (s, e) => 
+            Console.WriteLine($"Nodo desconocido: {e.Name}");
+        serializer.UnknownAttribute += (s, e) => 
+            Console.WriteLine($"Atributo desconocido: {e.Attr.Name}");
+        serializer.UnreferencedObject += (s, e) => 
+            Console.WriteLine($"Objeto no referenciado: {e.UnreferencedId}");
+        
+        using (TextReader reader = new StringReader(xmlString))
+        {
+            Producto productoLeido = (Producto)serializer.Deserialize(reader);
+            Console.WriteLine("\nProducto deserializado:");
+            Console.WriteLine($"{productoLeido.Nombre} - {productoLeido.Precio:C}");
+        }
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Serialización de colecciones y tipos complejos</h3>
+                    <p>Manejo de estructuras de datos más complejas:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Serialización avanzada</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
+
+// Ejemplo con colecciones y relaciones complejas
+[XmlRoot("universidad")]
+public class Universidad
+{
+    [XmlArray("departamentos")]
+    [XmlArrayItem("departamento")]
+    public List&lt;Departamento&gt; Departamentos { get; set; } = new List&lt;Departamento&gt;();
+    
+    [XmlArray("estudiantes")]
+    [XmlArrayItem("estudiante")]
+    public List&lt;Estudiante&gt; Estudiantes { get; set; } = new List&lt;Estudiante&gt;();
+    
+    [XmlAttribute("nombre")]
+    public string Nombre { get; set; }
+    
+    [XmlAttribute("fundacion", DataType = "date")]
+    public DateTime Fundacion { get; set; }
+}
+
+public class Departamento
+{
+    [XmlAttribute("codigo")]
+    public string Codigo { get; set; }
+    
+    [XmlElement("nombre")]
+    public string Nombre { get; set; }
+    
+    [XmlArray("profesores")]
+    [XmlArrayItem("profesor")]
+    public List&lt;Profesor&gt; Profesores { get; set; } = new List&lt;Profesor&gt;();
+    
+    [XmlElement("presupuesto")]
+    public decimal Presupuesto { get; set; }
+}
+
+public class Profesor
+{
+    [XmlAttribute("id")]
+    public int Id { get; set; }
+    
+    [XmlElement("nombre")]
+    public string Nombre { get; set; }
+    
+    [XmlElement("especialidad")]
+    public string Especialidad { get; set; }
+    
+    [XmlIgnore]
+    public Departamento Departamento { get; set; } // Relación circular
+}
+
+public class Estudiante
+{
+    [XmlAttribute("matricula")]
+    public string Matricula { get; set; }
+    
+    [XmlElement("nombre_completo")]
+    public string NombreCompleto { get; set; }
+    
+    [XmlElement("fecha_nacimiento", DataType = "date")]
+    public DateTime FechaNacimiento { get; set; }
+    
+    [XmlArray("cursos")]
+    [XmlArrayItem("curso")]
+    public List&lt;Curso&gt; Cursos { get; set; } = new List&lt;Curso&gt;();
+}
+
+public class Curso
+{
+    [XmlAttribute("clave")]
+    public string Clave { get; set; }
+    
+    [XmlElement("nombre")]
+    public string Nombre { get; set; }
+    
+    [XmlElement("creditos")]
+    public int Creditos { get; set; }
+    
+    [XmlElement("profesor")]
+    public string Profesor { get; set; }
+}
+
+class ComplexSerialization
+{
+    static void Main()
+    {
+        // Crear datos complejos
+        Universidad uni = new Universidad
+        {
+            Nombre = "Universidad Ejemplo",
+            Fundacion = new DateTime(1950, 5, 10)
+        };
+        
+        Departamento depInformatica = new Departamento
+        {
+            Codigo = "INF",
+            Nombre = "Informática",
+            Presupuesto = 1500000
+        };
+        
+        Profesor prof1 = new Profesor { Id = 1, Nombre = "Dr. Smith", Especialidad = "IA" };
+        Profesor prof2 = new Profesor { Id = 2, Nombre = "Dra. Johnson", Especialidad = "Bases de Datos" };
+        
+        depInformatica.Profesores.Add(prof1);
+        depInformatica.Profesores.Add(prof2);
+        
+        uni.Departamentos.Add(depInformatica);
+        
+        Estudiante est1 = new Estudiante
+        {
+            Matricula = "A1001",
+            NombreCompleto = "Juan Pérez",
+            FechaNacimiento = new DateTime(2000, 3, 15)
+        };
+        
+        est1.Cursos.Add(new Curso { Clave = "INF-101", Nombre = "Programación I", Creditos = 5, Profesor = "Dr. Smith" });
+        est1.Cursos.Add(new Curso { Clave = "INF-102", Nombre = "Estructuras de Datos", Creditos = 6, Profesor = "Dra. Johnson" });
+        
+        uni.Estudiantes.Add(est1);
+        
+        // Configurar referencias circulares
+        prof1.Departamento = depInformatica;
+        prof2.Departamento = depInformatica;
+        
+        // Serializar
+        XmlSerializer serializer = new XmlSerializer(typeof(Universidad));
+        
+        // Configurar para preservar referencias
+        XmlSerializerNamespaces ns = new XmlSerializerNamespaces();
+        ns.Add("", "");
+        
+        XmlWriterSettings settings = new XmlWriterSettings
+        {
+            Indent = true,
+            IndentChars = "  "
+        };
+        
+        using (XmlWriter writer = XmlWriter.Create("universidad.xml", settings))
+        {
+            serializer.Serialize(writer, uni, ns);
+        }
+        
+        Console.WriteLine("Universidad serializada exitosamente");
+        
+        // Deserializar
+        Universidad uniLeida;
+        using (FileStream fs = new FileStream("universidad.xml", FileMode.Open))
+        {
+            uniLeida = (Universidad)serializer.Deserialize(fs);
+        }
+        
+        Console.WriteLine("\nUniversidad deserializada:");
+        Console.WriteLine($"Nombre: {uniLeida.Nombre}");
+        Console.WriteLine($"Departamentos: {uniLeida.Departamentos.Count}");
+        Console.WriteLine($"Estudiantes: {uniLeida.Estudiantes.Count}");
+        
+        // Serializar con DataContractSerializer (alternativa)
+        var dcSerializer = new System.Runtime.Serialization.DataContractSerializer(typeof(Universidad));
+        
+        using (FileStream fs = new FileStream("universidad_dc.xml", FileMode.Create))
+        {
+            dcSerializer.WriteObject(fs, uni);
+        }
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Validation Section -->
+            <section id="validation" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">6. Validación de XML</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">Validación con XSD (XML Schema)</h3>
+                    <p>Uso de esquemas XSD para validar estructura y tipos de datos:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Esquema XSD</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"&gt;
+    &lt;xs:element name="biblioteca"&gt;
+        &lt;xs:complexType&gt;
+            &lt;xs:sequence&gt;
+                &lt;xs:element name="libro" maxOccurs="unbounded"&gt;
+                    &lt;xs:complexType&gt;
+                        &lt;xs:sequence&gt;
+                            &lt;xs:element name="titulo" type="xs:string"/&gt;
+                            &lt;xs:element name="autor" type="xs:string"/&gt;
+                            &lt;xs:element name="precio" type="xs:decimal"/&gt;
+                            &lt;xs:element name="publicacion" minOccurs="0"&gt;
+                                &lt;xs:complexType&gt;
+                                    &lt;xs:attribute name="año" type="xs:gYear"/&gt;
+                                &lt;/xs:complexType&gt;
+                            &lt;/xs:element&gt;
+                        &lt;/xs:sequence&gt;
+                        &lt;xs:attribute name="id" type="xs:ID" use="required"/&gt;
+                        &lt;xs:attribute name="categoria" type="xs:string" use="optional"/&gt;
+                    &lt;/xs:complexType&gt;
+                &lt;/xs:element&gt;
+            &lt;/xs:sequence&gt;
+            &lt;xs:attribute name="fecha_creacion" type="xs:date"/&gt;
+        &lt;/xs:complexType&gt;
+    &lt;/xs:element&gt;
+&lt;/xs:schema&gt;</code></pre>
+                    </div>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Validación con XSD</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.IO;
+using System.Xml;
+using System.Xml.Schema;
+
+class XmlValidationExample
+{
+    static void Main()
+    {
+        // Configurar el esquema
+        XmlSchemaSet schemaSet = new XmlSchemaSet();
+        schemaSet.Add("", "biblioteca.xsd");
+        
+        // Configurar el lector con validación
+        XmlReaderSettings settings = new XmlReaderSettings();
+        settings.ValidationType = ValidationType.Schema;
+        settings.Schemas = schemaSet;
+        settings.ValidationEventHandler += ValidationCallback;
+        
+        // Validar el documento
+        try
+        {
+            using (XmlReader reader = XmlReader.Create("biblioteca.xml", settings))
+            {
+                while (reader.Read()) { } // Leer todo el documento
+            }
+            
+            Console.WriteLine("Validación exitosa: El XML es válido según el esquema");
+        }
+        catch (XmlException ex)
+        {
+            Console.WriteLine($"Error de XML: {ex.Message}");
+        }
+        catch (XmlSchemaValidationException ex)
+        {
+            Console.WriteLine($"Error de validación: {ex.Message}");
+        }
+    }
+    
+    private static void ValidationCallback(object sender, ValidationEventArgs e)
+    {
+        Console.WriteLine($"Error de validación: {e.Message}");
+        Console.WriteLine($"Severidad: {e.Severity}");
+        Console.WriteLine($"Línea: {e.Exception.LineNumber}, Posición: {e.Exception.LinePosition}");
+    }
+    
+    // Validación al cargar un XmlDocument
+    static void ValidateXmlDocument()
+    {
+        XmlDocument doc = new XmlDocument();
+        doc.Schemas.Add("", "biblioteca.xsd");
+        doc.Validate(ValidationCallback);
+        
+        try
+        {
+            doc.Load("biblioteca.xml");
+            Console.WriteLine("Documento XML válido");
+        }
+        catch (XmlSchemaValidationException ex)
+        {
+            Console.WriteLine($"Documento inválido: {ex.Message}");
+        }
+    }
+    
+    // Validación con XDocument (LINQ to XML)
+    static void ValidateXDocument()
+    {
+        XmlSchemaSet schemas = new XmlSchemaSet();
+        schemas.Add("", "biblioteca.xsd");
+        
+        XDocument doc = XDocument.Load("biblioteca.xml");
+        StringBuilder errors = new StringBuilder();
+        
+        doc.Validate(schemas, (o, e) => 
+        {
+            errors.AppendLine($"Error: {e.Message}");
+        });
+        
+        if (errors.Length == 0)
+        {
+            Console.WriteLine("Documento válido");
+        }
+        else
+        {
+            Console.WriteLine("Errores de validación:");
+            Console.WriteLine(errors.ToString());
+        }
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Validación con DTD y otras técnicas</h3>
+                    <p>Opciones adicionales para validación de documentos XML:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Validación con DTD</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Xml;
+
+class DtdValidationExample
+{
+    static void Main()
+    {
+        // Configurar el lector para validar con DTD
+        XmlReaderSettings settings = new XmlReaderSettings();
+        settings.DtdProcessing = DtdProcessing.Parse;
+        settings.ValidationType = ValidationType.DTD;
+        settings.ValidationEventHandler += ValidationCallback;
+        
+        // Validar el documento
+        try
+        {
+            using (XmlReader reader = XmlReader.Create("documento_con_dtd.xml", settings))
+            {
+                while (reader.Read()) { }
+            }
+            
+            Console.WriteLine("Validación DTD exitosa");
+        }
+        catch (XmlException ex)
+        {
+            Console.WriteLine($"Error de XML: {ex.Message}");
+        }
+    }
+    
+    private static void ValidationCallback(object sender, ValidationEventArgs e)
+    {
+        Console.WriteLine($"Error de validación: {e.Message}");
+    }
+}
+
+// Validación con esquemas embebidos
+class EmbeddedSchemaExample
+{
+    static void Main()
+    {
+        string xmlConEsquema = @"
+        &lt;?xml version='1.0'?&gt;
+        &lt;xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' 
+                   xmlns='http://www.ejemplo.com'
+                   targetNamespace='http://www.ejemplo.com'
+                   elementFormDefault='qualified'&gt;
+            &lt;xs:element name='producto'&gt;
+                &lt;xs:complexType&gt;
+                    &lt;xs:sequence&gt;
+                        &lt;xs:element name='nombre' type='xs:string'/&gt;
+                        &lt;xs:element name='precio' type='xs:decimal'/&gt;
+                    &lt;/xs:sequence&gt;
+                &lt;/xs:complexType&gt;
+            &lt;/xs:element&gt;
+        &lt;/xs:schema&gt;
+        &lt;producto xmlns='http://www.ejemplo.com'&gt;
+            &lt;nombre&gt;Laptop&lt;/nombre&gt;
+            &lt;precio&gt;899.99&lt;/precio&gt;
+        &lt;/producto&gt;";
+        
+        XmlReaderSettings settings = new XmlReaderSettings();
+        settings.ValidationType = ValidationType.Schema;
+        settings.ValidationEventHandler += (s, e) => 
+            Console.WriteLine($"Error de validación: {e.Message}");
+        
+        using (StringReader stringReader = new StringReader(xmlConEsquema))
+        using (XmlReader reader = XmlReader.Create(stringReader, settings))
+        {
+            try
+            {
+                while (reader.Read()) { }
+                Console.WriteLine("Validación con esquema embebido exitosa");
+            }
+            catch (XmlException ex)
+            {
+                Console.WriteLine($"Error de XML: {ex.Message}");
+            }
+        }
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Validación personalizada</h3>
+                    <p>Técnicas para implementar reglas de validación adicionales:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Validación personalizada</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Linq;
+using System.Xml.Linq;
+using System.Text.RegularExpressions;
+
+class CustomValidation
+{
+    static void Main()
+    {
+        XDocument doc = XDocument.Load("clientes.xml");
+        
+        // Validar estructura básica
+        if (doc.Root.Name != "clientes")
+        {
+            Console.WriteLine("Elemento raíz debe ser 'clientes'");
+            return;
+        }
+        
+        // Validar cada cliente
+        foreach (XElement cliente in doc.Descendants("cliente"))
+        {
+            // Validar atributo id
+            if (cliente.Attribute("id") == null)
+            {
+                Console.WriteLine("Cliente sin atributo id");
+                continue;
+            }
+            
+            // Validar formato de email
+            XElement email = cliente.Element("email");
+            if (email != null)
+            {
+                if (!Regex.IsMatch(email.Value, 
+                    @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                {
+                    Console.WriteLine($"Email inválido: {email.Value}");
+                }
+            }
+            
+            // Validar número de teléfono
+            XElement telefono = cliente.Element("telefono");
+            if (telefono != null)
+            {
+                string telefonoLimpio = new string(
+                    telefono.Value.Where(c => char.IsDigit(c)).ToArray());
+                
+                if (telefonoLimpio.Length != 10)
+                {
+                    Console.WriteLine($"Teléfono inválido: {telefono.Value}");
+                }
+            }
+            
+            // Validar fechas
+            XElement fechaRegistro = cliente.Element("fecha_registro");
+            if (fechaRegistro != null)
+            {
+                if (!DateTime.TryParse(fechaRegistro.Value, out _))
+                {
+                    Console.WriteLine($"Fecha inválida: {fechaRegistro.Value}");
+                }
+            }
+        }
+        
+        // Validación de reglas de negocio
+        var clientesRepetidos = doc.Descendants("cliente")
+            .GroupBy(c => c.Attribute("id").Value)
+            .Where(g => g.Count() > 1);
+        
+        if (clientesRepetidos.Any())
+        {
+            Console.WriteLine("Clientes con IDs repetidos:");
+            foreach (var grupo in clientesRepetidos)
+            {
+                Console.WriteLine($"ID: {grupo.Key}, Repeticiones: {grupo.Count()}");
+            }
+        }
+        
+        // Validación cruzada entre elementos
+        var clientesSinPedidos = doc.Descendants("cliente")
+            .Where(c => !c.Elements("pedido").Any());
+        
+        if (clientesSinPedidos.Any())
+        {
+            Console.WriteLine("Clientes sin pedidos:");
+            foreach (var cliente in clientesSinPedidos)
+            {
+                Console.WriteLine($"ID: {cliente.Attribute("id").Value}");
+            }
+        }
+        
+        Console.WriteLine("Validación personalizada completada");
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Advanced Topics Section -->
+            <section id="advanced" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">7. Temas Avanzados</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <h3 class="content-title">XPath en C#</h3>
+                    <p>Uso de expresiones XPath para consultas avanzadas:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">XPath en C#</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Xml;
+using System.Xml.XPath;
+
+class XPathExample
+{
+    static void Main()
+    {
+        // Cargar documento
+        XPathDocument doc = new XPathDocument("libros.xml");
+        XPathNavigator nav = doc.CreateNavigator();
+        
+        // Consulta XPath básica
+        XPathNodeIterator libros = nav.Select("/biblioteca/libro");
+        Console.WriteLine($"Total libros: {libros.Count}");
+        
+        // Consulta con filtro
+        libros = nav.Select("/biblioteca/libro[precio > 30]");
+        Console.WriteLine($"Libros caros: {libros.Count}");
+        
+        // Consulta con funciones
+        libros = nav.Select("sum(/biblioteca/libro/precio)");
+        Console.WriteLine($"Suma de precios: {libros.Current.Value}");
+        
+        // Consulta con namespaces
+        XmlNamespaceManager nsManager = new XmlNamespaceManager(nav.NameTable);
+        nsManager.AddNamespace("ns", "http://www.ejemplo.com/libros");
+        
+        XPathNodeIterator titulos = nav.Select("//ns:titulo", nsManager);
+        Console.WriteLine("\nTítulos de libros:");
+        while (titulos.MoveNext())
+        {
+            Console.WriteLine(titulos.Current.Value);
+        }
+        
+        // Evaluar expresiones XPath
+        double precioPromedio = (double)nav.Evaluate("sum(/biblioteca/libro/precio) div count(/biblioteca/libro)");
+        Console.WriteLine($"Precio promedio: {precioPromedio:C}");
+        
+        // XPath con XmlDocument
+        XmlDocument xmlDoc = new XmlDocument();
+        xmlDoc.Load("libros.xml");
+        
+        XmlNodeList nodes = xmlDoc.SelectNodes("/biblioteca/libro[autor='Juan Pérez']");
+        Console.WriteLine($"\nLibros de Juan Pérez: {nodes.Count}");
+        
+        // XPath con XDocument
+        XDocument xdoc = XDocument.Load("libros.xml");
+        var elementos = xdoc.XPathSelectElements("/biblioteca/libro[titulo='Aprendiendo C#']");
+        Console.WriteLine($"Libro 'Aprendiendo C#': {elementos.Count()}");
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Transformaciones XSLT</h3>
+                    <p>Transformación de XML usando hojas de estilo XSLT:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Transformación XSLT</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.IO;
+using System.Xml;
+using System.Xml.Xsl;
+
+class XsltExample
+{
+    static void Main()
+    {
+        // Transformación básica
+        XslCompiledTransform transform = new XslCompiledTransform();
+        transform.Load("transformacion.xslt");
+        
+        transform.Transform("libros.xml", "libros_transformados.html");
+        
+        Console.WriteLine("Transformación básica completada");
+        
+        // Transformación con parámetros
+        transform = new XslCompiledTransform();
+        transform.Load("transformacion_parametros.xslt");
+        
+        XsltArgumentList args = new XsltArgumentList();
+        args.AddParam("fecha", "", DateTime.Now.ToString("yyyy-MM-dd"));
+        args.AddParam("titulo", "", "Reporte de Libros");
+        
+        using (FileStream fs = new FileStream("reporte_libros.html", FileMode.Create))
+        {
+            transform.Transform("libros.xml", args, fs);
+        }
+        
+        Console.WriteLine("Transformación con parámetros completada");
+        
+        // Transformación a string
+        transform = new XslCompiledTransform();
+        transform.Load("transformacion.xslt");
+        
+        StringWriter results = new StringWriter();
+        transform.Transform("libros.xml", null, results);
+        
+        string htmlResult = results.ToString();
+        Console.WriteLine("\nResultado de la transformación:");
+        Console.WriteLine(htmlResult.Substring(0, 100) + "...");
+        
+        // Transformación con extensiones
+        transform = new XslCompiledTransform();
+        transform.Load("transformacion_extensiones.xslt");
+        
+        args = new XsltArgumentList();
+        args.AddExtensionObject("urn:custom-extensions", new CustomXsltExtensions());
+        
+        transform.Transform("libros.xml", args, File.Create("libros_con_extensiones.html"));
+    }
+}
+
+// Clase para extensiones XSLT personalizadas
+public class CustomXsltExtensions
+{
+    public string FormatoMoneda(decimal valor)
+    {
+        return valor.ToString("C");
+    }
+    
+    public string Mayusculas(string texto)
+    {
+        return texto.ToUpper();
+    }
+    
+    public string FechaActual(string formato)
+    {
+        return DateTime.Now.ToString(formato);
+    }
+}</code></pre>
+                    </div>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">Ejemplo XSLT</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"&gt;
+    &lt;xsl:output method="html" indent="yes"/&gt;
+    
+    &lt;xsl:template match="/"&gt;
+        &lt;html&gt;
+            &lt;head&gt;
+                &lt;title&gt;Reporte de Libros&lt;/title&gt;
+                &lt;style&gt;
+                    table { border-collapse: collapse; width: 100%; }
+                    th, td { border: 1px solid #ddd; padding: 8px; }
+                    th { background-color: #f2f2f2; text-align: left; }
+                    tr:nth-child(even) { background-color: #f9f9f9; }
+                &lt;/style&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+                &lt;h1&gt;Lista de Libros&lt;/h1&gt;
+                &lt;p&gt;Generado el: &lt;xsl:value-of select="custom:FechaActual('yyyy-MM-dd')" 
+                    xmlns:custom="urn:custom-extensions"/&gt;&lt;/p&gt;
+                
+                &lt;table&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;ID&lt;/th&gt;
+                        &lt;th&gt;Título&lt;/th&gt;
+                        &lt;th&gt;Autor&lt;/th&gt;
+                        &lt;th&gt;Precio&lt;/th&gt;
+                    &lt;/tr&gt;
+                    
+                    &lt;xsl:for-each select="biblioteca/libro"&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;&lt;xsl:value-of select="@id"/&gt;&lt;/td&gt;
+                            &lt;td&gt;&lt;xsl:value-of select="custom:Mayusculas(titulo)" 
+                                xmlns:custom="urn:custom-extensions"/&gt;&lt;/td&gt;
+                            &lt;td&gt;&lt;xsl:value-of select="autor"/&gt;&lt;/td&gt;
+                            &lt;td&gt;&lt;xsl:value-of select="custom:FormatoMoneda(precio)" 
+                                xmlns:custom="urn:custom-extensions"/&gt;&lt;/td&gt;
+                        &lt;/tr&gt;
+                    &lt;/xsl:for-each&gt;
+                    
+                    &lt;tr&gt;
+                        &lt;td colspan="3"&gt;&lt;strong&gt;Total:&lt;/strong&gt;&lt;/td&gt;
+                        &lt;td&gt;&lt;strong&gt;
+                            &lt;xsl:value-of select="custom:FormatoMoneda(sum(/biblioteca/libro/precio))" 
+                                xmlns:custom="urn:custom-extensions"/&gt;
+                        &lt;/strong&gt;&lt;/td&gt;
+                    &lt;/tr&gt;
+                &lt;/table&gt;
+            &lt;/body&gt;
+        &lt;/html&gt;
+    &lt;/xsl:template&gt;
+&lt;/xsl:stylesheet&gt;</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">XML y Bases de Datos</h3>
+                    <p>Integración de XML con SQL Server y otras bases de datos:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">XML en SQL Server</span>
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="far fa-copy"></i></button>
+                        </div>
+                        <pre><code class="language-cpp">using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Xml;
+
+class SqlXmlExample
+{
+    static void Main()
+    {
+        string connectionString = "Server=localhost;Database=EjemploXML;Integrated Security=True;";
+        
+        // Almacenar XML en la base de datos
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            
+            XDocument doc = XDocument.Load("libros.xml");
+            string xmlString = doc.ToString();
+            
+            string sql = "INSERT INTO DocumentosXML (Nombre, Contenido) VALUES (@Nombre, @Contenido)";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@Nombre", "libros.xml");
+            command.Parameters.AddWithValue("@Contenido", xmlString);
+            
+            int rows = command.ExecuteNonQuery();
+            Console.WriteLine($"Documento guardado. Filas afectadas: {rows}");
+        }
+        
+        // Recuperar XML desde la base de datos
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            
+            string sql = "SELECT Contenido FROM DocumentosXML WHERE Nombre = @Nombre";
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@Nombre", "libros.xml");
+            
+            using (XmlReader reader = command.ExecuteXmlReader())
+            {
+                XDocument doc = XDocument.Load(reader);
+                Console.WriteLine("\nDocumento recuperado:");
+                Console.WriteLine(doc.Root.Name);
+            }
+        }
+        
+        // Consultas SQL que devuelven XML
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            
+            string sql = @"
+                SELECT 
+                    l.Id as '@id',
+                    l.Titulo as 'titulo',
+                    a.Nombre as 'autor',
+                    l.Precio as 'precio'
+                FROM Libros l
+                JOIN Autores a ON l.AutorId = a.Id
+                FOR XML PATH('libro'), ROOT('biblioteca')";
+            
+            SqlCommand command = new SqlCommand(sql, connection);
+            string xmlResult = command.ExecuteScalar().ToString();
+            
+            Console.WriteLine("\nResultado de consulta FOR XML:");
+            Console.WriteLine(xmlResult.Substring(0, 100) + "...");
+            
+            // Procesar el XML resultante
+            XDocument doc = XDocument.Parse(xmlResult);
+            var libros = from l in doc.Descendants("libro")
+                        select new {
+                            Id = l.Attribute("id").Value,
+                            Titulo = l.Element("titulo").Value
+                        };
+            
+            Console.WriteLine("\nLibros desde SQL:");
+            foreach (var libro in libros)
+            {
+                Console.WriteLine($"{libro.Id}: {libro.Titulo}");
+            }
+        }
+        
+        // Consultas XQuery en SQL Server
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            
+            string sql = @"
+                DECLARE @xml XML
+                SET @xml = (SELECT Contenido FROM DocumentosXML WHERE Nombre = 'libros.xml')
+                
+                SELECT 
+                    Libro.value('@id', 'INT') as Id,
+                    Libro.value('(titulo)[1]', 'NVARCHAR(100)') as Titulo,
+                    Libro.value('(precio)[1]', 'DECIMAL(10,2)') as Precio
+                FROM @xml.nodes('/biblioteca/libro') as T(Libro)
+                WHERE Libro.value('(precio)[1]', 'DECIMAL(10,2)') > 30";
+            
+            SqlCommand command = new SqlCommand(sql, connection);
+            SqlDataReader reader = command.ExecuteReader();
+            
+            Console.WriteLine("\nResultados de XQuery:");
+            while (reader.Read())
+            {
+                Console.WriteLine($"{reader["Id"]}: {reader["Titulo"]} - {reader["Precio"]:C}");
+            }
+        }
+    }
+}</code></pre>
+                    </div>
+                    
+                    <h3 class="content-title">Optimización y Mejores Prácticas</h3>
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="feature-title">Manejo de Memoria</h4>
+                            <ul class="feature-list">
+                                <li>Usa <code>XmlReader</code> para archivos grandes</li>
+                                <li>Libera recursos con <code>using</code> o llamando a <code>Dispose()</code></li>
+                                <li>Considera <code>XmlWriter</code> para generación eficiente</li>
+                                <li>Evita cargar documentos completos innecesariamente</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="feature-title">Seguridad</h4>
+                            <ul class="feature-list">
+                                <li>Deshabilita DTD si no son necesarios (<code>ProhibitDtd</code>)</li>
+                                <li>Limita el tamaño de los documentos XML</li>
+                                <li>Valida siempre la entrada XML</li>
+                                <li>Ten cuidado con las entidades externas</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h4 class="feature-title">Rendimiento</h4>
+                            <ul class="feature-list">
+                                <li>Usa <code>NameTable</code> para comparaciones rápidas</li>
+                                <li>Reutiliza instancias de <code>XmlSerializer</code></li>
+                                <li>Prefiere <code>XDocument</code> para manipulación frecuente</li>
+                                <li>Considera caché para esquemas XSD</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="note-box">
+                        <div class="note-header">
+                            <i class="fas fa-book"></i>
+                            <h4>Recursos para aprender más</h4>
+                        </div>
+                        <ul class="info-list">
+                            <li><a href="https://docs.microsoft.com/es-es/dotnet/standard/data/xml/" target="_blank">Documentación oficial de XML en .NET</a></li>
+                            <li><a href="https://www.w3schools.com/xml/" target="_blank">Tutoriales XML y XPath</a></li>
+                            <li><a href="https://www.w3.org/XML/Schema" target="_blank">Especificaciones XML Schema</a></li>
+                            <li><a href="https://www.w3.org/Style/XSL/" target="_blank">Recursos XSLT</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Help Section -->
+            <section id="contact" class="guide-section">
+                <div class="section-header">
+                    <h2 class="section-title">¿Necesitas Ayuda?</h2>
+                    <div class="section-divider"></div>
+                </div>
+                
+                <div class="section-content">
+                    <div class="help-box">
+                        <div class="help-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <div class="help-content">
+                            <h3>¿Tienes dudas sobre XML en C#?</h3>
+                            <p>Si hay algún concepto que no entiendes o necesitas ayuda con tu implementación, envíanos tus preguntas y te ayudaremos.</p>
+                            <button id="open-help-form" class="btn-primary btn-pulse">Solicitar Ayuda</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <!-- Help Form Modal -->
+    <div id="help-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Formulario de Ayuda</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="csharp-help-form" action="https://formsubmit.co/ratalittle893@gmail.com" method="POST">
+                    <input type="hidden" name="_subject" value="Ayuda con C# y XML">
+                    <input type="hidden" name="_captcha" value="false">
+                    
+                    <div class="form-group">
+                        <label for="help-name">Nombre</label>
+                        <input type="text" id="help-name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-email">Correo Electrónico</label>
+                        <input type="email" id="help-email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-section">Sección relacionada</label>
+                        <select id="help-section" name="section" required>
+                            <option value="" disabled selected>Selecciona una sección</option>
+                            <option value="Fundamentos">1. Fundamentos XML</option>
+                            <option value="Lectura">2. Lectura de XML</option>
+                            <option value="Escritura">3. Escritura de XML</option>
+                            <option value="LINQ">4. LINQ to XML</option>
+                            <option value="Serialización">5. Serialización</option>
+                            <option value="Validación">6. Validación</option>
+                            <option value="Avanzado">7. Temas Avanzados</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-question">Tu pregunta o problema</label>
+                        <textarea id="help-question" name="question" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="help-code">Código relacionado (opcional)</label>
+                        <textarea id="help-code" name="code" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Enviar Consulta</button>
+                        <button type="button" class="btn-secondary modal-close-btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <i class="fas fa-hashtag"></i>
+                <span class="brand-name">C# XML Guide</span>
+            </div>
+            
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4 class="footer-title">Guías</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="csharp-console-guide.html">C# Consola</a></li>
+                        <li><a href="cs-froms.html">Windows Forms</a></li>
+                        <li><a href="#" class="active">Trabajo con XML</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-title">Recursos</h4>
+                    <ul>
+                        <li><a href="https://docs.microsoft.com/es-es/dotnet/standard/data/xml/" target="_blank">Documentación XML en .NET</a></li>
+                        <li><a href="https://www.w3.org/XML/" target="_blank">Estándares XML</a></li>
+                        <li><a href="https://github.com/dotnet/samples/tree/main/snippets/xml" target="_blank">Ejemplos de código</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-title">Comunidad</h4>
+                    <ul>
+                        <li><a href="https://stackoverflow.com/questions/tagged/c%23+xml" target="_blank">Stack Overflow</a></li>
+                        <li><a href="https://www.reddit.com/r/dotnet/" target="_blank">Reddit .NET</a></li>
+                        <li><a href="https://discord.gg/dotnet" target="_blank">Discord .NET</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 RataLife Guides. Todos los derechos reservados.</p>
+            <p>C#, XML y .NET son marcas registradas de Microsoft Corporation.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/form-handler.js"></script>
+    <script src="scripts/security.js"></script>
+</body>
+</html>
